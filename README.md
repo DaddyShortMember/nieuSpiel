@@ -1,2 +1,2 @@
 # nieuSpiel
-Un bideojuego en progreso.
+Un videojuego en progreso.
