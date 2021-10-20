@@ -2,88 +2,51 @@ package jClasses;
 
 public abstract class Tropa {
 
+	/*TODO:
+	 * YEst
+	 * Nombre
+	 * Vida
+	 * Tipo Tropa
+	 * 
+	 * 1. Boolean que define si captura o no
+	 * 	a. Si no es optimo, algo similar
+	 * 2. Distancia Maxina c
+	 * 3. Vision c
+	 * 4. Alcanze c
+	 * 5. Municion c
+	 * 6. Arma 1 c
+	 * 7. Arma 2 c
+	 * 8. Tipo de Movimiento
+	 * 9. Tipo de tropa c
+	 * 10. Precio c
+	 * 11. Energia c
+	 * 12. Tipo Mov
+	 * 13. Nibel c
+	 * 14. Imagen c
+	 * 
+	 */
+	
 	String nombre;
-	String elemento;
+	String tipoTropa;
 	String categoria;
-	double salud;
-	double golpe;
+	int salud;
+	int golpe;
+	//ARMOR MUST BE PLANNED BETTER
 	double armadura;
-	
-	public Tropa(String nombre, String elemento, String categoria, double salud, double golpe, double armadura) {
-		super();
-		this.nombre = nombre;
-		this.elemento = elemento;
-		this.categoria = categoria;
-		this.salud = salud;
-		this.golpe = golpe;
-		this.armadura = armadura;
-	}
-	
-	public Tropa() {
-		this.nombre = "";
-		this.elemento = "";
-		this.categoria = "";
-		this.salud = 0;
-		this.golpe = 0;
-		this.armadura = 0;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getElemento() {
-		return elemento;
-	}
-
-	public void setElemento(String elemento) {
-		this.elemento = elemento;
-	}
-
-	public String getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
-	}
-
-	public Double getSalud() {
-		return salud;
-	}
-
-	public void setSalud(Double salud) {
-		this.salud = salud;
-	}
-
-	public Double getGolpe() {
-		return golpe;
-	}
-
-	public void setGolpe(Double golpe) {
-		this.golpe = golpe;
-	}
-
-	public Double getArmadura() {
-		return armadura;
-	}
-
-	public void setArmadura(Double armadura) {
-		this.armadura = armadura;
-	}
-
-	
-	
-	@Override
-	public String toString() {
-		return "Tropa [nombre=" + nombre + ", elemento=" + elemento + ", categoria=" + categoria + ", salud=" + salud
-				+ "]";
-	}
-	
+	//NEWLY ADDED, UNIMPLEMENTED
+	String imagen;
+	String armaPrincipal;
+	String armaSecundaria;
+	//Tipo de movimiento? Kak?
+	int precio;
+	int nivel;
+	int vision;
+	int alcance;
+	int municionesPrim;
+	int municionesSec;
+	int energia;
+	int distanciaMaxima;
+	String tipoMovimiento;
 	
 	
 	
