@@ -34,7 +34,6 @@ public abstract class Tropa {
 	//ARMOR MUST BE PLANNED BETTER
 	double armadura;
 	//NEWLY ADDED, UNIMPLEMENTED
-	String imagen;
 	String armaPrincipal;
 	String armaSecundaria;
 	//Tipo de movimiento? Kak?
@@ -47,6 +46,11 @@ public abstract class Tropa {
 	int energia;
 	int distanciaMaxima;
 	String tipoMovimiento;
+	//DATOS VISUALES
+	int posX;
+	int posY;
+	String imagen;
+	
 	
 	
 	
