@@ -1,6 +1,14 @@
 package jClasses;
 
 public abstract class Tropa {
+	
+	//Declaracion ENUM para TipoMovimiento
+	enum TipoMovimiento{
+		TIPOA,
+		TIPOB,
+		TIPOC,
+		RODRIGODESCRIBEMEJORLOSPERROSATRIBUTOS
+	}
 
 	/*TODO:
 	 * YEst
@@ -28,6 +36,7 @@ public abstract class Tropa {
 	
 	String nombre;
 	String tipoTropa;
+	enum TipoMovimiento;
 	String categoria;
 	int salud;
 	int golpe;
@@ -36,7 +45,7 @@ public abstract class Tropa {
 	//NEWLY ADDED, UNIMPLEMENTED
 	String armaPrincipal;
 	String armaSecundaria;
-	//Tipo de movimiento? Kak?
+	
 	int precio;
 	int nivel;
 	int vision;
