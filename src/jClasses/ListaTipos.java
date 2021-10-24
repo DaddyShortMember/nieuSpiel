@@ -1,0 +1,13 @@
+package jClasses;
+
+public enum ListaTipos {
+	INFANTERIA,
+	TERRESTRE,
+	AEREA,
+	MARINA,
+	VEHICULOLIGERO,
+	VEHICULOPESADO,
+	ACORAZADO,
+	AEREO,
+	ACUATICO
+}

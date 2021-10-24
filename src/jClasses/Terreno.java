@@ -1,18 +1,15 @@
 package jClasses;
 
 public abstract class Terreno {
-
-	/*TODO:
-	 * 1. Coste
-	 * 2. PasablePor
-	 * 	a. Si no es posible, implementar o un metodo, o una clase
-	 * 3. Nombre
-	 * 
-	 */
 	
+	
+	
+	String nombre; //Nombre del terreno
+	int peaje; //Lo que cuesta pasar por este terreno
+	int defensa; //Influye en el golpe total que recibe cada tropa. Mientras mas defensa, menos golpe recibido.
+	//Datos Fisicos
 	String imagen;
 	int posX;
 	int posY;
-	
 	
 }

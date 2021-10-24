@@ -3,14 +3,14 @@ package jClasses;
 import jClasses.Tropa.TipoMov;
 import jClasses.Tropa.TipoTropa;
 
-public abstract class Infanteria extends Tropa {
+public abstract class Aereo extends Tropa{
 
-	public Infanteria() {
+	public Aereo() {
 		super();
 		this.nombre = "";
-		this.tipoTropa = TipoTropa.INFANTERIA;
-		this.tipoMov = TipoMov.INFANTERIA;
-		this.captura = true;
+		this.tipoTropa = TipoTropa.AEREA;
+		this.tipoMov = TipoMov.AEREO;
+		this.captura = false;
 		this.salud = 0;
 		this.golpe = 0;
 		this.armadura = 0;

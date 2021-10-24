@@ -3,73 +3,56 @@ package jClasses;
 public abstract class Tropa {
 	
 	//Declaracion ENUM para TipoMovimiento
-	enum TipoMovimiento{
-		TIPOA,
-		TIPOB,
-		TIPOC,
-		RODRIGODESCRIBEMEJORLOSPERROSATRIBUTOS
+	enum TipoMov{
+		INFANTERIA,
+		MECH, //Basicamente, infanteria con otros atributos.
+		VEHICULOLIGERO,
+		VEHICULOPESADO,
+		ACORAZADO,
+		AEREO,
+		ACUATICO,
+	}
+	
+	enum TipoTropa{
+		INFANTERIA,
+		TERRESTRE,
+		AEREA,
+		MARINA,
 	}
 
-	/*TODO:
-	 * Ectb
-	 * Nombre
-	 * Vida
-	 * Tipo Tropa
-	 * 
-	 * 1. Boolean que define si captura o no
-	 * 	a. Si no es optimo, algo similar
-	 * 2. Distancia Maxina c
-	 * 3. Vision c
-	 * 4. Alcanze c
-	 * 5. Municion c
-	 * 6. Arma 1 c
-	 * 7. Arma 2 c
-	 * 8. Tipo de Movimiento
-	 * 9. Tipo de tropa c
-	 * 10. Precio c
-	 * 11. Energia c
-	 * 12. Tipo Mov
-	 * 13. Nibel c
-	 * 14. Imagen c
-	 * 
-	 */
-	
-	String nombre;
-	String tipoTropa;
-	TipoMovimiento tipoMov;
-	String categoria;
-	int salud;
-	int golpe;
-	//ARMOR MUST BE PLANNED BETTER
-	int armadura;
+	String nombre; //Nombre de la tropa
+	TipoTropa tipoTropa; //
+	TipoMov tipoMov;
+	boolean captura;
+	int salud; //Defensa en AW, teoricamente. Numero de gente en tropa. Usualmente 10.
+	int golpe; //Cuanto duele cuando da. Se debe pasar a decimal por un metodo.
+	int armadura; //Reduce el golpe recibido. Se debe pasar a decimal por un metodo, y devuelta a int para simplificar calculos.
 	//NEWLY ADDED, UNIMPLEMENTED
-	String armaPrincipal;
-	String armaSecundaria;
-	
-	int precio;
-	int nivel;
-	int vision;
-	int alcance;
-	int municionesPrim;
-	int municionesSec;
-	int energia;
-	int distanciaMaxima;
+	String armaPrincipal; //Arma principal, la que siempre llevaria
+	String armaSecundaria; //Arma secundaria, un arma opcional que se dispara contra ciertos enemigos, o en ciertos escenarios
+	int precio; //Cuanto cuesta
+	int nivel; //Se obtiene por victoria en combate. Incrementa el golpe o algo.
+	int vision; //Numero de casillas que puede ver
+	int alcance; //Numero de casillas en las que puede ataquar
+	int municionesPrim; //Numero de municiones que tiene el arma primaria.
+	int municionesSec; //Numero de municiones que tiene el arma secundaria.
+	int energia; //Numero de casillas que se puede mover la tropa cada momento. Sistema TBD, @Rodrigo
+	int distanciaMaxima; //Numero de casillas total que la tropa puede moverse
 	//DATOS VISUALES
-	int posX;
-	int posY;
-	String imagen;
+	int posX; //Posicion en eje X
+	int posY; //Posicion en eje Y
+	String imagen; //Fichero de imagen
 	
-	//HERE MAY BEGIN THE PURGE
-	
-	public Tropa(String nombre, String tipoTropa, TipoMovimiento tipoMov, String categoria, int salud, int golpe,
-			int armadura, String armaPrincipal, String armaSecundaria, int precio, int nivel, int vision,
-			int alcance, int municionesPrim, int municionesSec, int energia, int distanciaMaxima,
-			int posX, int posY, String imagen) {
+	//Constructor Normal
+	public Tropa(String nombre, TipoTropa tipoTropa, TipoMov tipoMov, boolean captura, int salud, int golpe,
+			int armadura, String armaPrincipal, String armaSecundaria, int precio, int nivel, int vision, int alcance,
+			int municionesPrim, int municionesSec, int energia, int distanciaMaxima, int posX, int posY,
+			String imagen) {
 		super();
 		this.nombre = nombre;
 		this.tipoTropa = tipoTropa;
 		this.tipoMov = tipoMov;
-		this.categoria = categoria;
+		this.captura = captura;
 		this.salud = salud;
 		this.golpe = golpe;
 		this.armadura = armadura;
@@ -89,10 +72,11 @@ public abstract class Tropa {
 	}
 	
 	public Tropa() {
+		super();
 		this.nombre = "";
-		this.tipoTropa = "";
-		this.tipoMov = TipoMovimiento.RODRIGODESCRIBEMEJORLOSPERROSATRIBUTOS;
-		this.categoria = "";
+		this.tipoTropa = TipoTropa.INFANTERIA;
+		this.tipoMov = TipoMov.INFANTERIA;
+		this.captura = false;
 		this.salud = 0;
 		this.golpe = 0;
 		this.armadura = 0;
@@ -110,166 +94,7 @@ public abstract class Tropa {
 		this.posY = 0;
 		this.imagen = "";
 	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getTipoTropa() {
-		return tipoTropa;
-	}
-
-	public void setTipoTropa(String tipoTropa) {
-		this.tipoTropa = tipoTropa;
-	}
-
-	public TipoMovimiento getTipoMov() {
-		return tipoMov;
-	}
-
-	public void setTipoMov(TipoMovimiento tipoMov) {
-		this.tipoMov = tipoMov;
-	}
-
-	public String getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
-	}
-
-	public int getSalud() {
-		return salud;
-	}
-
-	public void setSalud(int salud) {
-		this.salud = salud;
-	}
-
-	public int getGolpe() {
-		return golpe;
-	}
-
-	public void setGolpe(int golpe) {
-		this.golpe = golpe;
-	}
-
-	public int getArmadura() {
-		return armadura;
-	}
-
-	public void setArmadura(int armadura) {
-		this.armadura = armadura;
-	}
-
-	public String getArmaPrincipal() {
-		return armaPrincipal;
-	}
-
-	public void setArmaPrincipal(String armaPrincipal) {
-		this.armaPrincipal = armaPrincipal;
-	}
-
-	public String getArmaSecundaria() {
-		return armaSecundaria;
-	}
-
-	public void setArmaSecundaria(String armaSecundaria) {
-		this.armaSecundaria = armaSecundaria;
-	}
-
-	public int getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(int precio) {
-		this.precio = precio;
-	}
-
-	public int getNivel() {
-		return nivel;
-	}
-
-	public void setNivel(int nivel) {
-		this.nivel = nivel;
-	}
-
-	public int getVision() {
-		return vision;
-	}
-
-	public void setVision(int vision) {
-		this.vision = vision;
-	}
-
-	public int getAlcance() {
-		return alcance;
-	}
-
-	public void setAlcance(int alcance) {
-		this.alcance = alcance;
-	}
-
-	public int getMunicionesPrim() {
-		return municionesPrim;
-	}
-
-	public void setMunicionesPrim(int municionesPrim) {
-		this.municionesPrim = municionesPrim;
-	}
-
-	public int getMunicionesSec() {
-		return municionesSec;
-	}
-
-	public void setMunicionesSec(int municionesSec) {
-		this.municionesSec = municionesSec;
-	}
-
-	public int getEnergia() {
-		return energia;
-	}
-
-	public void setEnergia(int energia) {
-		this.energia = energia;
-	}
-
-	public int getDistanciaMaxima() {
-		return distanciaMaxima;
-	}
-
-	public void setDistanciaMaxima(int distanciaMaxima) {
-		this.distanciaMaxima = distanciaMaxima;
-	}
-
-	public int getPosX() {
-		return posX;
-	}
-
-	public void setPosX(int posX) {
-		this.posX = posX;
-	}
-
-	public int getPosY() {
-		return posY;
-	}
-
-	public void setPosY(int posY) {
-		this.posY = posY;
-	}
-
-	public String getImagen() {
-		return imagen;
-	}
-
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
-	}
+	
 	
 	
 }
