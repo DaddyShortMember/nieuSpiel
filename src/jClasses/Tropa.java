@@ -43,20 +43,22 @@ public abstract class Tropa {
 	
 	
 	enum TipoTropa{
-		INFANTERIA,
-		TERRESTRE,
-		AEREA,
-		MARINA,
+		INFANTERIA, //Tropa barata y ligera, poco golpe, siempre tierra
+		TERRESTRE, //Tropa vehicular/mecanizada, mucho golpe, siempre tierra
+		AEREA, //Tropa aerea, mucho golpe?, siempre aire
+		MARINA, //Tropa maritina, mucho golpe, siempre agua
+		SUBMARINA //Se hace un metodo que alterne entre acua/subacua para submarinos, si se implementan
 	}
 	
 	enum TipoMov{
-		INFANTERIA,
+		INFANTERIA, //Infanteria comun, va por monte y toaspartes no se
 		MECH, //Basicamente, infanteria con otros atributos.
-		VEHICULOLIGERO,
-		VEHICULOPESADO,
-		ACORAZADO,
-		AEREO,
-		ACUATICO,
+		V_LIGERO, //Vehiculo ligero, diferente manera de movimiento
+		V_PESADO, //VEhiculo pesado, mas peso == diferente movimiento
+		ACORAZADO, //Con orugas y mucha armadura. Much more heavy
+		AEREO, //Va por aire.
+		ACUATICO, //Va por mar.
+		SUBACUATICO //Se hace un metodo que alterne entre acua/subacua para submarinos, si se implementan
 	}
 	
 	enum Armamento{
