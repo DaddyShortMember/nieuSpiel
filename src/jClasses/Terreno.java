@@ -2,6 +2,11 @@ package jClasses;
 
 public abstract class Terreno {
 	
+	enum IdentidadTerreno{
+		ALGO,
+		
+	}
+	
 	
 	
 	String nombre; //Nombre del terreno
