@@ -4,30 +4,31 @@ import jClasses.Tropa.Armamento;
 import jClasses.Tropa.TipoMov;
 import jClasses.Tropa.TipoTropa;
 
-public abstract class Infanteria extends Tropa {
-
-	public Infanteria() {
+public class Rifleman extends Tropa {
+	
+	public Rifleman() {
 		super();
-		this.nombre = "";
+		this.nombre = "SOLDADO";
 		this.tipoTropa = TipoTropa.INFANTERIA;
 		this.tipoMov = TipoMov.INFANTERIA;
 		this.captura = true;
-		this.salud = 0;
-		this.golpe = 0;
+		this.salud = 10;
+		this.golpe = 10;
 		this.armadura = 0;
 		this.armaPrincipal = Armamento.NADA;
-		this.armaSecundaria = Armamento.NADA;
-		this.precio = 0;
+		this.armaSecundaria = Armamento.AMETRALLADORA;
+		this.precio = 1500;
 		this.nivel = 0;
-		this.vision = 0;
-		this.alcance = 0;
+		this.vision = 3;
+		this.alcance = 1;
 		this.municionesPrim = 0;
-		this.energiaMaxima = 0;
-		this.energia = 0;
-		this.distanciaMaxima = 0;
+		this.energiaMaxima = 99;
+		this.energia = 99;
+		this.distanciaMaxima = 3;
 		this.posX = 0;
 		this.posY = 0;
 		this.imagen = "";
-	}
 
+	}
+	
 }

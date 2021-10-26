@@ -116,6 +116,166 @@ public abstract class Tropa {
 		this.posY = 0;
 		this.imagen = "";
 	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public TipoTropa getTipoTropa() {
+		return tipoTropa;
+	}
+
+	public void setTipoTropa(TipoTropa tipoTropa) {
+		this.tipoTropa = tipoTropa;
+	}
+
+	public TipoMov getTipoMov() {
+		return tipoMov;
+	}
+
+	public void setTipoMov(TipoMov tipoMov) {
+		this.tipoMov = tipoMov;
+	}
+
+	public boolean isCaptura() {
+		return captura;
+	}
+
+	public void setCaptura(boolean captura) {
+		this.captura = captura;
+	}
+
+	public int getSalud() {
+		return salud;
+	}
+
+	public void setSalud(int salud) {
+		this.salud = salud;
+	}
+
+	public int getGolpe() {
+		return golpe;
+	}
+
+	public void setGolpe(int golpe) {
+		this.golpe = golpe;
+	}
+
+	public int getArmadura() {
+		return armadura;
+	}
+
+	public void setArmadura(int armadura) {
+		this.armadura = armadura;
+	}
+
+	public Armamento getArmaPrincipal() {
+		return armaPrincipal;
+	}
+
+	public void setArmaPrincipal(Armamento armaPrincipal) {
+		this.armaPrincipal = armaPrincipal;
+	}
+
+	public Armamento getArmaSecundaria() {
+		return armaSecundaria;
+	}
+
+	public void setArmaSecundaria(Armamento armaSecundaria) {
+		this.armaSecundaria = armaSecundaria;
+	}
+
+	public int getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(int precio) {
+		this.precio = precio;
+	}
+
+	public int getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
+	}
+
+	public int getVision() {
+		return vision;
+	}
+
+	public void setVision(int vision) {
+		this.vision = vision;
+	}
+
+	public int getAlcance() {
+		return alcance;
+	}
+
+	public void setAlcance(int alcance) {
+		this.alcance = alcance;
+	}
+
+	public int getMunicionesPrim() {
+		return municionesPrim;
+	}
+
+	public void setMunicionesPrim(int municionesPrim) {
+		this.municionesPrim = municionesPrim;
+	}
+
+	public int getEnergiaMaxima() {
+		return energiaMaxima;
+	}
+
+	public void setEnergiaMaxima(int energiaMaxima) {
+		this.energiaMaxima = energiaMaxima;
+	}
+
+	public int getEnergia() {
+		return energia;
+	}
+
+	public void setEnergia(int energia) {
+		this.energia = energia;
+	}
+
+	public int getDistanciaMaxima() {
+		return distanciaMaxima;
+	}
+
+	public void setDistanciaMaxima(int distanciaMaxima) {
+		this.distanciaMaxima = distanciaMaxima;
+	}
+
+	public int getPosX() {
+		return posX;
+	}
+
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
+	public int getPosY() {
+		return posY;
+	}
+
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
 	
 	
 	
