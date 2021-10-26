@@ -1,6 +1,8 @@
 package jClasses;
 
 public enum ListaTipos {
+	//Solo ordenados por a que elemento pertenecen. Simple listado de todos los tipos existentes.
+	//Esta desordenado, pero hay mas orden y contexto en el fichero de tropa.
 	//TERRESTRE
 	INFANTERIA,
 	MECH,
@@ -13,5 +15,7 @@ public enum ListaTipos {
 	AEREO,
 	//NAVAL
 	MARINA,
-	ACUATICO
+	ACUATICO,
+	SUBMARINA,
+	SUBACUATICO
 }
