@@ -28,14 +28,16 @@ public enum ListaIDTropa {
 		A_FIGHTJET, //Caza
 		A_LIGHTJET, //Caza ligero
 		A_SEAJET, //Naval
+		A_BOMBER, //Bombardero
 		
 		
 		//Naval
-		N_SHIP, //Battleship
-		N_CRUS, //Cruiser
+		N_SHIP, //Buque de Guerra
+		N_CRUS, //Fragata
 		N_SUBM, //Submarino
-		N_CARR, //Aircraft Carrier
-		N_LAND, //Lander
+		N_CARR, //Portaviones
+		N_LAND, //Lancha de Desembarco
+		N_MBOAT, //Buque de Misiles
 		
 	
 }
