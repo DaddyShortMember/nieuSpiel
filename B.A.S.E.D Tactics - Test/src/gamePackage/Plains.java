@@ -1,6 +1,6 @@
 package clasesEntidades;
 
-import clasesEntidades.Terreno.IdentidadTerreno;
+import gamePackage.Terreno.IdentidadTerreno;
 
 public class Plains extends Terreno {
 	
