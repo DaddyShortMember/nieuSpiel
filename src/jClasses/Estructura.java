@@ -3,6 +3,7 @@ package jClasses;
 public abstract class Estructura extends Terreno{
 
 	boolean cuartelGeneral; //Si es el cuartel general o no
+	boolean construible; //Si se puede construir o no; usado por aeropuerto y puerto temporal
 	boolean capturable; //Si es capturable o no.
 	boolean fabrica; //Si es capaz de producir tropas.
 	boolean visibleEncontrado; //Si es visible a primera vista, se puede integrar con un metodo un rango de casillas minimas hasta que sea visible
