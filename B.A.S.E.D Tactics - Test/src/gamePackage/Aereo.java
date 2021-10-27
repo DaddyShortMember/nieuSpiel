@@ -1,7 +1,7 @@
 package gamePackage;
 
-import clasesEntidades.Tropa.TipoMov;
-import clasesEntidades.Tropa.TipoTropa;
+import gamePackage.Tropa.TipoMov;
+import gamePackage.Tropa.TipoTropa;
 
 public abstract class Aereo extends Tropa{
 
