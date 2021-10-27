@@ -1,9 +1,9 @@
 package gamePackage;
 
-import clasesEntidades.Tropa.Armamento;
-import clasesEntidades.Tropa.IdentidadTropa;
-import clasesEntidades.Tropa.TipoMov;
-import clasesEntidades.Tropa.TipoTropa;
+import gamePackage.Tropa.Armamento;
+import gamePackage.Tropa.IdentidadTropa;
+import gamePackage.Tropa.TipoMov;
+import gamePackage.Tropa.TipoTropa;
 
 public class InfMech extends Infanteria {
 	
