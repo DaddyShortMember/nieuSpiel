@@ -1,4 +1,4 @@
-package clasesEntidades;
+package gamePackage;
 
 import clasesEntidades.Tropa.Armamento;
 import clasesEntidades.Tropa.IdentidadTropa;
