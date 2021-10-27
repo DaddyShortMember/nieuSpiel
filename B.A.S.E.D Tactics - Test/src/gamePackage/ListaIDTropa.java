@@ -1,4 +1,4 @@
-package clasesEntidades;
+package gamePackage;
 
 public enum ListaIDTropa {
 		//Presiento que esto sera util en algun momento
