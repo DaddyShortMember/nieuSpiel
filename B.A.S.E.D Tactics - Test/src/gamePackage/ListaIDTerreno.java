@@ -1,4 +1,4 @@
-package clasesEntidades;
+package gamePackage;
 
 public enum ListaIDTerreno {
 
