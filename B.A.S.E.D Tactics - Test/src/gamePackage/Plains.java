@@ -1,4 +1,4 @@
-package clasesEntidades;
+package gamePackage;
 
 import gamePackage.Terreno.IdentidadTerreno;
 
