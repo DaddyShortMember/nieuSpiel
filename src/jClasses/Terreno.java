@@ -26,7 +26,6 @@ public abstract class Terreno {
 	
 	IdentidadTerreno idTerreno; //Identidad del terreno.
 	String nombre; //Nombre del terreno
-	boolean construible; //Si se puede construir o no; usado por aeropuerto y puerto temporal
 	boolean construibleSobre; //Si se puede construir sobre este terreno. Implementado por cada grano de tierra y mar.
 	int peaje; //Lo que cuesta pasar por este terreno. Depende del tipo de tropa, por lo que se debe implementar arlgun metodo.
 	int defensa; //Influye en el golpe total que recibe cada tropa. Mientras mas defensa, menos golpe recibido.
