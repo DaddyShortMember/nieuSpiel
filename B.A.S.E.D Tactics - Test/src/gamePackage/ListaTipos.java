@@ -1,4 +1,4 @@
-package clasesEntidades;
+package gamePackage;
 
 public enum ListaTipos {
 	//Solo ordenados por a que elemento pertenecen. Simple listado de todos los tipos existentes.
