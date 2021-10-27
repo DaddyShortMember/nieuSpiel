@@ -1,6 +1,6 @@
 package gamePackage;
 
-import clasesEntidades.Terreno.IdentidadTerreno;
+import gamePackage.Terreno.IdentidadTerreno;
 
 public abstract class Estructura extends Terreno{
 
