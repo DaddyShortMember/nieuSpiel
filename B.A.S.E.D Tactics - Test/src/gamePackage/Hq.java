@@ -1,6 +1,6 @@
 package gamePackage;
 
-import clasesEntidades.Terreno.IdentidadTerreno;
+import gamePackage.Terreno.IdentidadTerreno;
 
 public class Hq extends Estructura{
 	
