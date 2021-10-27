@@ -1,4 +1,4 @@
-package clasesEntidades;
+package gamePackage;
 
 import clasesEntidades.Tropa.TipoMov;
 import clasesEntidades.Tropa.TipoTropa;
