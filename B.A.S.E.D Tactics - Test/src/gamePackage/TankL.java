@@ -5,34 +5,34 @@ import gamePackage.Tropa.IdentidadTropa;
 import gamePackage.Tropa.TipoMov;
 import gamePackage.Tropa.TipoTropa;
 
-public class InfMech extends Infanteria {
+public class TankL extends Vehiculo {
 	
-public InfMech() {
-		super();
-		this.nombre = "Mech";
-		this.idTropa = IdentidadTropa.INF_MECH;
-		this.tipoTropa = TipoTropa.INFANTERIA;
-		this.tipoMov = TipoMov.MECH;
-		this.captura = true;
+public TankL()  {
+		
+		this.nombre = "Tanque Ligero";
+		this.idTropa = IdentidadTropa.TANK_L;
+		this.tipoTropa = TipoTropa.TERRESTRE;
+		this.tipoMov = TipoMov.ACORAZADO;
+		this.captura = false;
 		this.construye = false;
-		this.salud = 120;
+		this.salud = 200;
 		this.golpePrim = 110;
-		this.golpeSec = 65;
-		this.armaPrincipal = Armamento.LANZACOHETES;
+		this.golpeSec = 75;
+		this.armaPrincipal = Armamento.TCANNON;
 		this.armaSecundaria = Armamento.AMETRALLADORA;
-		this.precio = 2500;
+		this.precio = 7000;
 		this.nivel = 0;
-		this.vision = 2;
+		this.vision = 3;
 		this.alcanceMin = 1;
 		this.alcanceMax = 1;
-		this.municionesPrim = 3;
+		this.municionesPrim = 6;
 		this.energiaMaxima = 70;
 		this.energia = this.energiaMaxima;
-		this.distanciaMaxima = 2;
+		this.distanciaMaxima = 6;
 		this.posX = 0;
 		this.posY = 0;
 		this.imagen = "";
-
+		
 	}
 
 }

@@ -5,28 +5,34 @@ import gamePackage.Tropa.IdentidadTropa;
 import gamePackage.Tropa.TipoMov;
 import gamePackage.Tropa.TipoTropa;
 
-public class InfFoot extends Infanteria {
+public class VRecon extends Vehiculo {
 	
-public InfFoot() {
-		super();
-		this.nombre = "Infanteria";
-		this.captura = true;
+public VRecon() {
+		
+		this.nombre = "Reconocimiento";
+		this.idTropa = IdentidadTropa.V_RECON;
+		this.tipoTropa = TipoTropa.TERRESTRE;
+		this.tipoMov = TipoMov.V_PESADO;
+		this.captura = false;
 		this.construye = false;
-		this.salud = 100;
-		this.golpeSec = 0;
+		this.salud = 130;
+		this.golpePrim = 0;
+		this.golpeSec = 75;
+		this.armaPrincipal = Armamento.NADA;
 		this.armaSecundaria = Armamento.AMETRALLADORA;
-		this.precio = 1500;
+		this.precio = 4000;
 		this.nivel = 0;
-		this.vision = 2; //5 en montes, se debe implementar algun metodo que lo cambie.
+		this.vision = 5;
 		this.alcanceMin = 1;
 		this.alcanceMax = 1;
+		this.municionesPrim = 0;
 		this.energiaMaxima = 99;
 		this.energia = this.energiaMaxima;
-		this.distanciaMaxima = 3;
+		this.distanciaMaxima = 8;
 		this.posX = 0;
 		this.posY = 0;
 		this.imagen = "";
-
+		
 	}
 
 }
