@@ -1,32 +1,40 @@
 package gamePackage;
 
-import gamePackage.Tropa.Armamento;
-import gamePackage.Tropa.IdentidadTropa;
-import gamePackage.Tropa.TipoMov;
-import gamePackage.Tropa.TipoTropa;
-
-public class InfFoot extends Infanteria {
+public class InfFoot implements Tropa {
 	
-public InfFoot() {
-		super();
-		this.nombre = "Infanteria";
-		this.captura = true;
-		this.construye = false;
-		this.salud = 100;
-		this.golpeSec = 0;
-		this.armaSecundaria = Armamento.AMETRALLADORA;
-		this.precio = 1500;
-		this.nivel = 0;
-		this.vision = 2; //5 en montes, se debe implementar algun metodo que lo cambie.
-		this.alcanceMin = 1;
-		this.alcanceMax = 1;
-		this.energiaMaxima = 99;
-		this.energia = this.energiaMaxima;
-		this.distanciaMaxima = 3;
-		this.posX = 0;
-		this.posY = 0;
-		this.imagen = "";
+	int posX = 0; //Posicion en eje X
+	int posY = 0; //Posicion en eje Y
+	String imagen = ""; //Direccion de imagen
 
+	@Override
+	public void setTropa(int posX, int posY, String imagen) {
+		// TODO Auto-generated method stub
+		this.posX = posX;
+		this.posY = posY;
+		this.imagen = imagen;
 	}
 
+	@Override
+	public int[] getPos() {
+		int[] pos = new int[2];
+		pos[0] = posX;
+		pos[1] = posY;
+		return pos;
+	}
+
+	@Override
+	public void setPos(int posX, int posY) {
+		this.posX = posX;
+		this.posY = posY;
+		
+	}
+
+	@Override
+	public void setImagen(String imagen) {
+		// TODO Auto-generated method stub
+		this.imagen = imagen;
+		
+	}
+	
 }
+

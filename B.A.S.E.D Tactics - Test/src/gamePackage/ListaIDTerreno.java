@@ -21,7 +21,10 @@ public enum ListaIDTerreno {
 		
 	//ESTRUCTURAS CONSTRUIBLES
 	TEMP_SEAP, //Puerto Temporal
-	TEMP_AIRP //Aeropuerto Temporal, 
+	TEMP_AIRP, //Aeropuerto Temporal, 
+	
+	//DEBUG
+	NADA
 
 
 

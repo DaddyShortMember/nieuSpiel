@@ -1,21 +1,24 @@
 package gamePackage;
 
 public enum ListaTipos {
-	//Solo ordenados por a que elemento pertenecen. Simple listado de todos los tipos existentes.
-	//Esta desordenado, pero hay mas orden y contexto en el fichero de tropa.
+	
+	//Existe un tipo (Infanteria) que se aplica para ambos tropa y tipo de movimiento. Esto solo ocurre con infanteria basica.
 	//TERRESTRE
-	INFANTERIA,
-	MECH,
-	TERRESTRE,
-	V_LIGERO,
-	V_PESADO,
-	ACORAZADO,
+	INFANTERIA, //Ambos tipo movimiento Y tipo tropa.
+	MECH, //Tipo tropa
+	TERRESTRE, //Tipo movimiento
+	V_LIGERO, //Tipo tropa
+	V_PESADO, //Tipo tropa
+	ACORAZADO, //Tipo tropa
 	//AEREO
-	AEREA,
-	AEREO,
+	AEREA, //Tipo tropa
+	AEREO, //Tipo movimiento
 	//NAVAL
-	MARINA,
-	ACUATICO,
-	SUBMARINA,
-	SUBACUATICO
+	MARINA, //Tipo tropa
+	ACUATICO, //Tipo movimiento
+	SUBMARINA, //Tipo tropa
+	SUBACUATICO, //Tipo movimiento
+	
+	//DEBUG
+	NADA
 }
