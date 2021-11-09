@@ -17,12 +17,12 @@ public class Hq implements Estructura {
 	}
 
 	@Override
-	public int getPos() {
+	public int[] getPos() {
 		int[] pos = new int[2];
 		pos[0] = posX;
 		pos[1] = posY;
 		// TODO Auto-generated method stub
-		return 0;
+		return pos;
 	}
 
 	@Override
@@ -66,17 +66,42 @@ public class Hq implements Estructura {
 		
 	}
 
-	@Override
-	public void setIngresos(int ingresos) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public int getIngresos() {
 		return ingresos;
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public String getNombre() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ListaIDTerreno getIDTerreno() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getDefensa() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean getConstSobre() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean getConstruible() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
