@@ -29,14 +29,24 @@ public interface Terreno {
 	String imagen = "";
 	
 	*/
-	
-	public void setTerreno(String imagen, int posX, int posY);
-	
-	public int getPos();
+	//Metodos Fisicos
+		//Setters
+	public String getNombre();
 	public void setPos(int posX, int posY);
 	public void setImagen(String imagen);
+		//Getters
+	public int[] getPos();
 	
+	//Metodos Logicos
+		//Setters
+	public void setTerreno(String imagen, int posX, int posY);	
+		//Getters
+	public ListaIDTerreno getIDTerreno();
 	public int getPeaje();
+	public int getDefensa();
+	public boolean getConstSobre();
+
+	
 
 }
 

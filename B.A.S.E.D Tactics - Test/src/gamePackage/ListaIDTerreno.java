@@ -3,13 +3,13 @@ package gamePackage;
 public enum ListaIDTerreno {
 
 	//TERRENO INDOMABLE
-	PLAINS, //Llanos y praderas
+	PLAINS, //Llanos y praderas, se puede construir encima
 	ROAD, //Carreteras
-	BRIDGE, //Puentes? En serio, Rodrigo?
-	MOUNTAIN, //Montanas y montes altos
+	BRIDGE, //Puentes
+	MOUNTAIN, //Montes altos
 	SEA, //El mar azul tan bello
 	ARCHIPELAGO, //Conjunto de islas cercanas
-	COAST, //Costas, donde se pueden construir
+	COAST, //Costas, donde se puede construir encima
 	FOREST, //Bosques
 	
 	//ESTRUCTURAS CAPTURABLES

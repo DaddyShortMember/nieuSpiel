@@ -63,6 +63,7 @@ public interface Tropa {
 	
 	//Metodos Fisicos
 		//Setters
+	public String getNombre();
 	public void setTropa(int posX, int posY, String imagen);
 	public void setPos(int posX, int posY);
 	public void setImagen(String imagen);
@@ -75,10 +76,13 @@ public interface Tropa {
 	public void setTipoTropa(ListaTipos tipoTropa);
 	public void setSalud(int salud);
 	public void setEnergia(int energia);
+	public void setMuniciones(int municiones);
+	public void setNivel(int nivel);
 		//Getters
 	public ListaIDTropa getIDTropa();
 	public ListaTipos getTipoTropa();
 	public ListaTipos getTipoMov();
+	public ListaArmas[] getArmas();
 	public boolean getCaptura();
 	public int getPrecio();
 	public boolean getConstruye();
@@ -87,7 +91,9 @@ public interface Tropa {
 	public int getGolpeSec();
 	public int getDistMax();
 	public int getEnergia();
-	
-	
+	public int[] getAlcance();
+	public int getMuniciones();
+	public int getVision();
+	public int getNivel();
 	
 }

@@ -26,11 +26,13 @@ public interface Estructura extends Terreno{
 	
 	*/
 	
-
+	//Metodos Logicos
+		//Setters
+	//Nada. No hacen falta los Setters.
+		//Getters
 	public boolean getCapturable();
 	public boolean getFabrica();
 	public boolean getCG();
-	public void setIngresos(int ingresos);
+	public boolean getConstruible();
 	public int getIngresos();
-
 }
