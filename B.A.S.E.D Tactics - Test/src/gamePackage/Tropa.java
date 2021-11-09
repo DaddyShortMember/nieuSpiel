@@ -61,10 +61,33 @@ public interface Tropa {
 	
 	*/
 	
+	//Metodos Fisicos
+		//Setters
 	public void setTropa(int posX, int posY, String imagen);
-	//public void setTropa(String nombre, ListaIDTropa idTropa, ListaTipos tipoTropa, ListaTipos tipoMov, int saludMaxima, int golpePrim, int golpeSec, int); Esto se termina luego
-	public int[] getPos();
 	public void setPos(int posX, int posY);
 	public void setImagen(String imagen);
+		//Getters
+	public int[] getPos();
+	
+	//Metodos Logicos
+		//Setters
+	public void setTipoMov(ListaTipos tipoMov);
+	public void setTipoTropa(ListaTipos tipoTropa);
+	public void setSalud(int salud);
+	public void setEnergia(int energia);
+		//Getters
+	public ListaIDTropa getIDTropa();
+	public ListaTipos getTipoTropa();
+	public ListaTipos getTipoMov();
+	public boolean getCaptura();
+	public int getPrecio();
+	public boolean getConstruye();
+	public int getSalud();
+	public int getGolpePrim();
+	public int getGolpeSec();
+	public int getDistMax();
+	public int getEnergia();
+	
+	
 	
 }
