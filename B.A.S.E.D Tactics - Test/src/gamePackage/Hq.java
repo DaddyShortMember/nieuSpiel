@@ -39,7 +39,7 @@ public class Hq implements Estructura {
 	}
 
 	@Override
-	public int getPeaje() {
+	public int getPeaje(ListaTipos trop) {
 		int peaje = 0;
 		//Switch en vez de if-else if-else
 		return peaje;

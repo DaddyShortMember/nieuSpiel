@@ -2,10 +2,17 @@ package gamePackage;
 
 public class Plains implements Terreno {
 	
+	//Atributos Logicos
+	ListaIDTerreno idTerreno = ListaIDTerreno.PLAINS;
+	boolean construibleSobre = true;
+	int peaje = 0;
+	int defensa = 1;
+	//Atributos Fisicos
+	String nombre = "Llanuras";
 	int posX = 0;
 	int posY = 0;
 	String imagen = "";
-
+	
 	@Override
 	public void setTerreno(String imagen, int posX, int posY) {
 		// TODO Auto-generated method stub
@@ -38,8 +45,29 @@ public class Plains implements Terreno {
 	}
 
 	@Override
-	public int getPeaje() {
+	public int getPeaje(ListaTipos trop) {
 		int peaje = 0;
+		switch (trop) {
+		case INFANTERIA:
+			peaje = 1;
+			break;
+		case V_LIGERO:
+			peaje = 1;
+			break;
+		case V_PESADO:
+			peaje = 1;
+			break;
+		case ACORAZADO:
+			peaje = 1;
+			break;
+		case AEREO:
+			peaje = 1;
+			break;
+		default:
+			peaje = 9999;
+			break;
+			
+		}
 		//Switch en vez de if-else if-else
 		return peaje;
 	}
@@ -47,7 +75,7 @@ public class Plains implements Terreno {
 	@Override
 	public String getNombre() {
 		// TODO Auto-generated method stub
-		return null;
+		return nombre;
 	}
 
 

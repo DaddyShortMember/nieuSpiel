@@ -42,7 +42,7 @@ public interface Terreno {
 	public void setTerreno(String imagen, int posX, int posY);	
 		//Getters
 	public ListaIDTerreno getIDTerreno();
-	public int getPeaje();
+	public int getPeaje(ListaTipos trop);
 	public int getDefensa();
 	public boolean getConstSobre();
 
