@@ -11,7 +11,7 @@ public class InfFoot implements Tropa {
 	int saludMaxima = 100;
 	int salud = this.saludMaxima;
 	int golpePrim = 0;
-	int golpeSec = 0;
+	int golpeSec = 55;
 	ListaArmas armaPrincipal = ListaArmas.NADA;
 	ListaArmas armaSecundaria = ListaArmas.AMETRALLADORA;
 	int precio = 1500;
