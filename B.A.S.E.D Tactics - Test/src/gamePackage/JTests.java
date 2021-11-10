@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class JTests {
-
+//Tests de getters/setters de clase
 	@Test
 	public void testGetEnergia() {
 		InfFoot x = new InfFoot();
