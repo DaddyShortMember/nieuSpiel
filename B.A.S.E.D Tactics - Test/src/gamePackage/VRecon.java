@@ -1,38 +1,39 @@
 package gamePackage;
 
-public class InfMech implements Tropa {
-
-	// ATRIBUTOS LOGICOS
-	ListaIDTropa idTropa = ListaIDTropa.INF_MECH;
-	ListaTipos tipoTropa = ListaTipos.MECH;
-	ListaTipos tipoMov = ListaTipos.INFANTERIA;
-	boolean captura = true;
+public class VRecon implements Tropa{
+	
+	//ATRIBUTOS LOGICOS
+	ListaIDTropa idTropa = ListaIDTropa.INF_FOOT;
+	ListaTipos tipoTropa = ListaTipos.TERRESTRE;
+	ListaTipos tipoMov = ListaTipos.V_PESADO;
+	boolean captura = false;
 	boolean construye = false;
-	int saludMaxima = 120;
+	int saludMaxima = 130;
 	int salud = this.saludMaxima;
-	int golpePrim = 110;
-	int golpeSec = 65;
-	ListaArmas armaPrincipal = ListaArmas.LANZACOHETES;
+	int golpePrim = 0;
+	int golpeSec = 75;
+	ListaArmas armaPrincipal = ListaArmas.NADA;
 	ListaArmas armaSecundaria = ListaArmas.AMETRALLADORA;
-	int precio = 2500;
+	int precio = 4000;
 	int nivel = 0;
-	int vision = 2;
+	int vision = 5;
 	int alcanceMin = 1;
 	int alcanceMax = this.alcanceMin;
-	int municionesMax = 6;
+	int municionesMax = 0;
 	int municionesPrim = this.municionesMax;
-	int energiaMaxima = 70;
+	int energiaMaxima = 80;
 	int energia = this.energiaMaxima;
-	int distanciaMaxima = 2;
-
-	// ATRIBUTOS FISICOS
-	String nombre = "Infanteria";
-	int posX = 0; // Posicion en eje X
-	int posY = 0; // Posicion en eje Y
-	String imagen = ""; // Direccion de imagen
-
-	// Metodos Heredados
-	// Setters
+	int distanciaMaxima = 8;
+	
+	//ATRIBUTOS FISICOS
+		String nombre = "Reconocimiento";
+		int posX = 0; //Posicion en eje X
+		int posY = 0; //Posicion en eje Y
+		String imagen = ""; //Direccion de imagen
+		
+	//Metodos Heredados
+	//Setters
+	
 	@Override
 	public void setTropa(int posX, int posY, String imagen) {
 		// TODO Auto-generated method stub
@@ -51,10 +52,10 @@ public class InfMech implements Tropa {
 
 	@Override
 	public void setPos(int posX, int posY) {
-		// If(posY <= limYsup && posX <= limXsup || posY >= limYinf && posX >= limXinf)
+		//If(posY <= limYsup && posX <= limXsup || posY >= limYinf && posX >= limXinf)
 		this.posX = posX;
 		this.posY = posY;
-		// else{ Logger? }
+		//else{ Logger? }
 	}
 
 	@Override
@@ -66,30 +67,30 @@ public class InfMech implements Tropa {
 	@Override
 	public void setSalud(int salud) {
 		// TODO Auto-generated method stub
-		if (salud <= saludMaxima)
+		if(salud <= saludMaxima)
 			this.salud = salud;
 		else {
-			// Logger?
+			//Logger?
 		}
 	}
 
 	@Override
 	public void setEnergia(int energia) {
 		// TODO Auto-generated method stub
-		if (energia <= energiaMaxima)
+		if(energia <= energiaMaxima)
 			this.energia = energia;
 		else {
-			// Logger?
+			//Logger?
 		}
 	}
 
 	@Override
 	public void setMuniciones(int municiones) {
 		// TODO Auto-generated method stub
-		if (municiones <= municionesMax)
+		if(municiones <= municionesMax)
 			this.municionesPrim = municiones;
 		else {
-			// Logger?
+			//Logger?
 		}
 	}
 
@@ -98,8 +99,7 @@ public class InfMech implements Tropa {
 		// TODO Auto-generated method stub
 		this.nivel = nivel;
 	}
-
-	// Getters
+		//Getters
 	@Override
 	public String getNombre() {
 		// TODO Auto-generated method stub
@@ -208,7 +208,7 @@ public class InfMech implements Tropa {
 		return nivel;
 	}
 
-	// Metodos Logicos
+		//Metodos Logicos
 	@Override
 	public boolean atacaA(ListaTipos tipoTropa) {
 		// TODO Auto-generated method stub
@@ -238,29 +238,28 @@ public class InfMech implements Tropa {
 		default:
 			target = false;
 		}
-
+		
 		return target;
 	}
 
-	// Metodos Inutiles Para Esta Tropa
+	//Metodos Inutiles Para Esta Tropa
 	@Override
 	public void setTipoMov(ListaTipos tipoMov) {
 		// TODO Auto-generated method stub
-		// Nada
+		//Nada
 	}
-
 	@Override
 	public void setTipoTropa(ListaTipos tipoTropa) {
 		// TODO Auto-generated method stub
-		// Nada
+		//Nada
 	}
 
-	// Metodos Unicos Para Esta Tropa
-	// Setters
+	//Metodos Unicos Para Esta Tropa
+		//Setters
 	public void setVision(int vis) {
 		this.vision = vis;
 	}
-	// Getters
+		//Getters
 
 	@Override
 	public int getSaludMax() {
@@ -279,5 +278,7 @@ public class InfMech implements Tropa {
 		// TODO Auto-generated method stub
 		return municionesMax;
 	}
+	
+	
 
 }

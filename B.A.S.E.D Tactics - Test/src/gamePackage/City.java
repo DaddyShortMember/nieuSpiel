@@ -1,20 +1,19 @@
 package gamePackage;
 
-public class Hq implements Estructura {
+public class City implements Estructura{
 	
-
 	//Fisicos
-	String nombre = "Cuartel General";
+	String nombre = "Ciudad";
 	int posX = 0;
 	int posY = 0;
 	String imagen = "";
 	
-	//Logicos
-	ListaIDTerreno idTerreno = ListaIDTerreno.HQ;
+	//Logicos 
+	ListaIDTerreno idTerreno = ListaIDTerreno.CITY;
 	boolean construibleSobre = false;
-	int defensa = 4;
+	int defensa = 2;
 	int ingresos = 1000;
-	boolean cuartelGeneral = true;
+	boolean cuartelGeneral = false;
 	boolean construible = false;
 	boolean capturable = true;
 	boolean fabrica = true;
@@ -28,7 +27,7 @@ public class Hq implements Estructura {
 		this.imagen = imagen;
 		
 	}
-
+	
 	@Override
 	public int[] getPos() {
 		int[] pos = new int[2];
@@ -37,20 +36,20 @@ public class Hq implements Estructura {
 		// TODO Auto-generated method stub
 		return pos;
 	}
-
+	
 	@Override
 	public void setPos(int posX, int posY) {
 		// TODO Auto-generated method stub
 		this.posX = posX;
 		this.posY = posY;
 	}
-
+	
 	@Override
 	public void setImagen(String imagen) {
 		// TODO Auto-generated method stub
 		this.imagen = imagen;
 	}
-
+	
 	@Override
 	public int getPeaje(Tropa trop) {
 		int peaje = 0;
@@ -81,14 +80,14 @@ public class Hq implements Estructura {
 		//Switch en vez de if-else if-else
 		return peaje;
 	}
-
+	
 	@Override
 	public boolean getCapturable() {
 		return capturable;
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
 	public boolean getFabrica() {
 		return fabrica;
@@ -140,7 +139,7 @@ public class Hq implements Estructura {
 		// TODO Auto-generated method stub
 		return construible;
 	}
-
+	
 	@Override //Intento de hacer un metodo recursivo. Hay error de Stack Overflow.
 	public boolean suministra(Tropa trop) {
 		// TODO Auto-generated method stub
@@ -184,5 +183,6 @@ public class Hq implements Estructura {
 		}
 		return sumi;
 	}
+	
 
 }

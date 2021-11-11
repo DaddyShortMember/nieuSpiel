@@ -68,10 +68,14 @@ public class JTests {
 		Hq y = new Hq();
 		x.setSalud(20);
 		x.setMuniciones(1);
-		System.out.println(x.getEnergia() + " " + x.getSalud() + " " + x.getMuniciones());
-		if(y.suministra(x) == true) {
-		
+		try {
+			while(x.getEnergia() != x.getEnergiaMax() || x.getSalud() != x.getSaludMax() || x.getMuniciones() != x.getMunicionesMax()){
+				y.suministra(x);
+				System.out.println(x.getEnergia() + x.getSalud() + x.getMuniciones());
+				}
 			
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		
 		itworks = true;

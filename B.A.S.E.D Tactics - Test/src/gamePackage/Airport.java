@@ -1,20 +1,19 @@
 package gamePackage;
 
-public class Hq implements Estructura {
+public class Airport implements Estructura{
 	
-
 	//Fisicos
-	String nombre = "Cuartel General";
+	String nombre = "Aeropuerto";
 	int posX = 0;
 	int posY = 0;
 	String imagen = "";
 	
 	//Logicos
-	ListaIDTerreno idTerreno = ListaIDTerreno.HQ;
+	ListaIDTerreno idTerreno = ListaIDTerreno.AIRPORT;
 	boolean construibleSobre = false;
-	int defensa = 4;
+	int defensa = 3;
 	int ingresos = 1000;
-	boolean cuartelGeneral = true;
+	boolean cuartelGeneral = false;
 	boolean construible = false;
 	boolean capturable = true;
 	boolean fabrica = true;
@@ -184,5 +183,6 @@ public class Hq implements Estructura {
 		}
 		return sumi;
 	}
+	
 
 }

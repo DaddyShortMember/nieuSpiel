@@ -99,7 +99,6 @@ public interface Tropa {
 	public int getVision();
 	public int getNivel();
 		//Metodos
-	public boolean necesitaSuministro();
 	public boolean atacaA(ListaTipos tipoTropa);
 	
 }
