@@ -151,10 +151,10 @@ public class Hq implements Estructura {
 					trop.setEnergia((trop.getEnergia() + 1));
 				}
 				if(trop.getMuniciones() <= trop.getMunicionesMax()){
-					trop.setMuniciones((trop.getMuniciones() + 1));
+					trop.setMuniciones((trop.getMunicionesMax()));
 				}
 				if(trop.getSalud() <= trop.getSaludMax()){
-					trop.setMuniciones((trop.getSalud() + 1));
+					trop.setSalud((trop.getSaludMax()));
 				}
 			}}
 			
