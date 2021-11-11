@@ -280,4 +280,12 @@ public class InfMech implements Tropa {
 		return municionesMax;
 	}
 
+	@Override
+	public boolean necesitaSuministro() {
+		if(this.municionesPrim < this.municionesMax || this.salud < this.saludMaxima || this.energia < this.energiaMaxima) {
+			return true;
+		}else
+		return false;
+	}
+
 }

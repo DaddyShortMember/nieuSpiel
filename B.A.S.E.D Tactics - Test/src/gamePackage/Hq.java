@@ -144,45 +144,21 @@ public class Hq implements Estructura {
 	@Override //Intento de hacer un metodo recursivo. Hay error de Stack Overflow.
 	public boolean suministra(Tropa trop) {
 		// TODO Auto-generated method stub
-		boolean sumi = false;
-		try {
-			if(suministra(trop) == true) {
-				if(trop.getEnergia() <= trop.getEnergiaMax()) {
-					trop.setEnergia((trop.getEnergia() + 1));
-				}
-				if(trop.getMuniciones() <= trop.getMunicionesMax()){
-					trop.setMuniciones((trop.getMunicionesMax()));
-				}
-				if(trop.getSalud() <= trop.getSaludMax()){
-					trop.setSalud((trop.getSaludMax()));
-				}
-			}}
 			
-		 catch (Exception e) {
-			// TODO: handle exception
-		}
-		
-			
-		if(sumi = false) {
 			switch (trop.getTipoTropa()) {
 			case TERRESTRE:
-				sumi = true;
-				break;
+				return true;
 			case INFANTERIA:
-				sumi = true;
-				break;
+				return true;
 			case V_LIGERO:
-				sumi = true;
-				break;
+				return true;
 			case V_PESADO:
-				sumi = true;
-				break;
+				return true;
 			default:
-				sumi = false;
-				break;
+				return false;
 			}
-		}
-		return sumi;
+		
+		
 	}
 
 }
