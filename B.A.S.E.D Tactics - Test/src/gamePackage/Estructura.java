@@ -16,7 +16,7 @@ public interface Estructura extends Terreno{
 	
 	/*Atributos a copiar a clases:
 	
-	ListaTipos suministraA = null;
+	boolean suministra = true;
 	boolean cuartelGeneral = false;
 	boolean construible = false;
 	boolean capturable = false;
@@ -35,4 +35,5 @@ public interface Estructura extends Terreno{
 	public boolean getCG();
 	public boolean getConstruible();
 	public int getIngresos();
+	public boolean suministra(Tropa trop);
 }

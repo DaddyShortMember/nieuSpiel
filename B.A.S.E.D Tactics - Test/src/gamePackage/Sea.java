@@ -1,13 +1,13 @@
 package gamePackage;
 
-public class Plains implements Terreno {
-	
+public class Sea implements Terreno{
+
 	//Atributos Logicos
-	ListaIDTerreno idTerreno = ListaIDTerreno.PLAINS;
-	boolean construibleSobre = true;
-	int defensa = 1;
+	ListaIDTerreno idTerreno = ListaIDTerreno.SEA;
+	boolean construibleSobre = false;
+	int defensa = 0;
 	//Atributos Fisicos
-	String nombre = "Llanuras";
+	String nombre = "Mar";
 	int posX = 0;
 	int posY = 0;
 	String imagen = "";
@@ -47,22 +47,13 @@ public class Plains implements Terreno {
 	public int getPeaje(Tropa trop) {
 		int peaje = 0;
 		switch (trop.getTipoMov()) {
-		case INFANTERIA:
+		case ACUATICO:
 			peaje = 1;
 			break;
-		case V_LIGERO:
-			peaje = 1;
-			break;
-		case V_PESADO:
-			peaje = 2;
-			break;
-		case ACORAZADO:
+		case SUBACUATICO:
 			peaje = 1;
 			break;
 		case AEREO:
-			peaje = 1;
-			break;
-		case MECH:
 			peaje = 1;
 			break;
 		default:

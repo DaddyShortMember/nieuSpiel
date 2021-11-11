@@ -2,11 +2,24 @@ package gamePackage;
 
 public class Hq implements Estructura {
 	
+
+	//Fisicos
+	String nombre = "Cuartel General";
 	int posX = 0;
 	int posY = 0;
 	String imagen = "";
-	int ingresos = 0;
-
+	
+	//Logicos
+	ListaIDTerreno idTerreno = ListaIDTerreno.HQ;
+	boolean construibleSobre = false;
+	int defensa = 4;
+	int ingresos = 1000;
+	boolean cuartelGeneral = true;
+	boolean construible = false;
+	boolean capturable = true;
+	boolean fabrica = true;
+	boolean visibleEncontrado = true;
+	
 	@Override
 	public void setTerreno(String imagen, int posX, int posY) {
 		// TODO Auto-generated method stub
@@ -39,29 +52,53 @@ public class Hq implements Estructura {
 	}
 
 	@Override
-	public int getPeaje(ListaTipos trop) {
+	public int getPeaje(Tropa trop) {
 		int peaje = 0;
+		switch (trop.getTipoMov()) {
+		case INFANTERIA:
+			peaje = 1;
+			break;
+		case V_LIGERO:
+			peaje = 1;
+			break;
+		case V_PESADO:
+			peaje = 2;
+			break;
+		case ACORAZADO:
+			peaje = 1;
+			break;
+		case AEREO:
+			peaje = 1;
+			break;
+		case MECH:
+			peaje = 1;
+			break;
+		default:
+			peaje = 0;
+			break;
+			
+		}
 		//Switch en vez de if-else if-else
 		return peaje;
 	}
 
 	@Override
 	public boolean getCapturable() {
-		return false;
+		return capturable;
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public boolean getFabrica() {
-		return false;
+		return fabrica;
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public boolean getCG() {
-		return false;
+		return cuartelGeneral;
 		// TODO Auto-generated method stub
 		
 	}
@@ -77,31 +114,75 @@ public class Hq implements Estructura {
 	@Override
 	public String getNombre() {
 		// TODO Auto-generated method stub
-		return null;
+		return nombre;
 	}
 
 	@Override
 	public ListaIDTerreno getIDTerreno() {
 		// TODO Auto-generated method stub
-		return null;
+		return idTerreno;
 	}
 
 	@Override
 	public int getDefensa() {
 		// TODO Auto-generated method stub
-		return 0;
+		return defensa;
 	}
 
 	@Override
 	public boolean getConstSobre() {
 		// TODO Auto-generated method stub
-		return false;
+		return construibleSobre;
 	}
 
 	@Override
 	public boolean getConstruible() {
 		// TODO Auto-generated method stub
-		return false;
+		return construible;
+	}
+
+	@Override //Intento de hacer un metodo recursivo. Hay error de Stack Overflow.
+	public boolean suministra(Tropa trop) {
+		// TODO Auto-generated method stub
+		boolean sumi = false;
+		try {
+			if(suministra(trop) == true) {
+				if(trop.getEnergia() <= trop.getEnergiaMax()) {
+					trop.setEnergia((trop.getEnergia() + 1));
+				}
+				if(trop.getMuniciones() <= trop.getMunicionesMax()){
+					trop.setMuniciones((trop.getMuniciones() + 1));
+				}
+				if(trop.getSalud() <= trop.getSaludMax()){
+					trop.setMuniciones((trop.getSalud() + 1));
+				}
+			}}
+			
+		 catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+			
+		if(sumi = false) {
+			switch (trop.getTipoTropa()) {
+			case TERRESTRE:
+				sumi = true;
+				break;
+			case INFANTERIA:
+				sumi = true;
+				break;
+			case V_LIGERO:
+				sumi = true;
+				break;
+			case V_PESADO:
+				sumi = true;
+				break;
+			default:
+				sumi = false;
+				break;
+			}
+		}
+		return sumi;
 	}
 
 }

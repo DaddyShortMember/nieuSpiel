@@ -86,14 +86,19 @@ public interface Tropa {
 	public boolean getCaptura();
 	public int getPrecio();
 	public boolean getConstruye();
+	public int getSaludMax();
 	public int getSalud();
 	public int getGolpePrim();
 	public int getGolpeSec();
 	public int getDistMax();
+	public int getEnergiaMax();
 	public int getEnergia();
 	public int[] getAlcance();
+	public int getMunicionesMax();
 	public int getMuniciones();
 	public int getVision();
 	public int getNivel();
+		//Metodos
+	public boolean atacaA(ListaTipos tipoTropa);
 	
 }
