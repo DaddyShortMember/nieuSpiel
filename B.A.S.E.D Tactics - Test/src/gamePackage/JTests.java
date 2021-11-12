@@ -8,26 +8,34 @@ public class JTests {
 
 	@Test
 	public void testGetEnergia() {
+		System.out.println("INICIO TEST GETENERGIA");
 		InfFoot x = new InfFoot();
 		int energy = x.getEnergia();
+		System.out.println("FIN TEST GETENERGIA");
 		assertEquals(x.energiaMaxima, energy);
 	}
 	
 	@Test
 	public void testGetPeaje() {
+		System.out.println("INICIO TEST GETPEAJE");
 		InfFoot x = new InfFoot();
 		Plains y = new Plains();
 		int peaj = y.getPeaje(x);
+		System.out.println("FIN TEST GETPEAJE");
 		assertEquals(1, peaj);
+
 	}
 	
 	@Test //Test para ver si furrula el setEnergia();
 	public void testSetEnergia() {
+		System.out.println("INICIO TEST SETENERGIA");
 		InfFoot x = new InfFoot();
-		Plains y = new Plains();
-		int test = y.getPeaje(x);
-		x.setEnergia(x.energia - test);
-		assertEquals(98, x.getEnergia());
+		Mountain y = new Mountain();
+		System.out.println(x.getEnergia());
+		x.setEnergia(x.energia - y.getPeaje(x));
+		System.out.println(x.getEnergia());
+		System.out.println("FIN TEST SETENERGIA");
+		assertEquals(x.getEnergiaMax() - y.getPeaje(x), x.getEnergia());
 	}
 	
 	@Test //Test para ver si 
@@ -63,22 +71,23 @@ public class JTests {
 	
 	@Test
 	public void testSuministra() {
+		System.out.println("INICIO TEST DE SUMINISTRO");
 		boolean itworks = false;
 		InfMech x = new InfMech();
 		Hq y = new Hq();
+		
 		x.setSalud(20);
 		x.setMuniciones(1);
-		try {
-			while(x.getEnergia() != x.getEnergiaMax() || x.getSalud() != x.getSaludMax() || x.getMuniciones() != x.getMunicionesMax()){
-				y.suministra(x);
-				System.out.println(x.getEnergia() + x.getSalud() + x.getMuniciones());
-				}
+		System.out.println(x.getEnergia() + " " + x.getSalud() + " " + x.getMuniciones());
+		System.out.println(y.suministra(x));
+		System.out.println(x.necesitaSuministro());
+		if(y.suministra(x) == true && x.necesitaSuministro() == true) {
 			
-		} catch (Exception e) {
-			// TODO: handle exception
+			itworks = true;
+			
 		}
 		
-		itworks = true;
+		System.out.println("FIN TEST DE SUMINISTRO");
 		assertEquals(true, itworks);
 	}
 
