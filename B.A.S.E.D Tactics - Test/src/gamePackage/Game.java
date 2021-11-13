@@ -2,6 +2,7 @@ package gamePackage;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.logging.Logger;
 
 import javax.swing.*;
 
@@ -16,12 +17,14 @@ public class Game extends JFrame{
 		juego.setLocationRelativeTo(null);
 		juego.setResizable(false);
 		juego.setVisible(true);
-
+		Logger logger = Logger.getLogger(Game.class.getName());
+		System.out.println("vert: " + grafoVert(3));
+		System.out.println("arist: " + grafoArist(3));
 	}
 	//public static int tiles = 17;  <-- Viejo tamaño de las casillas
 	public static int mov = 32;		//Tamaño de las casillas y valor por el que se multiplica el valor de x e y de los labels
 	
-	@SuppressWarnings("deprecation")
+	
 	public Game() {
 		Container cp = this.getContentPane();
 		cp.setLayout(new BoxLayout(cp, BoxLayout.X_AXIS));		//Se le pone un BoxLayout al contenedor de la ventana en el eje X que coloca los componentes en serie horizontalmente
@@ -58,13 +61,13 @@ public class Game extends JFrame{
 		JLayeredPane entityPanel = new JLayeredPane();		//Creación del panel que contiene las entidades como tropas o edificios
 		entityPanel.setLayout(null);		//Se le pone layout nulo para que deje poner componentes mediante posiciones absolutas
 		entityPanel.setBounds(0, 0, 672, 672);		//Posición y tamaño del panel de entidades
-		entityPanel.add(troopLabel1, new Integer(0), 0);		//Se añade el label de una tropa con un valor que define su prioridad para presentarse por encima o por debajo de otro label
-		entityPanel.add(cursor, new Integer(1), 0);		//Se añade el label del cursor con una prioridad mayor que hace que esté sobre las tropas y entidades
+		entityPanel.add(troopLabel1, 0, 0);		//Se añade el label de una tropa con un valor que define su prioridad para presentarse por encima o por debajo de otro label
+		entityPanel.add(cursor, 1, 0);		//Se añade el label del cursor con una prioridad mayor que hace que esté sobre las tropas y entidades
 		
 		entityPanel.setOpaque(false);		//Se cambia el atributo del panel para hacer que se pueda ver lo que tiene debajo (otro panel)
 		
-		layeredGamePanel.add(mapPanel, new Integer(0), 0);		//Se añade el panel que contiene el mapa con prioridad baja para que esté por debajo del resto de cosas que se añadan
-		layeredGamePanel.add(entityPanel, new Integer(1), 0);		//Se añade el panel de entidades con mayor prioridad que el del mapa para que se vean por encima de este
+		layeredGamePanel.add(mapPanel, 0, 0);		//Se añade el panel que contiene el mapa con prioridad baja para que esté por debajo del resto de cosas que se añadan
+		layeredGamePanel.add(entityPanel, 1, 0);		//Se añade el panel de entidades con mayor prioridad que el del mapa para que se vean por encima de este
 		
 		
 		
@@ -198,12 +201,50 @@ public class Game extends JFrame{
 		
 	}
 	
+	public static int grafoVert(int trop) {
+		int n = 1;
+		int vert = 1;
+		for (int i = 0; i < (trop - 1); i++) {
+			n += 2;
+			vert += n;		
+			//System.out.println("n: " + n + " vert: " + vert);
+		}
+		vert *= 2;
+		vert += n + 2;
+		return vert;
+	}
+	public static int grafoArist(int trop) {
+		int n = 1;
+		int arist = 1;
+		for (int i = 0; i < ((trop * 2) - 2); i++) {
+			n += 1;
+			arist += n;		
+			//System.out.println("n: " + n + " arist: " + arist);
+		}
+		arist *= 2;
+		arist += n + 1;
+		return arist;
+	}
+	public static Dimension grafoVertPos() {
+		
+		
+		
+		return new Dimension(1,2);
+	}
+	
+	
+	
+	
 }
 
 //TODO list
 /*
+·Panel de información para quien quiera hacerlo
+ 
 ·Methods (...)
-
+·Graph:
+	-node positions relative to map
+	-positions in map relative to troop
 
  
  */
