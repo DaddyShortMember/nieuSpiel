@@ -32,7 +32,7 @@ public class AntiA implements Tropa{
 	String imagen = ""; //Direccion de imagen
 	
 	//Metodos Heredados
-		//Setters
+	//Setters
 	@Override
 	public void setTropa(int posX, int posY, String imagen) {
 		// TODO Auto-generated method stub
@@ -277,6 +277,12 @@ public class AntiA implements Tropa{
 		// TODO Auto-generated method stub
 		return municionesMax;
 	}
+	@Override
+	public boolean necesitaSuministro() {
+		if(this.municionesPrim < this.municionesMax || this.salud < this.saludMaxima || this.energia < this.energiaMaxima) {
+			return true;
+		}else
+		return false;
+	}
 
-
-}
+	}
