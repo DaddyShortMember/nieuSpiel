@@ -31,6 +31,14 @@ public class VRecon implements Tropa{
 		int posY = 0; //Posicion en eje Y
 		String imagen = ""; //Direccion de imagen
 		
+		//Constructor
+		public VRecon(int posX, int posY, String imagen) {
+			super();
+			this.posX = posX;
+			this.posY = posY;
+			this.imagen = imagen;
+		}
+		
 		//Metodos Heredados
 		//Setters
 		@Override

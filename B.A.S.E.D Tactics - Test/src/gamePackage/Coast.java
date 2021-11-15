@@ -11,6 +11,13 @@ public class Coast implements Terreno {
 		int posX = 0;
 		int posY = 0;
 		String imagen = "";
+		
+		//Constructor
+		public Coast(int posX, int posY) {
+			super();
+			this.posX = posX;
+			this.posY = posY;
+		}
 
 		@Override
 		public void setTerreno(String imagen, int posX, int posY) {

@@ -12,6 +12,13 @@ public class Mountain implements Terreno {
 			int posY = 0;
 			String imagen = "";
 			
+			//Constructor
+			public Mountain(int posX, int posY) {
+				super();
+				this.posX = posX;
+				this.posY = posY;
+			}
+			
 			@Override
 			public void setTerreno(String imagen, int posX, int posY) {
 				// TODO Auto-generated method stub

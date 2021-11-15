@@ -12,6 +12,14 @@ public class Road implements Terreno{
 		int posY = 0;
 		String imagen = "";
 		
+		//Constructor
+				public Road(int posX, int posY, String imagen) {
+					super();
+					this.posX = posX;
+					this.posY = posY;
+					this.imagen = imagen;
+				}
+		
 		@Override
 		public void setTerreno(String imagen, int posX, int posY) {
 			// TODO Auto-generated method stub

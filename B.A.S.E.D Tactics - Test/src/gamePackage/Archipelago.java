@@ -11,6 +11,13 @@ public class Archipelago implements Terreno {
 		int posX = 0;
 		int posY = 0;
 		String imagen = "";
+		
+		//Constructor
+		public Archipelago(int posX, int posY) {
+			super();
+			this.posX = posX;
+			this.posY = posY;
+		}
 
 		@Override
 		public void setTerreno(String imagen, int posX, int posY) {
@@ -20,6 +27,8 @@ public class Archipelago implements Terreno {
 			this.imagen = imagen;
 
 		}
+		
+	
 
 		@Override
 		public int[] getPos() {

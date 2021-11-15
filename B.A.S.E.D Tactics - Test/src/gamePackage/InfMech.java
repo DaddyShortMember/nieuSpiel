@@ -30,6 +30,27 @@ public class InfMech implements Tropa {
 	int posX = 0; // Posicion en eje X
 	int posY = 0; // Posicion en eje Y
 	String imagen = ""; // Direccion de imagen
+	
+	//Constructor
+		public InfMech(int posX, int posY, String imagen) {
+			super();
+			this.posX = posX;
+			this.posY = posY;
+			this.imagen = imagen;
+		}
+		//To String
+		@Override
+		public String toString() {
+			return "Tropa [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
+					+ captura + ", construye=" + construye + ", saludMaxima=" + saludMaxima + ", salud=" + salud
+					+ ", golpePrim=" + golpePrim + ", golpeSec=" + golpeSec + ", armaPrincipal=" + armaPrincipal
+					+ ", armaSecundaria=" + armaSecundaria + ", precio=" + precio + ", nivel=" + nivel + ", vision="
+					+ vision + ", alcanceMin=" + alcanceMin + ", alcanceMax=" + alcanceMax + ", municionesMax="
+					+ municionesMax + ", municionesPrim=" + municionesPrim + ", energiaMaxima=" + energiaMaxima
+					+ ", energia=" + energia + ", distanciaMaxima=" + distanciaMaxima + ", nombre=" + nombre + ", posX="
+					+ posX + ", posY=" + posY + ", imagen=" + imagen + "]";
+		}
+
 
 	// Metodos Heredados
 	// Setters

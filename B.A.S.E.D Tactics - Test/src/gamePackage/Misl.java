@@ -25,6 +25,14 @@ public class Misl implements Tropa{
 	int energia = this.energiaMaxima;
 	int distanciaMaxima = 5;
 	
+	//Constructor
+			public Misl(int posX, int posY, String imagen) {
+				super();
+				this.posX = posX;
+				this.posY = posY;
+				this.imagen = imagen;
+			}
+	
 	//ATRIBUTOS FISICOS
 	String nombre = "Lanzamisiles";
 	int posX = 0; //Posicion en eje X

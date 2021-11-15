@@ -9,7 +9,7 @@ public class JTests {
 	@Test
 	public void testGetEnergia() {
 		System.out.println("INICIO TEST GETENERGIA");
-		InfFoot x = new InfFoot();
+		InfFoot x = new InfFoot(0, 0, null);
 		int energy = x.getEnergia();
 		System.out.println("FIN TEST GETENERGIA");
 		assertEquals(x.energiaMaxima, energy);
@@ -18,8 +18,8 @@ public class JTests {
 	@Test
 	public void testGetPeaje() {
 		System.out.println("INICIO TEST GETPEAJE");
-		InfFoot x = new InfFoot();
-		Plains y = new Plains();
+		InfFoot x = new InfFoot(0, 0, null);
+		Plains y = new Plains(0, 0);
 		int peaj = y.getPeaje(x);
 		System.out.println("FIN TEST GETPEAJE");
 		assertEquals(1, peaj);
@@ -29,8 +29,8 @@ public class JTests {
 	@Test //Test para ver si furrula el setEnergia();
 	public void testSetEnergia() {
 		System.out.println("INICIO TEST SETENERGIA");
-		InfFoot x = new InfFoot();
-		Mountain y = new Mountain();
+		InfFoot x = new InfFoot(0, 0, null);
+		Mountain y = new Mountain(0, 0);
 		System.out.println(x.getEnergia());
 		x.setEnergia(x.energia - y.getPeaje(x));
 		System.out.println(x.getEnergia());
@@ -40,9 +40,9 @@ public class JTests {
 	
 	@Test //Test para ver si 
 	public void testSetSalud() {
-		InfFoot x = new InfFoot();
-		InfMech y = new InfMech();
-		Mountain z = new Mountain();
+		InfFoot x = new InfFoot(0, 0, null);
+		InfMech y = new InfMech(0, 0, null);
+		Mountain z = new Mountain(0, 0);
 		int xG = x.getGolpeSec();
 		//Sistema de combate primitivo.
 		if(x.idTropa == y.idTropa) {
@@ -73,8 +73,8 @@ public class JTests {
 	public void testSuministra() {
 		System.out.println("INICIO TEST DE SUMINISTRO");
 		boolean itworks = false;
-		InfMech x = new InfMech();
-		Hq y = new Hq();
+		InfMech x = new InfMech(0, 0, null);
+		Hq y = new Hq(0, 0, null);
 		
 		x.setSalud(20);
 		x.setMuniciones(1);

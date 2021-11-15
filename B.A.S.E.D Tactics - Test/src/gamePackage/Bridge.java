@@ -11,6 +11,13 @@ public class Bridge implements Terreno {
 	int posX = 0;
 	int posY = 0;
 	String imagen = "";
+	
+	//Constructor
+	public Bridge(int posX, int posY) {
+		super();
+		this.posX = posX;
+		this.posY = posY;
+	}
 
 	@Override
 	public void setTerreno(String imagen, int posX, int posY) {

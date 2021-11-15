@@ -19,6 +19,14 @@ public class Airport implements Estructura{
 	boolean fabrica = true;
 	boolean visibleEncontrado = true;
 	
+	//Constructor
+			public Airport(int posX, int posY, String imagen) {
+				super();
+				this.posX = posX;
+				this.posY = posY;
+				this.imagen = imagen;
+			}
+	
 	@Override
 	public void setTerreno(String imagen, int posX, int posY) {
 		// TODO Auto-generated method stub
