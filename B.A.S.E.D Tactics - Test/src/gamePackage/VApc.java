@@ -1,48 +1,47 @@
 package gamePackage;
 
-public class Misl implements Tropa{
+public class VApc implements Tropa{
 	
 	//ATRIBUTOS LOGICOS
-	ListaIDTropa idTropa = ListaIDTropa.MISL;
+	ListaIDTropa idTropa = ListaIDTropa.V_APC;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;
-	ListaTipos tipoMov = ListaTipos.V_PESADO;
+	ListaTipos tipoMov = ListaTipos.ACORAZADO;
 	boolean captura = false;
 	boolean construye = false;
-	int saludMaxima = 160;
+	int saludMaxima = 300;
 	int salud = this.saludMaxima;
-	int golpePrim = 450;
+	int golpePrim = 0;
 	int golpeSec = 0;
-	ListaArmas armaPrincipal = ListaArmas.MISIL_AA;
+	ListaArmas armaPrincipal = ListaArmas.NADA;
 	ListaArmas armaSecundaria = ListaArmas.NADA;
-	int precio = 11000;
+	int precio = 5000;
 	int nivel = 0;
-	int vision = 5;
-	int alcanceMin = 3;
-	int alcanceMax = 6;
-	int municionesMax = 5;
+	int vision = 1;
+	int alcanceMin = 0;
+	int alcanceMax = this.alcanceMin;
+	int municionesMax = 0;
 	int municionesPrim = this.municionesMax;
-	int energiaMaxima = 50;
+	int energiaMaxima = 99;
 	int energia = this.energiaMaxima;
-	int distanciaMaxima = 5;
-	
-	//Constructor
-		public Misl(int posX, int posY, String imagen) {
-			super();
-			this.posX = posX;
-			this.posY = posY;
-			this.imagen = imagen;
-			}
+	int distanciaMaxima = 6;
 	
 	//ATRIBUTOS FISICOS
-	String nombre = "Lanzamisiles";
+	String nombre = "TOA";
 	int posX = 0; //Posicion en eje X
 	int posY = 0; //Posicion en eje Y
 	String imagen = ""; //Direccion de imagen
 	
-	//To String
-	@Override
-	public String toString() {
-		return "Lanzamisiles [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
+	//Constructor
+		public VApc(int posX, int posY, String imagen) {
+			super();
+			this.posX = posX;
+			this.posY = posY;
+			this.imagen = imagen;
+		}
+		//To String
+		@Override
+		public String toString() {
+			return "TOA [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
 					+ captura + ", construye=" + construye + ", saludMaxima=" + saludMaxima + ", salud=" + salud
 					+ ", golpePrim=" + golpePrim + ", golpeSec=" + golpeSec + ", armaPrincipal=" + armaPrincipal
 					+ ", armaSecundaria=" + armaSecundaria + ", precio=" + precio + ", nivel=" + nivel + ", vision="
@@ -305,4 +304,5 @@ public class Misl implements Tropa{
 		}else
 		return false;
 	}
+
 }
