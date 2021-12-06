@@ -26,7 +26,7 @@ public class Arty implements Tropa{
 	int distanciaMaxima = 5;
 	
 	//ATRIBUTOS FISICOS
-	String nombre = "Artillería";
+	String nombre = "ArtillerÃ­a";
 	int posX = 0; //Posicion en eje X
 	int posY = 0; //Posicion en eje Y
 	String imagen = ""; //Direccion de imagen
@@ -41,7 +41,7 @@ public class Arty implements Tropa{
 	//To String
 	@Override
 	public String toString() {
-		return "Artillería [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
+		return "ArtillerÃ­a [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
 					+ captura + ", construye=" + construye + ", saludMaxima=" + saludMaxima + ", salud=" + salud
 					+ ", golpePrim=" + golpePrim + ", golpeSec=" + golpeSec + ", armaPrincipal=" + armaPrincipal
 					+ ", armaSecundaria=" + armaSecundaria + ", precio=" + precio + ", nivel=" + nivel + ", vision="
