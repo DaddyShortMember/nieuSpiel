@@ -4,31 +4,31 @@ public interface Tropa {
 	
 	/*
 	[Datos Logicos]
-	nombre — Nombre de la tropa. Esto es lo que se muestra
-	idTropa — Identidad de la tropa. Esto para metodos a futuro
-	tipoTropa — Identidad de tipo de tropa. Esto para metodos a futuro
-	tipoMov — Identidad de tipo de movimiento. Esto para metodos a futuro
-	captura — Si puede capturar o no
-	construye — Si puede construir estructuras o no. Usado solo por una tropa de momento, pero implementable a futuro para mas.
-	salud — Cuanto golpe puede absorver
-	golpePrim — Cuanto duele cuando da con arma primaria.
-	golpeSec — Cuanto duele cuando da con arma secundaria.
-	armaPrincipal — Arma principal, la que siempre llevaria. Municiones limitadas.
-	armaSecundaria — Arma secundaria, un arma opcional que se dispara contra ciertos enemigos, o en ciertos escenarios. Municiones infinitas.
-	precio — Cuanto cuesta
-	nivel — Se obtiene por victoria en combate. Incrementa el golpe o algo.
-	vision — Numero de casillas que puede ver
-	alcanceMin — Limite minimo de casillas en las que puede ataquar
-	alcanceMax — Limite maximo de casillas en las que puede ataquar
-	municionesPrim — Numero de municiones que tiene el arma primaria.
-	energiaMaxima — Numero de movimientos maximos
-	energia — Numero de casillas que se puede mover la tropa cada momento. Sistema TBD, @Rodrigo
-	distanciaMaxima — Numero de casillas total que la tropa puede moverse en un turno
+	nombre â€” Nombre de la tropa. Esto es lo que se muestra
+	idTropa â€” Identidad de la tropa. Esto para metodos a futuro
+	tipoTropa â€” Identidad de tipo de tropa. Esto para metodos a futuro
+	tipoMov â€” Identidad de tipo de movimiento. Esto para metodos a futuro
+	captura â€” Si puede capturar o no
+	construye â€” Si puede construir estructuras o no. Usado solo por una tropa de momento, pero implementable a futuro para mas.
+	salud â€” Cuanto golpe puede absorver
+	golpePrim â€” Cuanto duele cuando da con arma primaria.
+	golpeSec â€” Cuanto duele cuando da con arma secundaria.
+	armaPrincipal â€” Arma principal, la que siempre llevaria. Municiones limitadas.
+	armaSecundaria â€” Arma secundaria, un arma opcional que se dispara contra ciertos enemigos, o en ciertos escenarios. Municiones infinitas.
+	precio â€” Cuanto cuesta
+	nivel â€” Se obtiene por victoria en combate. Incrementa el golpe o algo.
+	vision â€” Numero de casillas que puede ver
+	alcanceMin â€” Limite minimo de casillas en las que puede ataquar
+	alcanceMax â€” Limite maximo de casillas en las que puede ataquar
+	municionesPrim â€” Numero de municiones que tiene el arma primaria.
+	energiaMaxima â€” Numero de movimientos maximos
+	energia â€” Numero de casillas que se puede mover la tropa cada momento. Sistema TBD, @Rodrigo
+	distanciaMaxima â€” Numero de casillas total que la tropa puede moverse en un turno
 	
 	[Datos Fisicos]
-	posX — Posicion en eje X
-	posY — Posicion en eje Y
-	imagen — Fichero de imagen 
+	posX â€” Posicion en eje X
+	posY â€” Posicion en eje Y
+	imagen â€” Fichero de imagen 
 	
 	 */
 	

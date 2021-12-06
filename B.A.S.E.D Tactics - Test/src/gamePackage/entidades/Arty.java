@@ -1,60 +1,58 @@
 package gamePackage;
 
-public class InfBike implements Tropa{
+public class Arty implements Tropa{
 	
-	//ATRIBUTOS LÓGICOS
-	ListaIDTropa idTropa = ListaIDTropa.INF_BIKE;
-	ListaTipos tipoTropa = ListaTipos.INFANTERIA;
-	ListaTipos tipoMov = ListaTipos.V_LIGERO;
-	boolean captura = true;
+	//ATRIBUTOS LOGICOS
+	ListaIDTropa idTropa = ListaIDTropa.ARTY;
+	ListaTipos tipoTropa = ListaTipos.TERRESTRE;
+	ListaTipos tipoMov = ListaTipos.ACORAZADO;
+	boolean captura = false;
 	boolean construye = false;
-	int saludMaxima = 120;
+	int saludMaxima = 150;
 	int salud = this.saludMaxima;
-	int golpePrim = 0;
-	int golpeSec = 65;
-	ListaArmas armaPrincipal = ListaArmas.NADA;
-	ListaArmas armaSecundaria = ListaArmas.AMETRALLADORA;
-	int precio = 2500;
+	int golpePrim = 150;
+	int golpeSec = 0;
+	ListaArmas armaPrincipal = ListaArmas.CANNON;
+	ListaArmas armaSecundaria = ListaArmas.NADA;
+	int precio = 6000;
 	int nivel = 0;
-	int vision = 2;
-	int alcanceMin = 1;
-	int alcanceMax = this.alcanceMin;
-	int municionesMax = 0;
+	int vision = 5;
+	int alcanceMin = 2;
+	int alcanceMax = 3;
+	int municionesMax = 6;
 	int municionesPrim = this.municionesMax;
-	int energiaMaxima = 70;
+	int energiaMaxima = 50;
 	int energia = this.energiaMaxima;
-	int distanciaMaxima = 6;
+	int distanciaMaxima = 5;
 	
-	//ATRIBUTOS FÍSICOS
-	String nombre = "Moto";
-	int posX = 0; //Posición en eje X
-	int posY = 0; //Posición en eje y
-	String imagen = ""; //Dirección de imagen
+	//ATRIBUTOS FISICOS
+	String nombre = "ArtillerÃ­a";
+	int posX = 0; //Posicion en eje X
+	int posY = 0; //Posicion en eje Y
+	String imagen = ""; //Direccion de imagen
 	
 	//Constructor
-	public InfBike(String nombre, int posX, int posY, String imagen) {
+	public Arty(int posX, int posY, String imagen) {
 		super();
-		this.nombre = nombre;
 		this.posX = posX;
 		this.posY = posY;
 		this.imagen = imagen;
-	}
-	
-	//ToString
+		}
+	//To String
 	@Override
 	public String toString() {
-		return "InfBike [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
-				+ captura + ", construye=" + construye + ", saludMaxima=" + saludMaxima + ", salud=" + salud
-				+ ", golpePrim=" + golpePrim + ", golpeSec=" + golpeSec + ", armaPrincipal=" + armaPrincipal
-				+ ", armaSecundaria=" + armaSecundaria + ", precio=" + precio + ", nivel=" + nivel + ", vision="
-				+ vision + ", alcanceMin=" + alcanceMin + ", alcanceMax=" + alcanceMax + ", municionesMax="
-				+ municionesMax + ", municionesPrim=" + municionesPrim + ", energiaMaxima=" + energiaMaxima
-				+ ", energia=" + energia + ", distanciaMaxima=" + distanciaMaxima + ", nombre=" + nombre + ", posX="
-				+ posX + ", posY=" + posY + ", imagen=" + imagen + "]";
-	}
-	
+		return "ArtillerÃ­a [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
+					+ captura + ", construye=" + construye + ", saludMaxima=" + saludMaxima + ", salud=" + salud
+					+ ", golpePrim=" + golpePrim + ", golpeSec=" + golpeSec + ", armaPrincipal=" + armaPrincipal
+					+ ", armaSecundaria=" + armaSecundaria + ", precio=" + precio + ", nivel=" + nivel + ", vision="
+					+ vision + ", alcanceMin=" + alcanceMin + ", alcanceMax=" + alcanceMax + ", municionesMax="
+					+ municionesMax + ", municionesPrim=" + municionesPrim + ", energiaMaxima=" + energiaMaxima
+					+ ", energia=" + energia + ", distanciaMaxima=" + distanciaMaxima + ", nombre=" + nombre + ", posX="
+					+ posX + ", posY=" + posY + ", imagen=" + imagen + "]";
+		}
+
 	//Metodos Heredados
-	//Setters
+		//Setters
 	@Override
 	public void setTropa(int posX, int posY, String imagen) {
 		// TODO Auto-generated method stub
@@ -307,8 +305,7 @@ public class InfBike implements Tropa{
 		return false;
 	}
 
-	
-	
+
 	
 	
 	

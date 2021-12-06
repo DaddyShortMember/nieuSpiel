@@ -11,7 +11,7 @@ import javax.swing.*;
 public class Game extends JFrame{
 	
 	public static void main(String[] args){
-		//creación de la instancia de la ventana y modificacion de algunos de sus atributos para que sea visible 
+		//creaciÃ³n de la instancia de la ventana y modificacion de algunos de sus atributos para que sea visible 
 		Game juego = new Game();
 		juego.pack();
 		juego.setLocationRelativeTo(null);
@@ -21,17 +21,17 @@ public class Game extends JFrame{
 		System.out.println("vert: " + grafoVert(3));
 		System.out.println("arist: " + grafoArist(3));
 	}
-	//public static int tiles = 17;  <-- Viejo tamaño de las casillas
-	public static int mov = 32;		//Tamaño de las casillas y valor por el que se multiplica el valor de x e y de los labels
+	//public static int tiles = 17;  <-- Viejo tamaÃ±o de las casillas
+	public static int mov = 32;		//TamaÃ±o de las casillas y valor por el que se multiplica el valor de x e y de los labels
 	
 	
 	public Game() {
 		Container cp = this.getContentPane();
 		cp.setLayout(new BoxLayout(cp, BoxLayout.X_AXIS));		//Se le pone un BoxLayout al contenedor de la ventana en el eje X que coloca los componentes en serie horizontalmente
-		JLayeredPane layeredGamePanel = new JLayeredPane();		//Creación de un panel que permite colocar unos componentes por encima de otros
+		JLayeredPane layeredGamePanel = new JLayeredPane();		//CreaciÃ³n de un panel que permite colocar unos componentes por encima de otros
 		//layeredGamePanel.setBackground(Color.green);		//for testing
-		layeredGamePanel.setBounds(0, 0, 672, 672);		//Posición y tamaño del panel del juego
-		layeredGamePanel.setPreferredSize(new Dimension(672, 672));		//Tamaño preferido para el panel que hace que alguna instrucción no ignore este valor
+		layeredGamePanel.setBounds(0, 0, 672, 672);		//PosiciÃ³n y tamaÃ±o del panel del juego
+		layeredGamePanel.setPreferredSize(new Dimension(672, 672));		//TamaÃ±o preferido para el panel que hace que alguna instrucciÃ³n no ignore este valor
 		
 		JLabel mapLabel = new JLabel();		//Label temporal que contiene todo el mapa en una sola imagen
 		
@@ -44,30 +44,30 @@ public class Game extends JFrame{
 		troopLabel1.setIcon(new ImageIcon(getClass().getResource("img/inft.png")));
 		cursor.setIcon(new ImageIcon(getClass().getResource("img/Cursor.gif")));
 		
-		mapLabel.setPreferredSize(new Dimension(672, 672));		//De nuevo se coloca el tamaño preferido para que las instrucciones tiendan a usar este valor
+		mapLabel.setPreferredSize(new Dimension(672, 672));		//De nuevo se coloca el tamaÃ±o preferido para que las instrucciones tiendan a usar este valor
 		
-		JPanel mapPanel = new JPanel();		//Creación del panel en el que está el label del mapa (más tarde serán muchos componentes que forman un mapa)
+		JPanel mapPanel = new JPanel();		//CreaciÃ³n del panel en el que estÃ¡ el label del mapa (mÃ¡s tarde serÃ¡n muchos componentes que forman un mapa)
 		mapPanel.setLayout(new BoxLayout(mapPanel, BoxLayout.X_AXIS));		//Se le pone un BoxLayout al panel del mapa en el eje X que coloca los componentes en serie horizontalmente
-		mapPanel.add(mapLabel);		//Añadir el label que contiene el mapa
-		mapPanel.setBounds(0, 0, 672, 672);		//Posición y tamaño del panel del mapa
-		mapPanel.setOpaque(false);		//Hace que se pueda ver lo que haya detrás del panel
+		mapPanel.add(mapLabel);		//AÃ±adir el label que contiene el mapa
+		mapPanel.setBounds(0, 0, 672, 672);		//PosiciÃ³n y tamaÃ±o del panel del mapa
+		mapPanel.setOpaque(false);		//Hace que se pueda ver lo que haya detrÃ¡s del panel
 		
-		troopLabel1.setPreferredSize(new Dimension(32, 32));		//Tamaño preferido del label que contiene la imagen de la tropa
-		troopLabel1.setBounds(mov*6, mov*7, 32, 32);		//Posición y tamaño  del label siendo la posición la multiplicación del tamaño de las casillas por la casilla en la queremos que esté
+		troopLabel1.setPreferredSize(new Dimension(32, 32));		//TamaÃ±o preferido del label que contiene la imagen de la tropa
+		troopLabel1.setBounds(mov*6, mov*7, 32, 32);		//PosiciÃ³n y tamaÃ±o  del label siendo la posiciÃ³n la multiplicaciÃ³n del tamaÃ±o de las casillas por la casilla en la queremos que estÃ©
 		
-		cursor.setPreferredSize(new Dimension(32, 32));		//Tamaño preferido del label que contiene el gif del cursor
-		cursor.setBounds(mov*8, mov*8, 32, 32);		//Lo mismo de antes pero siendo la posición el centro del mapa
+		cursor.setPreferredSize(new Dimension(32, 32));		//TamaÃ±o preferido del label que contiene el gif del cursor
+		cursor.setBounds(mov*8, mov*8, 32, 32);		//Lo mismo de antes pero siendo la posiciÃ³n el centro del mapa
 		
-		JLayeredPane entityPanel = new JLayeredPane();		//Creación del panel que contiene las entidades como tropas o edificios
+		JLayeredPane entityPanel = new JLayeredPane();		//CreaciÃ³n del panel que contiene las entidades como tropas o edificios
 		entityPanel.setLayout(null);		//Se le pone layout nulo para que deje poner componentes mediante posiciones absolutas
-		entityPanel.setBounds(0, 0, 672, 672);		//Posición y tamaño del panel de entidades
-		entityPanel.add(troopLabel1, 0, 0);		//Se añade el label de una tropa con un valor que define su prioridad para presentarse por encima o por debajo de otro label
-		entityPanel.add(cursor, 1, 0);		//Se añade el label del cursor con una prioridad mayor que hace que esté sobre las tropas y entidades
+		entityPanel.setBounds(0, 0, 672, 672);		//PosiciÃ³n y tamaÃ±o del panel de entidades
+		entityPanel.add(troopLabel1, 0, 0);		//Se aÃ±ade el label de una tropa con un valor que define su prioridad para presentarse por encima o por debajo de otro label
+		entityPanel.add(cursor, 1, 0);		//Se aÃ±ade el label del cursor con una prioridad mayor que hace que estÃ© sobre las tropas y entidades
 		
 		entityPanel.setOpaque(false);		//Se cambia el atributo del panel para hacer que se pueda ver lo que tiene debajo (otro panel)
 		
-		layeredGamePanel.add(mapPanel, 0, 0);		//Se añade el panel que contiene el mapa con prioridad baja para que esté por debajo del resto de cosas que se añadan
-		layeredGamePanel.add(entityPanel, 1, 0);		//Se añade el panel de entidades con mayor prioridad que el del mapa para que se vean por encima de este
+		layeredGamePanel.add(mapPanel, 0, 0);		//Se aÃ±ade el panel que contiene el mapa con prioridad baja para que estÃ© por debajo del resto de cosas que se aÃ±adan
+		layeredGamePanel.add(entityPanel, 1, 0);		//Se aÃ±ade el panel de entidades con mayor prioridad que el del mapa para que se vean por encima de este
 		
 		
 		
@@ -155,44 +155,44 @@ public class Game extends JFrame{
 		
 		
 		
-		JPanel derecha = new JPanel();		//Creación del panel de la derecha que contiene otros paneles que mostrarán la información de tropas y terrenos
-		derecha.setPreferredSize(new Dimension(416, 672));		//Se define el tamaño preferido del panel
+		JPanel derecha = new JPanel();		//CreaciÃ³n del panel de la derecha que contiene otros paneles que mostrarÃ¡n la informaciÃ³n de tropas y terrenos
+		derecha.setPreferredSize(new Dimension(416, 672));		//Se define el tamaÃ±o preferido del panel
 		derecha.setLayout(new BoxLayout(derecha, BoxLayout.Y_AXIS));		//Se le pone un BoxLayout en el eje Y que coloca los componentes en serie verticalmente
 		
-		JPanel info = new JPanel();		//Creación del panel superior de información general de la partida
-		info.setBackground(Color.black);		//Instrucción de prueba para diferenciar los paneles mientras no estén programados
-		info.setPreferredSize(new Dimension(416, 416));		//Tamaño preferido del panel de información general
+		JPanel info = new JPanel();		//CreaciÃ³n del panel superior de informaciÃ³n general de la partida
+		info.setBackground(Color.black);		//InstrucciÃ³n de prueba para diferenciar los paneles mientras no estÃ©n programados
+		info.setPreferredSize(new Dimension(416, 416));		//TamaÃ±o preferido del panel de informaciÃ³n general
 		
-		JPanel abajo = new JPanel();		//Creación del panel inferior de la seccion de información (parte derecha de la pantalla)
+		JPanel abajo = new JPanel();		//CreaciÃ³n del panel inferior de la seccion de informaciÃ³n (parte derecha de la pantalla)
 		abajo.setLayout(new BoxLayout(abajo, BoxLayout.X_AXIS));		//Sele pone un BoxLayout en el eje Y que coloca los componentes en serie horizontalmente
 		
-		JPanel movData = new JPanel();		//Creación del panel inferior con información de movimiento
-		movData.setBackground(Color.yellow);		//Instrucción de prueba para diferenciar los paneles mientras no estén programados
-		movData.setPreferredSize(new Dimension(160, 256));		//Tamaño preferido del panel de información de tropas
+		JPanel movData = new JPanel();		//CreaciÃ³n del panel inferior con informaciÃ³n de movimiento
+		movData.setBackground(Color.yellow);		//InstrucciÃ³n de prueba para diferenciar los paneles mientras no estÃ©n programados
+		movData.setPreferredSize(new Dimension(160, 256));		//TamaÃ±o preferido del panel de informaciÃ³n de tropas
 		
-		JPanel troopInfo = new JPanel();		//Creación del panel inferior con información de tropas
-		troopInfo.setBackground(Color.white);		//Instrucción de prueba para diferenciar los paneles mientras no estén programados
-		troopInfo.setPreferredSize(new Dimension(256, 256));		//Tamaño preferido del panel de información de tropas
+		JPanel troopInfo = new JPanel();		//CreaciÃ³n del panel inferior con informaciÃ³n de tropas
+		troopInfo.setBackground(Color.white);		//InstrucciÃ³n de prueba para diferenciar los paneles mientras no estÃ©n programados
+		troopInfo.setPreferredSize(new Dimension(256, 256));		//TamaÃ±o preferido del panel de informaciÃ³n de tropas
 		
-		abajo.add(movData);			//Se añade el panel de información de movimiento al panel que contiene toda la parte inferior
-		abajo.add(troopInfo);		//Se añade el panel de información de tropas al panel que contiene toda la parte inferior
+		abajo.add(movData);			//Se aÃ±ade el panel de informaciÃ³n de movimiento al panel que contiene toda la parte inferior
+		abajo.add(troopInfo);		//Se aÃ±ade el panel de informaciÃ³n de tropas al panel que contiene toda la parte inferior
 		
-		derecha.add(info);		//Se añade el panel superior que contiene información general de la partida al panel que contiene toda la parte derecha (informacion)
-		derecha.add(abajo);		//Se añade el panel inferior que contiene los paneles movData y troopInfo al panel que contiene toda la parte derecha (informacion)
+		derecha.add(info);		//Se aÃ±ade el panel superior que contiene informaciÃ³n general de la partida al panel que contiene toda la parte derecha (informacion)
+		derecha.add(abajo);		//Se aÃ±ade el panel inferior que contiene los paneles movData y troopInfo al panel que contiene toda la parte derecha (informacion)
 		
-		cp.add(layeredGamePanel);		//Se añade el panel del juego al contenedor de la ventana
-		cp.add(derecha);		//Se añade el panel de la derecha (información) al contenedor de la ventana
+		cp.add(layeredGamePanel);		//Se aÃ±ade el panel del juego al contenedor de la ventana
+		cp.add(derecha);		//Se aÃ±ade el panel de la derecha (informaciÃ³n) al contenedor de la ventana
 		
 		//redundant in newer versions
 		//int width = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth();
 		//int height = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight();
 		
 		
-		this.pack();		//Se asegura de que todos los componentes están por lo menos a su tamaño preferido
-		addKeyListener(kListener);		//Se añade el KeyListener a la ventana
+		this.pack();		//Se asegura de que todos los componentes estÃ¡n por lo menos a su tamaÃ±o preferido
+		addKeyListener(kListener);		//Se aÃ±ade el KeyListener a la ventana
 		this.setTitle("B.A.S.E.D Tactics");		//Se cambia el titulo de la ventana
 		this.setIconImage(new ImageIcon(getClass().getResource("img/tankicon.png")).getImage());		//Coloca el icono de la ventana
-		this.setSize(new Dimension(1088, 672));		//Se cambia el tamaño de la ventana
+		this.setSize(new Dimension(1088, 672));		//Se cambia el tamaÃ±o de la ventana
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);		//El proceso se termina cuando se cierra la ventana
 		
 		
@@ -239,10 +239,10 @@ public class Game extends JFrame{
 
 //TODO list
 /*
-·Panel de información para quien quiera hacerlo
+Â·Panel de informaciÃ³n para quien quiera hacerlo
  
-·Methods (...)
-·Graph:
+Â·Methods (...)
+Â·Graph:
 	-node positions relative to map
 	-positions in map relative to troop
 

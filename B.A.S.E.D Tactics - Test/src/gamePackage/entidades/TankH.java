@@ -1,38 +1,38 @@
 package gamePackage;
 
-public class AHelit implements Tropa{
-	
-	//ATRIBUTOS L”GICOS
-		ListaIDTropa idTropa = ListaIDTropa.A_HELIT;
-		ListaTipos tipoTropa = ListaTipos.AEREA;
-		ListaTipos tipoMov = ListaTipos.AEREO;
+public class TankH implements Tropa{
+		
+		//ATRIBUTOS L√ìGICOS
+		ListaIDTropa idTropa = ListaIDTropa.TANK_H;
+		ListaTipos tipoTropa = ListaTipos.TERRESTRE;
+		ListaTipos tipoMov = ListaTipos.ACORAZADO;
 		boolean captura = false;
 		boolean construye = false;
-		int saludMaxima = 200;
+		int saludMaxima = 500;
 		int salud = this.saludMaxima;
-		int golpePrim = 0;
-		int golpeSec = 0;
-		ListaArmas armaPrincipal = ListaArmas.NADA;
-		ListaArmas armaSecundaria = ListaArmas.NADA;
-		int precio = 5000;
+		int golpePrim = 275;
+		int golpeSec = 105;
+		ListaArmas armaPrincipal = ListaArmas.TCANNON_LETAL;
+		ListaArmas armaSecundaria = ListaArmas.AMETRALLADORA;
+		int precio = 16000;
 		int nivel = 0;
-		int vision = 1;
-		int alcanceMin = 0;
+		int vision = 2;
+		int alcanceMin = 1;
 		int alcanceMax = this.alcanceMin;
-		int municionesMax = 0;
+		int municionesMax = 5;
 		int municionesPrim = this.municionesMax;
-		int energiaMaxima = 99;
+		int energiaMaxima = 50;
 		int energia = this.energiaMaxima;
-		int distanciaMaxima = 6;
+		int distanciaMaxima = 4;
 		
-		//ATRIBUTOS FÕSICOS
-		String nombre = "Helicoptero Transporte";
-		int posX = 0; //PosiciÛn en eje X
-		int posY = 0; //PosiciÛn en eje y
-		String imagen = ""; //DirecciÛn de imagen
+		//ATRIBUTOS F√çSICOS
+		String nombre = "Tanque Pesado";
+		int posX = 0; //Posici√≥n en eje X
+		int posY = 0; //Posici√≥n en eje y
+		String imagen = ""; //Direcci√≥n de imagen
 		
 		//Constructor
-		public AHelit(String nombre, int posX, int posY, String imagen) {
+		public TankH(String nombre, int posX, int posY, String imagen) {
 			super();
 			this.nombre = nombre;
 			this.posX = posX;
@@ -43,7 +43,7 @@ public class AHelit implements Tropa{
 		//ToString
 		@Override
 		public String toString() {
-			return "AHelit [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
+			return "TankH [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
 					+ captura + ", construye=" + construye + ", saludMaxima=" + saludMaxima + ", salud=" + salud
 					+ ", golpePrim=" + golpePrim + ", golpeSec=" + golpeSec + ", armaPrincipal=" + armaPrincipal
 					+ ", armaSecundaria=" + armaSecundaria + ", precio=" + precio + ", nivel=" + nivel + ", vision="

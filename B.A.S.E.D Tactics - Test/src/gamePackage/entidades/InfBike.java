@@ -1,56 +1,58 @@
 package gamePackage;
 
-public class AntiA implements Tropa{
+public class InfBike implements Tropa{
 	
-	//ATRIBUTOS LOGICOS
-	ListaIDTropa idTropa = ListaIDTropa.ANTI_A;
-	ListaTipos tipoTropa = ListaTipos.TERRESTRE;
-	ListaTipos tipoMov = ListaTipos.ACORAZADO;
-	boolean captura = false;
+	//ATRIBUTOS LÓGICOS
+	ListaIDTropa idTropa = ListaIDTropa.INF_BIKE;
+	ListaTipos tipoTropa = ListaTipos.INFANTERIA;
+	ListaTipos tipoMov = ListaTipos.V_LIGERO;
+	boolean captura = true;
 	boolean construye = false;
-	int saludMaxima = 200;
+	int saludMaxima = 120;
 	int salud = this.saludMaxima;
-	int golpePrim = 120;
-	int golpeSec = 0;
-	ListaArmas armaPrincipal = ListaArmas.CANNON;
-	ListaArmas armaSecundaria = ListaArmas.NADA;
-	int precio = 8000;
+	int golpePrim = 0;
+	int golpeSec = 65;
+	ListaArmas armaPrincipal = ListaArmas.NADA;
+	ListaArmas armaSecundaria = ListaArmas.AMETRALLADORA;
+	int precio = 2500;
 	int nivel = 0;
-	int vision = 3;
+	int vision = 2;
 	int alcanceMin = 1;
 	int alcanceMax = this.alcanceMin;
-	int municionesMax = 6;
+	int municionesMax = 0;
 	int municionesPrim = this.municionesMax;
-	int energiaMaxima = 60;
+	int energiaMaxima = 70;
 	int energia = this.energiaMaxima;
 	int distanciaMaxima = 6;
 	
-	//ATRIBUTOS FISICOS
-	String nombre = "Anti-Aereo";
-	int posX = 0; //Posicion en eje X
-	int posY = 0; //Posicion en eje Y
-	String imagen = ""; //Direccion de imagen
+	//ATRIBUTOS FÍSICOS
+	String nombre = "Moto";
+	int posX = 0; //Posición en eje X
+	int posY = 0; //Posición en eje y
+	String imagen = ""; //Dirección de imagen
 	
 	//Constructor
-	public AntiA(int posX, int posY, String imagen) {
+	public InfBike(String nombre, int posX, int posY, String imagen) {
 		super();
+		this.nombre = nombre;
 		this.posX = posX;
 		this.posY = posY;
 		this.imagen = imagen;
-		}
-	//To String
+	}
+	
+	//ToString
 	@Override
 	public String toString() {
-	return "Anti-Aereo [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
-					+ captura + ", construye=" + construye + ", saludMaxima=" + saludMaxima + ", salud=" + salud
-					+ ", golpePrim=" + golpePrim + ", golpeSec=" + golpeSec + ", armaPrincipal=" + armaPrincipal
-					+ ", armaSecundaria=" + armaSecundaria + ", precio=" + precio + ", nivel=" + nivel + ", vision="
-					+ vision + ", alcanceMin=" + alcanceMin + ", alcanceMax=" + alcanceMax + ", municionesMax="
-					+ municionesMax + ", municionesPrim=" + municionesPrim + ", energiaMaxima=" + energiaMaxima
-					+ ", energia=" + energia + ", distanciaMaxima=" + distanciaMaxima + ", nombre=" + nombre + ", posX="
-					+ posX + ", posY=" + posY + ", imagen=" + imagen + "]";
-		}
-
+		return "InfBike [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
+				+ captura + ", construye=" + construye + ", saludMaxima=" + saludMaxima + ", salud=" + salud
+				+ ", golpePrim=" + golpePrim + ", golpeSec=" + golpeSec + ", armaPrincipal=" + armaPrincipal
+				+ ", armaSecundaria=" + armaSecundaria + ", precio=" + precio + ", nivel=" + nivel + ", vision="
+				+ vision + ", alcanceMin=" + alcanceMin + ", alcanceMax=" + alcanceMax + ", municionesMax="
+				+ municionesMax + ", municionesPrim=" + municionesPrim + ", energiaMaxima=" + energiaMaxima
+				+ ", energia=" + energia + ", distanciaMaxima=" + distanciaMaxima + ", nombre=" + nombre + ", posX="
+				+ posX + ", posY=" + posY + ", imagen=" + imagen + "]";
+	}
+	
 	//Metodos Heredados
 	//Setters
 	@Override
@@ -303,4 +305,12 @@ public class AntiA implements Tropa{
 			return true;
 		}else
 		return false;
-	}	}
+	}
+
+	
+	
+	
+	
+	
+
+}

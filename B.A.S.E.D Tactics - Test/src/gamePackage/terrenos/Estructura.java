@@ -4,13 +4,13 @@ public interface Estructura extends Terreno{
 	
 	/*
 	[Datos Logicos]
-	suministraA — Para saber a que tipo de tropas suministra.
-	cuartelGeneral — Si es el cuartel general o no
-	construible — Si se puede construir o no; usado por aeropuerto y puerto temporal
-	capturable — Si es capturable o no.
-	fabrica — Si es capaz de producir tropas.
-	visibleEncontrado — Si es visible a primera vista, se puede integrar con un metodo un rango de casillas minimas hasta que sea visible
-	ingresos — Cantidad de dinero que te dan por tener esta estructura 
+	suministraA â€” Para saber a que tipo de tropas suministra.
+	cuartelGeneral â€” Si es el cuartel general o no
+	construible â€” Si se puede construir o no; usado por aeropuerto y puerto temporal
+	capturable â€” Si es capturable o no.
+	fabrica â€” Si es capaz de producir tropas.
+	visibleEncontrado â€” Si es visible a primera vista, se puede integrar con un metodo un rango de casillas minimas hasta que sea visible
+	ingresos â€” Cantidad de dinero que te dan por tener esta estructura 
 	
 	 */
 	

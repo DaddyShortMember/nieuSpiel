@@ -1,38 +1,38 @@
 package gamePackage;
 
-public class Arty implements Tropa{
+public class AntiA implements Tropa{
 	
 	//ATRIBUTOS LOGICOS
-	ListaIDTropa idTropa = ListaIDTropa.ARTY;
+	ListaIDTropa idTropa = ListaIDTropa.ANTI_A;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;
 	ListaTipos tipoMov = ListaTipos.ACORAZADO;
 	boolean captura = false;
 	boolean construye = false;
-	int saludMaxima = 150;
+	int saludMaxima = 200;
 	int salud = this.saludMaxima;
-	int golpePrim = 150;
+	int golpePrim = 120;
 	int golpeSec = 0;
 	ListaArmas armaPrincipal = ListaArmas.CANNON;
 	ListaArmas armaSecundaria = ListaArmas.NADA;
-	int precio = 6000;
+	int precio = 8000;
 	int nivel = 0;
-	int vision = 5;
-	int alcanceMin = 2;
-	int alcanceMax = 3;
+	int vision = 3;
+	int alcanceMin = 1;
+	int alcanceMax = this.alcanceMin;
 	int municionesMax = 6;
 	int municionesPrim = this.municionesMax;
-	int energiaMaxima = 50;
+	int energiaMaxima = 60;
 	int energia = this.energiaMaxima;
-	int distanciaMaxima = 5;
+	int distanciaMaxima = 6;
 	
 	//ATRIBUTOS FISICOS
-	String nombre = "Artillería";
+	String nombre = "Anti-Aereo";
 	int posX = 0; //Posicion en eje X
 	int posY = 0; //Posicion en eje Y
 	String imagen = ""; //Direccion de imagen
 	
 	//Constructor
-	public Arty(int posX, int posY, String imagen) {
+	public AntiA(int posX, int posY, String imagen) {
 		super();
 		this.posX = posX;
 		this.posY = posY;
@@ -41,7 +41,7 @@ public class Arty implements Tropa{
 	//To String
 	@Override
 	public String toString() {
-		return "Artillería [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
+	return "Anti-Aereo [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
 					+ captura + ", construye=" + construye + ", saludMaxima=" + saludMaxima + ", salud=" + salud
 					+ ", golpePrim=" + golpePrim + ", golpeSec=" + golpeSec + ", armaPrincipal=" + armaPrincipal
 					+ ", armaSecundaria=" + armaSecundaria + ", precio=" + precio + ", nivel=" + nivel + ", vision="
@@ -52,7 +52,7 @@ public class Arty implements Tropa{
 		}
 
 	//Metodos Heredados
-		//Setters
+	//Setters
 	@Override
 	public void setTropa(int posX, int posY, String imagen) {
 		// TODO Auto-generated method stub
@@ -303,11 +303,4 @@ public class Arty implements Tropa{
 			return true;
 		}else
 		return false;
-	}
-
-
-	
-	
-	
-
-}
+	}	}
