@@ -2,7 +2,7 @@ package gamePackage;
 
 public class InfBike implements Tropa{
 	
-	//ATRIBUTOS L”GICOS
+	//ATRIBUTOS L√ìGICOS
 	ListaIDTropa idTropa = ListaIDTropa.INF_BIKE;
 	ListaTipos tipoTropa = ListaTipos.INFANTERIA;
 	ListaTipos tipoMov = ListaTipos.V_LIGERO;
@@ -25,11 +25,11 @@ public class InfBike implements Tropa{
 	int energia = this.energiaMaxima;
 	int distanciaMaxima = 6;
 	
-	//ATRIBUTOS FÕSICOS
+	//ATRIBUTOS F√çSICOS
 	String nombre = "Moto";
-	int posX = 0; //PosiciÛn en eje X
-	int posY = 0; //PosiciÛn en eje y
-	String imagen = ""; //DirecciÛn de imagen
+	int posX = 0; //Posici√≥n en eje X
+	int posY = 0; //Posici√≥n en eje y
+	String imagen = ""; //Direcci√≥n de imagen
 	
 	//Constructor
 	public InfBike(String nombre, int posX, int posY, String imagen) {
