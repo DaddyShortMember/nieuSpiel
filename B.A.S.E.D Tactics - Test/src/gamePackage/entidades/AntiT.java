@@ -2,7 +2,7 @@ package gamePackage;
 
 public class AntiT implements Tropa{
 	
-	//ATRIBUTOS L”GICOS
+	//ATRIBUTOS L√ìGICOS
 		ListaIDTropa idTropa = ListaIDTropa.ANTI_T;
 		ListaTipos tipoTropa = ListaTipos.TERRESTRE;
 		ListaTipos tipoMov = ListaTipos.ACORAZADO;
@@ -25,11 +25,11 @@ public class AntiT implements Tropa{
 		int energia = this.energiaMaxima;
 		int distanciaMaxima = 4;
 		
-		//ATRIBUTOS FÕSICOS
+		//ATRIBUTOS F√çSICOS
 		String nombre = "Anti-Tanque";
-		int posX = 0; //PosiciÛn en eje X
-		int posY = 0; //PosiciÛn en eje y
-		String imagen = ""; //DirecciÛn de imagen
+		int posX = 0; //Posici√≥n en eje X
+		int posY = 0; //Posici√≥n en eje y
+		String imagen = ""; //Direcci√≥n de imagen
 		
 		//Constructor
 		public AntiT(String nombre, int posX, int posY, String imagen) {
