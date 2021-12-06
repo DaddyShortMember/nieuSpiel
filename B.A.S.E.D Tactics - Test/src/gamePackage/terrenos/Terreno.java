@@ -4,11 +4,11 @@ public interface Terreno {
 	
 	/*
 	[Datos Logicos]
-	idTerreno — Identidad del terreno.
-	nombre — Nombre del terreno
-	construibleSobre — Si se puede construir sobre este terreno. Implementado por cada grano de tierra y mar.
-	peaje — Lo que cuesta pasar por este terreno. Depende del tipo de tropa, por lo que se debe implementar arlgun metodo.
-	defensa — Influye en el golpe total que recibe cada tropa. Mientras mas defensa, menos golpe recibido.
+	idTerreno â€” Identidad del terreno.
+	nombre â€” Nombre del terreno
+	construibleSobre â€” Si se puede construir sobre este terreno. Implementado por cada grano de tierra y mar.
+	peaje â€” Lo que cuesta pasar por este terreno. Depende del tipo de tropa, por lo que se debe implementar arlgun metodo.
+	defensa â€” Influye en el golpe total que recibe cada tropa. Mientras mas defensa, menos golpe recibido.
 	
 	[Datos Fisicos]
 	int posX;
