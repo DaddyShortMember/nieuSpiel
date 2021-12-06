@@ -2,7 +2,7 @@ package gamePackage;
 
 public class TankH implements Tropa{
 		
-		//ATRIBUTOS L”GICOS
+		//ATRIBUTOS L√ìGICOS
 		ListaIDTropa idTropa = ListaIDTropa.TANK_H;
 		ListaTipos tipoTropa = ListaTipos.TERRESTRE;
 		ListaTipos tipoMov = ListaTipos.ACORAZADO;
@@ -25,11 +25,11 @@ public class TankH implements Tropa{
 		int energia = this.energiaMaxima;
 		int distanciaMaxima = 4;
 		
-		//ATRIBUTOS FÕSICOS
+		//ATRIBUTOS F√çSICOS
 		String nombre = "Tanque Pesado";
-		int posX = 0; //PosiciÛn en eje X
-		int posY = 0; //PosiciÛn en eje y
-		String imagen = ""; //DirecciÛn de imagen
+		int posX = 0; //Posici√≥n en eje X
+		int posY = 0; //Posici√≥n en eje y
+		String imagen = ""; //Direcci√≥n de imagen
 		
 		//Constructor
 		public TankH(String nombre, int posX, int posY, String imagen) {
