@@ -2,7 +2,7 @@ package gamePackage;
 
 public class AHelit implements Tropa{
 	
-	//ATRIBUTOS L”GICOS
+	//ATRIBUTOS L√ìGICOS
 		ListaIDTropa idTropa = ListaIDTropa.A_HELIT;
 		ListaTipos tipoTropa = ListaTipos.AEREA;
 		ListaTipos tipoMov = ListaTipos.AEREO;
@@ -25,11 +25,11 @@ public class AHelit implements Tropa{
 		int energia = this.energiaMaxima;
 		int distanciaMaxima = 6;
 		
-		//ATRIBUTOS FÕSICOS
+		//ATRIBUTOS F√çSICOS
 		String nombre = "Helicoptero Transporte";
-		int posX = 0; //PosiciÛn en eje X
-		int posY = 0; //PosiciÛn en eje y
-		String imagen = ""; //DirecciÛn de imagen
+		int posX = 0; //Posici√≥n en eje X
+		int posY = 0; //Posici√≥n en eje y
+		String imagen = ""; //Direcci√≥n de imagen
 		
 		//Constructor
 		public AHelit(String nombre, int posX, int posY, String imagen) {
