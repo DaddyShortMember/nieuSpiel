@@ -1,4 +1,6 @@
-package gamePackage;
+package gamePackage.terrenos;
+import gamePackage.entidades.Tropa;
+import gamePackage.logica.*;
 
 public class Airport implements Estructura{
 	

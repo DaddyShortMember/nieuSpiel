@@ -1,4 +1,4 @@
-package gamePackage;
+package gamePackage.logica;
 
 public enum ListaIDTropa {
 	

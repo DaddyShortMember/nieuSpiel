@@ -1,9 +1,11 @@
 //Este archivo es para crear funciones en un entorno separado a la ventana principal
 
-package gamePackage;
+package gamePackage.tests;
 
 import java.awt.*;
 import java.util.ArrayList;
+
+import gamePackage.logica.*;
 
 public class TestingGround {
 	public static void main(String[] args) {

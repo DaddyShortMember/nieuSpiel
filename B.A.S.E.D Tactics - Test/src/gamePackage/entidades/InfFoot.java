@@ -1,4 +1,6 @@
-package gamePackage;
+package gamePackage.entidades;
+
+import gamePackage.logica.*;
 
 public class InfFoot implements Tropa {
 	
@@ -22,7 +24,7 @@ public class InfFoot implements Tropa {
 	int municionesMax = 0;
 	int municionesPrim = this.municionesMax;
 	int energiaMaxima = 99;
-	int energia = this.energiaMaxima;
+	int energia = this.getEnergiaMaxima();
 	int distanciaMaxima = 3;
 	
 	//ATRIBUTOS FISICOS
@@ -41,12 +43,12 @@ public class InfFoot implements Tropa {
 	//To String
 	@Override
 	public String toString() {
-		return "InfFoot [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
+		return "InfFoot [idTropa=" + getIdTropa() + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
 				+ captura + ", construye=" + construye + ", saludMaxima=" + saludMaxima + ", salud=" + salud
 				+ ", golpePrim=" + golpePrim + ", golpeSec=" + golpeSec + ", armaPrincipal=" + armaPrincipal
 				+ ", armaSecundaria=" + armaSecundaria + ", precio=" + precio + ", nivel=" + nivel + ", vision="
 				+ vision + ", alcanceMin=" + alcanceMin + ", alcanceMax=" + alcanceMax + ", municionesMax="
-				+ municionesMax + ", municionesPrim=" + municionesPrim + ", energiaMaxima=" + energiaMaxima
+				+ municionesMax + ", municionesPrim=" + municionesPrim + ", energiaMaxima=" + getEnergiaMaxima()
 				+ ", energia=" + energia + ", distanciaMaxima=" + distanciaMaxima + ", nombre=" + nombre + ", posX="
 				+ posX + ", posY=" + posY + ", imagen=" + imagen + "]";
 	}
@@ -96,7 +98,7 @@ public void setSalud(int salud) {
 @Override
 public void setEnergia(int energia) {
 	// TODO Auto-generated method stub
-	if(energia <= energiaMaxima)
+	if(energia <= getEnergiaMaxima())
 		this.energia = energia;
 	else {
 		//Logger?
@@ -128,7 +130,7 @@ public String getNombre() {
 @Override
 public ListaIDTropa getIDTropa() {
 	// TODO Auto-generated method stub
-	return idTropa;
+	return getIdTropa();
 }
 
 @Override
@@ -289,7 +291,7 @@ public int getSaludMax() {
 @Override
 public int getEnergiaMax() {
 	// TODO Auto-generated method stub
-	return energiaMaxima;
+	return getEnergiaMaxima();
 }
 
 @Override
@@ -299,10 +301,16 @@ public int getMunicionesMax() {
 }
 @Override
 public boolean necesitaSuministro() {
-	if(this.municionesPrim < this.municionesMax || this.salud < this.saludMaxima || this.energia < this.energiaMaxima) {
+	if(this.municionesPrim < this.municionesMax || this.salud < this.saludMaxima || this.energia < this.getEnergiaMaxima()) {
 		return true;
 	}else
 	return false;
+}
+public int getEnergiaMaxima() {
+	return energiaMaxima;
+}
+public ListaIDTropa getIdTropa() {
+	return idTropa;
 }
 
 }

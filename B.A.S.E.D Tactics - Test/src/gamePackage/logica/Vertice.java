@@ -1,4 +1,4 @@
-package gamePackage;
+package gamePackage.logica;
 
 import java.awt.*;
 import java.util.ArrayList;

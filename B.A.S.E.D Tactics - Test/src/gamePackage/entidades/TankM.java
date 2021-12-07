@@ -1,4 +1,6 @@
-package gamePackage;
+package gamePackage.entidades;
+
+import gamePackage.logica.*;
 
 public class TankM implements Tropa{
 	

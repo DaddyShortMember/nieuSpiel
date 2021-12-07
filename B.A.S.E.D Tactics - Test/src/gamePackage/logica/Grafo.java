@@ -1,5 +1,5 @@
 //En principio esta clase va a ser clave para mostrar el area en el que se puede mover la tropa
-package gamePackage;
+package gamePackage.logica;
 
 import java.util.ArrayList;
 import java.util.HashMap;

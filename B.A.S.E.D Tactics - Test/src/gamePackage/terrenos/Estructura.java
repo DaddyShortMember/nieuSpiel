@@ -1,4 +1,6 @@
-package gamePackage;
+package gamePackage.terrenos;
+import gamePackage.entidades.Tropa;
+import gamePackage.logica.*;
 
 public interface Estructura extends Terreno{
 	

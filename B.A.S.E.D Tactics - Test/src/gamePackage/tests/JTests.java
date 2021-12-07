@@ -1,4 +1,6 @@
-package gamePackage;
+package gamePackage.tests;
+import gamePackage.entidades.*;
+import gamePackage.terrenos.*;
 
 import static org.junit.Assert.*;
 
@@ -12,7 +14,7 @@ public class JTests {
 		InfFoot x = new InfFoot(0, 0, null);
 		int energy = x.getEnergia();
 		System.out.println("FIN TEST GETENERGIA");
-		assertEquals(x.energiaMaxima, energy);
+		assertEquals(x.getEnergiaMaxima(), energy);
 	}
 	
 	@Test
@@ -32,7 +34,7 @@ public class JTests {
 		InfFoot x = new InfFoot(0, 0, null);
 		Mountain y = new Mountain(0, 0);
 		System.out.println(x.getEnergia());
-		x.setEnergia(x.energia - y.getPeaje(x));
+		x.setEnergia(x.getEnergia() - y.getPeaje(x));
 		System.out.println(x.getEnergia());
 		System.out.println("FIN TEST SETENERGIA");
 		assertEquals(x.getEnergiaMax() - y.getPeaje(x), x.getEnergia());
@@ -45,7 +47,7 @@ public class JTests {
 		Mountain z = new Mountain(0, 0);
 		int xG = x.getGolpeSec();
 		//Sistema de combate primitivo.
-		if(x.idTropa == y.idTropa) {
+		if(x.getIdTropa() == y.getIDTropa()) {
 			if(z.getDefensa() == 0) {		
 			}
 			else
@@ -56,13 +58,13 @@ public class JTests {
 		else
 			xG = (xG + x.getSalud())/(z.getDefensa());
 		System.out.println("DMG == " + xG);
-		while(y.salud > 0) {
+		while(y.getSalud() > 0) {
 			System.out.println("Was " + y.getSalud() + " HP");
-			y.setSalud(y.salud - xG);
+			y.setSalud(y.getSalud() - xG);
 			System.out.println("Is " + y.getSalud() + " HP");
 		}
 		boolean itworks;
-		if(y.salud <= 0)
+		if(y.getSalud() <= 0)
 			itworks = true;
 		else
 			itworks = false;
