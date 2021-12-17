@@ -34,7 +34,7 @@ public class AHelit implements Tropa{
 		String imagen = ""; //DirecciÃ³n de imagen
 		
 		//Constructor
-		public AHelit(String nombre, int posX, int posY, String imagen) {
+		public AHelit(int posX, int posY, String imagen) {
 			super();
 			this.nombre = nombre;
 			this.posX = posX;
