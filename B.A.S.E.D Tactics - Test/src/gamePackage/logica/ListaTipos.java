@@ -11,7 +11,8 @@ public enum ListaTipos {
 	V_PESADO, //Tipo tropa
 	ACORAZADO, //Tipo tropa
 	//AEREO
-	AEREA, //Tipo tropa
+	AEREAA, //Tipo tropa, Aerea Avion
+	AEREAH, //Tipo tropa, Aerea Helicoptero
 	AEREO, //Tipo movimiento
 	//NAVAL
 	MARINA, //Tipo tropa
