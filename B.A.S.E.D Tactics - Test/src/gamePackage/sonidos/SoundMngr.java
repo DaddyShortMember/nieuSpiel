@@ -6,7 +6,8 @@ import java.net.URL; //Para directorios; ej. "fx/sonido1.wav"
 import javax.sound.sampled.*; //Librerias que permiten utilizar audio (limitado a .wav y otros primitivos)
 import java.io.File;
 import java.io.IOException;
-
+//TODO: !!!AUN NO FUNCIONA!!!
+//Da error por que no reconoce el URL como directorio.
 //Gestor de sonido
 /*
  * Idea: crea un hilo por sonido para permitir el uso de multiples sonidos a la vez
