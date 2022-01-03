@@ -12,6 +12,8 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 
 //Gestor de sonido
+//Todo sonido es un hilo.
+//TODO: Instrucciones de STOP/PLAY, pulido de duracion/funcionamiento
 
 /* Idea para gestion de directorios: ya que son dos musicas distintas por cada turno,
  * se puede hacer que cada turno cambie el audio.
