@@ -53,9 +53,13 @@ public class SoundMngr {
 					clip.start();
 					if (rule == 0) {
 						clip.loop(Clip.LOOP_CONTINUOUSLY);
-						Thread.sleep(duration);
+						do {
+							Thread.sleep(50);
+						}while (clip.isActive());
 					}else {
-						Thread.sleep(duration);
+						do {
+							Thread.sleep(50);
+						}while (clip.isActive());
 						clip.close();
 						audioStream.close();
 					}
