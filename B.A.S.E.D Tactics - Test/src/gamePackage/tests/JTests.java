@@ -1,8 +1,11 @@
 package gamePackage.tests;
-import gamePackage.entidades.*;
-import gamePackage.terrenos.*;
+import gamePackage.entidades.terrestres.*;
+import gamePackage.terrenos.estructuras.*;
+import gamePackage.terrenos.terrenos.*;
 
 import static org.junit.Assert.*;
+
+import java.awt.Point;
 
 import org.junit.Test;
 
@@ -11,7 +14,7 @@ public class JTests {
 	@Test
 	public void testGetEnergia() {
 		System.out.println("INICIO TEST GETENERGIA");
-		InfFoot x = new InfFoot(0, 0, null);
+		InfFoot x = new InfFoot(new Point(0,0), null);
 		int energy = x.getEnergia();
 		System.out.println("FIN TEST GETENERGIA");
 		assertEquals(x.getEnergiaMaxima(), energy);
@@ -20,8 +23,8 @@ public class JTests {
 	@Test
 	public void testGetPeaje() {
 		System.out.println("INICIO TEST GETPEAJE");
-		InfFoot x = new InfFoot(0, 0, null);
-		Plains y = new Plains(0, 0);
+		InfFoot x = new InfFoot(new Point(0,0), null);
+		Plains y = new Plains(new Point(0,0));
 		int peaj = y.getPeaje(x);
 		System.out.println("FIN TEST GETPEAJE");
 		assertEquals(1, peaj);
@@ -31,8 +34,8 @@ public class JTests {
 	@Test //Test para ver si furrula el setEnergia();
 	public void testSetEnergia() {
 		System.out.println("INICIO TEST SETENERGIA");
-		InfFoot x = new InfFoot(0, 0, null);
-		Mountain y = new Mountain(0, 0);
+		InfFoot x = new InfFoot(new Point(0,0), null);
+		Mountain y = new Mountain(new Point(0,0));
 		System.out.println(x.getEnergia());
 		x.setEnergia(x.getEnergia() - y.getPeaje(x));
 		System.out.println(x.getEnergia());
@@ -42,9 +45,9 @@ public class JTests {
 	
 	@Test //Test para ver si 
 	public void testSetSalud() {
-		InfFoot x = new InfFoot(0, 0, null);
-		InfMech y = new InfMech(0, 0, null);
-		Mountain z = new Mountain(0, 0);
+		InfFoot x = new InfFoot(new Point(0,0), null);
+		InfMech y = new InfMech(new Point(1,1), null);
+		Mountain z = new Mountain(new Point(0,0));
 		int xG = x.getGolpeSec();
 		//Sistema de combate primitivo.
 		if(x.getIdTropa() == y.getIDTropa()) {
@@ -75,8 +78,8 @@ public class JTests {
 	public void testSuministra() {
 		System.out.println("INICIO TEST DE SUMINISTRO");
 		boolean itworks = false;
-		InfMech x = new InfMech(0, 0, null);
-		Hq y = new Hq(0, 0, null);
+		InfMech x = new InfMech(new Point(0,0), null);
+		Hq y = new Hq(new Point(0,0), null);
 		
 		x.setSalud(20);
 		x.setMuniciones(1);
