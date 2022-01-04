@@ -32,15 +32,15 @@ import java.lang.System.Logger.Level;
 public class SoundMngr {
 	Object currentSound;
 	String currentName;
-	int gain;
+	int gain = 100;
 	long duration;
 	Mixer mixer;
 	Clip clip;
 	File file;
 	Logger log;
-	
 
 	public SoundMngr(Object name, int rule, int vol) {
+		this.gain = vol;
 		if (name != null) {
 			URL url = SoundMngr.class.getResource("/gamePackage/sonidos/fx/" + (String) name);
 			if (url != null) {
@@ -55,11 +55,14 @@ public class SoundMngr {
 						clip.loop(Clip.LOOP_CONTINUOUSLY);
 						do {
 							Thread.sleep(50);
-						}while (clip.isActive());
-					}else {
+						} while (clip.isActive());
+						clip.stop();
+						clip.close();
+						audioStream.close();
+					} else {
 						do {
 							Thread.sleep(50);
-						}while (clip.isActive());
+						} while (clip.isActive());
 						clip.close();
 						audioStream.close();
 					}
@@ -78,12 +81,56 @@ public class SoundMngr {
 				}
 			}
 		} else
-			log.log(Level.INFO, "Unable to read director");
+			log.log(Level.INFO, "Unable to read directory");
 
 	}
+
+	public void play() {
+		clip.setFramePosition(0);
+		clip.start();
+
+	}
+
+	public void loop() {
+		clip.loop(Clip.LOOP_CONTINUOUSLY);
+
+	}
+
+	public void stop() {
+		clip.stop();
+	}
+
+	public void end() {
+		clip.stop();
+		clip.close();
+
+	}
+
+	public void playLoop() {
+		clip.setFramePosition(0);
+		clip.start();
+		clip.loop(Clip.LOOP_CONTINUOUSLY);
+	}
+
+	public boolean isActive() {
+
+		return clip.isActive();
+	}
+
 //Test
 	public static void main(String[] args) {
 		String x = "CantinaBand60.wav";
-		new SoundMngr(x, 0, 100);
+		
+		Thread thread1 = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				SoundMngr soundMngr = new SoundMngr(x, 1, 1);
+				soundMngr.play();
+			}
+		});
+	thread1.run();	
 	}
+
 }
