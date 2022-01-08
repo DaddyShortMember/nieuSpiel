@@ -26,7 +26,7 @@ public class MainMenu extends JFrame{
 		JLabel background = new JLabel();
 		JLabel title = new JLabel();
 		JLabel playSingle = new JLabel();
-		JLabel playMulti = new JLabel();
+		//JLabel playMulti = new JLabel();
 		JLabel settings = new JLabel();
 		JLabel exit = new JLabel();
 		
@@ -43,4 +43,9 @@ public class MainMenu extends JFrame{
 		this.setSize(new Dimension(1088, 672));
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
+	
+	public void exitProgram() {
+		System.exit(0);
+	}
 }
+

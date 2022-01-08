@@ -149,6 +149,10 @@ public class Game extends JFrame{
 			    	//System.out.println("down");
 			    	//released = false;
 			    }
+			    
+			    if (key == KeyEvent.VK_SPACE) {
+			    	
+			    }
 			}
 		};
 		
@@ -169,10 +173,55 @@ public class Game extends JFrame{
 		JPanel movData = new JPanel();		//Creación del panel inferior con información de movimiento
 		movData.setBackground(Color.yellow);		//Instrucción de prueba para diferenciar los paneles mientras no estén programados
 		movData.setPreferredSize(new Dimension(160, 256));		//Tamaño preferido del panel de información de tropas
+		movData.setLayout(new BoxLayout(derecha, BoxLayout.Y_AXIS));
 		
 		JPanel troopInfo = new JPanel();		//Creación del panel inferior con información de tropas
 		troopInfo.setBackground(Color.white);		//Instrucción de prueba para diferenciar los paneles mientras no estén programados
 		troopInfo.setPreferredSize(new Dimension(256, 256));		//Tamaño preferido del panel de información de tropas
+		troopInfo.setLayout(new BoxLayout(derecha, BoxLayout.X_AXIS));
+		
+		
+		//Labels de los atributos del panel info
+		JLabel troopNum = new JLabel();
+		JLabel buildingNum = new JLabel();
+		JLabel gold = new JLabel();
+		
+		info.add(troopNum);
+		info.add(buildingNum);
+		info.add(gold);
+		
+		
+		//Labels de los atributos del panel movData
+		JLabel move = new JLabel();
+		JLabel attack = new JLabel();
+		JLabel capture = new JLabel();
+		
+		movData.add(move);
+		movData.add(attack);
+		movData.add(capture);
+		
+		
+		//Labels de los atributos del panel troopInfo
+		JLabel name = new JLabel();
+		JLabel health = new JLabel();
+		JLabel attack1 = new JLabel();
+		JLabel attack2 = new JLabel();
+		JLabel minRange = new JLabel();
+		JLabel maxRange = new JLabel();
+		JLabel ammo = new JLabel();
+		JLabel energy = new JLabel();
+		JLabel terrain = new JLabel();
+		
+		
+		troopInfo.add(name);
+		troopInfo.add(health);
+		troopInfo.add(attack1);
+		troopInfo.add(attack2);
+		troopInfo.add(minRange);
+		troopInfo.add(maxRange);
+		troopInfo.add(ammo);
+		troopInfo.add(energy);
+		
 		
 		abajo.add(movData);			//Se añade el panel de información de movimiento al panel que contiene toda la parte inferior
 		abajo.add(troopInfo);		//Se añade el panel de información de tropas al panel que contiene toda la parte inferior
@@ -245,6 +294,20 @@ public class Game extends JFrame{
 ·Graph:
 	-node positions relative to map
 	-positions in map relative to troop
+
+
+
+Problems:
+�detecting things that are on top of eachother
+�movement -> graph detecting what the troop can be on top of and calculate where it cant reach anymore
+�
+
+
+
+
+
+
+
 
  
  */
