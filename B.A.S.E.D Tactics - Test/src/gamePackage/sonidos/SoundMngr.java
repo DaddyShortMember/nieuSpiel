@@ -119,14 +119,13 @@ public class SoundMngr {
 
 //Test
 	public static void main(String[] args) {
-		String x = "CantinaBand60.wav";
 		
 		Thread thread1 = new Thread(new Runnable() {
 			
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				SoundMngr soundMngr = new SoundMngr(x, 1, 1);
+				SoundMngr soundMngr = new SoundMngr("mainmenu.wav", 1, 1);
 				soundMngr.play();
 			}
 		});
