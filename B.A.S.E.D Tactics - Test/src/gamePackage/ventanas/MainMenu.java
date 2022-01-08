@@ -36,7 +36,7 @@ public class MainMenu extends JFrame{
 		title.setBackground(Color.cyan);
 		playSingle.setBackground(Color.yellow);
 		
-		//test fuck you
+		//test 
 		
 		//background.setIcon(new ImageIcon(getClass().getResource("img/mapa1.png")));
 		
