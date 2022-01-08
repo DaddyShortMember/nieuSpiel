@@ -1,6 +1,8 @@
 package gamePackage.ventanas;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -33,32 +35,68 @@ public class MainMenu extends JFrame{
 		background.setBounds(0, 0, 1088, 672);
 		
 		JLabel title = new JLabel();
-		JButton playSingle = new JButton("");
-		playSingle.setBounds(137, 524, 100, 100);
-		playSingle.setOpaque(false);
-		playSingle.setContentAreaFilled(false);
-		playSingle.setBorderPainted(false);
+		JButton play = new JButton("");
+		play.setBounds(137, 524, 100, 100);
+		play.setOpaque(false);
+		play.setContentAreaFilled(false);
+		play.setBorderPainted(false);
+		
+		play.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Game juego = new Game();
+				juego.pack();
+				juego.setLocationRelativeTo(null);
+				juego.setResizable(false);
+				juego.setVisible(true);
+				dispose();
+			}
+		});
+		
 		//JLabel playMulti = new JLabel();
 		JButton mapMaker = new JButton("");
 		mapMaker.setBounds(292, 536, 115, 160);
 		mapMaker.setOpaque(false);
 		mapMaker.setContentAreaFilled(false);
 		mapMaker.setBorderPainted(false);
+		
+		mapMaker.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
+		
 		JButton settings = new JButton("");
 		settings.setBounds(632, 541, 160, 160);
 		settings.setOpaque(false);
 		settings.setContentAreaFilled(false);
 		settings.setBorderPainted(false);
+		
+		
+		
 		JButton exit = new JButton("");
 		exit.setBounds(848, 492, 200, 200);
 		exit.setOpaque(false);
 		exit.setContentAreaFilled(false);
 		exit.setBorderPainted(false);
 		
+		exit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+				
+			}
+		});
+		
 		background.setBackground(Color.magenta);
 		title.setBackground(Color.cyan);
 		
-		options.add(playSingle);
+		options.add(play);
 		options.add(mapMaker);
 		options.add(settings);
 		options.add(exit);
@@ -86,8 +124,5 @@ public class MainMenu extends JFrame{
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 	
-	public void exitProgram() {
-		System.exit(0);
-	}
 }
 

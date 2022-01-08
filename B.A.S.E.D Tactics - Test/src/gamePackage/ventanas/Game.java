@@ -1,7 +1,7 @@
 package gamePackage.ventanas;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
+import java.util.*;
 import java.util.logging.Logger;
 
 import javax.swing.*;
@@ -23,7 +23,7 @@ public class Game extends JFrame{
 	}
 	//public static int tiles = 17;  <-- Viejo tamaño de las casillas
 	public static int mov = 32;		//Tamaño de las casillas y valor por el que se multiplica el valor de x e y de los labels
-	
+	public HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid = new HashMap<>();
 	
 	public Game() {
 		Container cp = this.getContentPane();
