@@ -13,22 +13,22 @@ public class NShip implements Tropa{
 			ListaTipos tipoMov = ListaTipos.ACUATICO;
 			boolean captura = false;
 			boolean construye = false;
-			int saludMaxima = 200;
+			int saludMaxima = 350;
 			int salud = this.saludMaxima;
 			int golpePrim = 150;
 			int golpeSec = 0;
 			ListaArmas armaPrincipal = ListaArmas.CANNON;
 			ListaArmas armaSecundaria = ListaArmas.NADA;
-			int precio = 11000;
+			int precio = 24000;
 			int nivel = 0;
-			int vision = 2;
-			int alcanceMin = 1;
-			int alcanceMax = 3;
+			int vision = 6;
+			int alcanceMin = 3;
+			int alcanceMax = 5;
 			int municionesMax = 6;
 			int municionesPrim = this.municionesMax;
-			int energiaMaxima = 50;
+			int energiaMaxima = 99;
 			int energia = this.energiaMaxima;
-			int distanciaMaxima = 4;
+			int distanciaMaxima = 5;
 			
 			//ATRIBUTOS FÃ�SICOS
 			String nombre = "Buque de Guerra";
@@ -45,7 +45,7 @@ public class NShip implements Tropa{
 			//ToString
 			@Override
 			public String toString() {
-				return "AntiT [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
+				return "NShip [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
 						+ captura + ", construye=" + construye + ", saludMaxima=" + saludMaxima + ", salud=" + salud
 						+ ", golpePrim=" + golpePrim + ", golpeSec=" + golpeSec + ", armaPrincipal=" + armaPrincipal
 						+ ", armaSecundaria=" + armaSecundaria + ", precio=" + precio + ", nivel=" + nivel + ", vision="
