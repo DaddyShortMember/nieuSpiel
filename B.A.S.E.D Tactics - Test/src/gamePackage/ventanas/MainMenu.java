@@ -25,15 +25,18 @@ public class MainMenu extends JFrame{
 		//JLabel filter, playSingle, playMulti, settings, exit = new JLabel();
 		JLabel background = new JLabel();
 		JLabel title = new JLabel();
-		JLabel playSingle = new JLabel();
+		JButton playSingle = new JButton("Play");
 		//JLabel playMulti = new JLabel();
-		JLabel settings = new JLabel();
-		JLabel exit = new JLabel();
+		JButton score = new JButton("Scoreboard");
+		
+		JButton settings = new JButton("Settings");
+		JButton exit = new JButton("Exit");
 		
 		background.setBackground(Color.magenta);
 		title.setBackground(Color.cyan);
 		playSingle.setBackground(Color.yellow);
 		
+		//test fuck you
 		
 		//background.setIcon(new ImageIcon(getClass().getResource("img/mapa1.png")));
 		
