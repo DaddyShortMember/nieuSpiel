@@ -173,12 +173,12 @@ public class Game extends JFrame{
 		JPanel movData = new JPanel();		//Creación del panel inferior con información de movimiento
 		movData.setBackground(Color.yellow);		//Instrucción de prueba para diferenciar los paneles mientras no estén programados
 		movData.setPreferredSize(new Dimension(160, 256));		//Tamaño preferido del panel de información de tropas
-		movData.setLayout(new BoxLayout(derecha, BoxLayout.Y_AXIS));
+		movData.setLayout(new BoxLayout(movData, BoxLayout.Y_AXIS));
 		
 		JPanel troopInfo = new JPanel();		//Creación del panel inferior con información de tropas
 		troopInfo.setBackground(Color.white);		//Instrucción de prueba para diferenciar los paneles mientras no estén programados
 		troopInfo.setPreferredSize(new Dimension(256, 256));		//Tamaño preferido del panel de información de tropas
-		troopInfo.setLayout(new BoxLayout(derecha, BoxLayout.X_AXIS));
+		troopInfo.setLayout(new BoxLayout(troopInfo, BoxLayout.X_AXIS));
 		
 		
 		//Labels de los atributos del panel info
