@@ -25,20 +25,11 @@ public class City implements Estructura{
 	//Fisicos
 	String nombre = "Ciudad";
 	Point pos = new Point(0, 0);
-	String imagen = "";
+	
 
 	// Constructor
-	public City(Point pos, String imagen) {
+	public City() {
 		super();
-		this.pos = pos;
-		this.imagen = imagen;
-	}
-
-	@Override
-	public void setTerreno(Point pos, String imagen) {
-		// TODO Auto-generated method stub
-		this.pos = pos;
-		this.imagen = imagen;
 
 	}
 
@@ -48,18 +39,6 @@ public class City implements Estructura{
 		return pos;
 	}
 
-	@Override
-	public void setPos(Point pos) {
-		// TODO Auto-generated method stub
-		this.pos = pos;
-	}
-	
-	@Override
-	public void setImagen(String imagen) {
-		// TODO Auto-generated method stub
-		this.imagen = imagen;
-	}
-	
 	@Override
 	public int getPeaje(Tropa trop) {
 		int peaje = 0;

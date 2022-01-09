@@ -35,14 +35,11 @@ public interface Terreno {
 	//Metodos Fisicos
 		//Setters
 	public String getNombre();
-	public void setPos(Point pos);
-	public void setImagen(String imagen);
 		//Getters
 	public Point getPos();
 	
 	//Metodos Logicos
 		//Setters
-	public void setTerreno(Point pos, String imagen);	
 		//Getters
 	public ListaIDTerreno getIDTerreno();
 	public int getPeaje(Tropa trop);

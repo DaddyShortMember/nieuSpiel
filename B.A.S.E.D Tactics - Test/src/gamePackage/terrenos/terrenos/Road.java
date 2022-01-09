@@ -15,20 +15,11 @@ public class Road implements Terreno {
 	// Atributos Fisicos
 	String nombre = "Carretera";
 	Point pos = new Point(0, 0);
-	String imagen = ""; //Imagen cambia en base a direccion
+
 
 	// Constructor
-	public Road(Point pos, String imagen) {
+	public Road() {
 		super();
-		this.pos = pos;
-		this.imagen = imagen;
-	}
-
-	@Override
-	public void setTerreno(Point pos, String imagen) {
-		// TODO Auto-generated method stub
-		this.pos = pos;
-		this.imagen = imagen;
 
 	}
 
@@ -36,18 +27,6 @@ public class Road implements Terreno {
 	public Point getPos() {
 		// TODO Auto-generated method stub
 		return pos;
-	}
-
-	@Override
-	public void setPos(Point pos) {
-		// TODO Auto-generated method stub
-		this.pos = pos;
-	}
-
-	@Override
-	public void setImagen(String imagen) {
-		// TODO Auto-generated method stub
-		this.imagen = imagen;
 	}
 
 	@Override

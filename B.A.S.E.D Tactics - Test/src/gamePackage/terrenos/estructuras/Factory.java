@@ -32,31 +32,11 @@ public class Factory implements Estructura{
 	}
 
 	@Override
-	public void setTerreno(Point pos, String imagen) {
-		// TODO Auto-generated method stub
-		this.pos = pos;
-		this.imagen = imagen;
-
-	}
-
-	@Override
 	public Point getPos() {
 		// TODO Auto-generated method stub
 		return pos;
 	}
 
-	@Override
-	public void setPos(Point pos) {
-		// TODO Auto-generated method stub
-		this.pos = pos;
-	}
-	
-	@Override
-	public void setImagen(String imagen) {
-		// TODO Auto-generated method stub
-		this.imagen = imagen;
-	}
-	
 	@Override
 	public int getPeaje(Tropa trop) {
 		int peaje = 0;

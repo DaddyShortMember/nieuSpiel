@@ -66,7 +66,6 @@ public class Game extends JFrame{
 		JLabel plabel = new JLabel();
 		ArrayList<Object> lterrain = new ArrayList<>();
 		lterrain.add(plabel);
-		lterrain.add(new Plains(fakePos.getLocation()));
 		ArrayList<Object> ltroop = new ArrayList<>();
 		ltroop.add(troopLabel1);
 		ltroop.add(new InfFoot(fakePos.getLocation(), "img/inft.png"));
@@ -78,7 +77,7 @@ public class Game extends JFrame{
 		ArrayList<Object> f = mapGrid.get(fakePos).get(1);
 		Tropa t = (Tropa) f.get(1);
 		t.setSalud(2);
-		f = mapGrid.get(fakePos).get(0);
+		f = mapGrid.get(fakePos).get(1);
 		t = (Tropa) f.get(1);
 		
 		

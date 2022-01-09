@@ -15,38 +15,17 @@ public class Sea implements Terreno {
 	// Atributos Fisicos
 	String nombre = "Mar";
 	Point pos = new Point(0, 0);
-	String imagen = ""; //Imagen predeterminada
+	String imagen = "img/Sea.png"; //Imagen predeterminada
 
 	// Constructor
-	public Sea(Point pos) {
+	public Sea() {
 		super();
-		this.pos = pos;
-	}
-
-	@Override
-	public void setTerreno(Point pos, String imagen) {
-		// TODO Auto-generated method stub
-		this.pos = pos;
-		this.imagen = imagen;
-
 	}
 
 	@Override
 	public Point getPos() {
 		// TODO Auto-generated method stub
 		return pos;
-	}
-
-	@Override
-	public void setPos(Point pos) {
-		// TODO Auto-generated method stub
-		this.pos = pos;
-	}
-
-	@Override
-	public void setImagen(String imagen) {
-		// TODO Auto-generated method stub
-		this.imagen = imagen;
 	}
 
 	@Override
