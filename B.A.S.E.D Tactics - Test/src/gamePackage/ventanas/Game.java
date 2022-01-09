@@ -3,8 +3,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import java.util.logging.Logger;
-
 import javax.swing.*;
+import gamePackage.entidades.*;
+import gamePackage.entidades.terrestres.*;
+import gamePackage.terrenos.terrenos.*;
+
 
 
 @SuppressWarnings("serial")
@@ -58,13 +61,29 @@ public class Game extends JFrame{
 		cursor.setPreferredSize(new Dimension(32, 32));		//Tamaño preferido del label que contiene el gif del cursor
 		cursor.setBounds(mov*8, mov*8, 32, 32);		//Lo mismo de antes pero siendo la posición el centro del mapa
 		
+		Point fakePos = new Point(10, 10);
 		
-		
-		ArrayList<Object> lt = new ArrayList<>();
-		lt.add(troopLabel1);
+		JLabel plabel = new JLabel();
+		ArrayList<Object> lterrain = new ArrayList<>();
+		lterrain.add(plabel);
+		lterrain.add(new Plains(fakePos.getLocation()));
+		ArrayList<Object> ltroop = new ArrayList<>();
+		ltroop.add(troopLabel1);
+		ltroop.add(new InfFoot(fakePos.getLocation(), "img/inft.png"));
 		ArrayList<ArrayList<Object>> llo = new ArrayList<>();
+		llo.add(lterrain);
+		llo.add(ltroop);
 		
-		mapGrid.put(cursor.getLocation(), null);
+		mapGrid.put(fakePos, llo);
+		ArrayList<Object> f = mapGrid.get(fakePos).get(1);
+		Tropa t = (Tropa) f.get(1);
+		t.setSalud(2);
+		f = mapGrid.get(fakePos).get(0);
+		t = (Tropa) f.get(1);
+		
+		
+		System.out.println(t.getSalud());
+		//mapGrid.replace(fakePos, mapGrid.get(fakePos).get(1).get(1));
 		
 		JLayeredPane entityPanel = new JLayeredPane();		//Creación del panel que contiene las entidades como tropas o edificios
 		entityPanel.setLayout(null);		//Se le pone layout nulo para que deje poner componentes mediante posiciones absolutas
