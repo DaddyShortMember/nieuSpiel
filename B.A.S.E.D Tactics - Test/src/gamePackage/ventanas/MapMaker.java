@@ -14,7 +14,7 @@ import gamePackage.terrenos.estructuras.*;
 
 
 @SuppressWarnings("serial")
-public class MapMaker extends JFrame{
+public class MapMaker extends JFrame implements Serializable{
 	
 	public static void main(String[] args){
 		//creación de la instancia de la ventana y modificacion de algunos de sus atributos para que sea visible 
@@ -157,15 +157,26 @@ public class MapMaker extends JFrame{
 		color.addItem("White");
 		color.addItem("Blue");
 		color.addItem("Red");
-		if (color.getSelectedItem()=="Blue") {
-			brush[1]=2;
-		}
-		else if (color.getSelectedItem()=="White"){
-			brush[1]=0;
-		}
-		else {
-			brush[1]=1;
-		}
+		color.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if (color.getSelectedItem()=="Blue") {
+					brush[1]=2;
+				}
+				else if (color.getSelectedItem()=="White"){
+					brush[1]=0;
+				}
+				else {
+					brush[1]=1;
+				}
+				
+			}
+		});
+		
+		
+		
 		JButton exit = new JButton("");
 		exit.addActionListener(new ActionListener() {
 
@@ -260,16 +271,13 @@ public class MapMaker extends JFrame{
 						
 						Point mouse = MouseInfo.getPointerInfo().getLocation();
 						SwingUtilities.convertPointFromScreen(mouse, cp);
-						Thread.sleep(50);
+						Thread.sleep(25);
 						double x = mouse.getX();
 						double y = mouse.getY();
 						x = x/32;
 						y=y/32;
 						x=Math.floor(x);
 						y=Math.floor(y);
-						System.out.println(x);
-						System.out.println(y);
-						
 						if (x<=21 && y<=21) {
 							Point clave = new Point((int) x ,(int) y);
 							ArrayList<ArrayList<Object>> casilla = new  ArrayList<>();
@@ -304,38 +312,43 @@ public class MapMaker extends JFrame{
 								case 5:
 									switch (brush[1]) {
 										case 0:
-											jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/CityWHITE.png")));	
+											
+											jm.setIcon(new ImageIcon(getClass().getResource("img/structure/CityWHITE.png")));	
 											terreno.add(jm);
 											terreno.add(new City(brush[1]));
 											break;
 										case 1:
-											jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/CityRED.png")));	
+											jm.setIcon(new ImageIcon(getClass().getResource("img/structure/CityRED.png")));	
 											terreno.add(jm);
 											terreno.add(new City(brush[1]));
 											break;
 										case 2:
-											jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/CityBLUE.png")));	
+											jm.setIcon(new ImageIcon(getClass().getResource("img/structure/CityBLUE.png")));	
 											terreno.add(jm);
 											terreno.add(new City(brush[1]));
+											break;
+										default:
 											break;
 										}
 									break;
 								case 6:
 									switch (brush[1]) {
 									case 0:
-										jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/FactoryWHITE.png")));	
+										jm.setIcon(new ImageIcon(getClass().getResource("img/structure/FactoryWHITE.png")));	
 										terreno.add(jm);
 										terreno.add(new Factory(brush[1]));
 										break;
 									case 1:
-										jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/FactoryRED.png")));	
+										jm.setIcon(new ImageIcon(getClass().getResource("img/structure/FactoryRED.png")));	
 										terreno.add(jm);
 										terreno.add(new Factory(brush[1]));
 										break;
 									case 2:
-										jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/FactoryBLUE.png")));	
+										jm.setIcon(new ImageIcon(getClass().getResource("img/structure/FactoryBLUE.png")));	
 										terreno.add(jm);
 										terreno.add(new Factory(brush[1]));
+										break;
+									default:
 										break;
 									}
 									break;
@@ -344,14 +357,16 @@ public class MapMaker extends JFrame{
 									case 0:
 										break;
 									case 1:
-										jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/HqRED.png")));	
+										jm.setIcon(new ImageIcon(getClass().getResource("img/structure/HqRED.png")));	
 										terreno.add(jm);
 										terreno.add(new Hq(brush[1]));
 										break;
 									case 2:
-										jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/HqBLUE.png")));	
+										jm.setIcon(new ImageIcon(getClass().getResource("img/structure/HqBLUE.png")));	
 										terreno.add(jm);
 										terreno.add(new Hq(brush[1]));
+										break;
+									default:
 										break;
 									}
 									break;
@@ -361,9 +376,10 @@ public class MapMaker extends JFrame{
 							
 							casilla.add(terreno);
 							mapGrid.put(clave, casilla);
-							System.out.println((int) x + "-" + (int) y);
 							jm.setBounds((int) x * mov,(int) y * mov, 32, 32);
+							
 							mapPanel.add(jm);
+							
 							mapPanel.repaint();
 						}
 						
@@ -461,7 +477,7 @@ public class MapMaker extends JFrame{
 		plains.setIcon(new ImageIcon(getClass().getResource("img/terrain/Plains.png")));
 		mountain.setIcon(new ImageIcon(getClass().getResource("img/terrain/mountain.png")));
 		forest.setIcon(new ImageIcon(getClass().getResource("img/terrain/Forest.png")));
-		road.setIcon(new ImageIcon(getClass().getResource("img/terrain/Road.png")));
+		road.setIcon(new ImageIcon(getClass().getResource("img/terrain/RoadX.png")));
 		city.setIcon(new ImageIcon(getClass().getResource("img/structure/CityWHITE.png")));
 		factory.setIcon(new ImageIcon(getClass().getResource("img/structure/FactoryWHITE.png")));
 		hq.setIcon(new ImageIcon(getClass().getResource("img/structure/HqRED.png")));
@@ -505,8 +521,7 @@ public class MapMaker extends JFrame{
 		
 		//redundant in newer versions
 		//int width = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth();
-		//int height = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight();
-		
+		//int height = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight():
 		addMouseListener(ml);
 		this.pack();		//Se asegura de que todos los componentes están por lo menos a su tamaño preferido
 		this.setTitle("B.A.S.E.D Tactics");		//Se cambia el titulo de la ventana
