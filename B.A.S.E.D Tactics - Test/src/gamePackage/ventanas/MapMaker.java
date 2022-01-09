@@ -23,9 +23,6 @@ public class MapMaker extends JFrame{
 		juego.setLocationRelativeTo(null);
 		juego.setResizable(false);
 		juego.setVisible(true);
-		Logger logger = Logger.getLogger(MapMaker.class.getName());
-		System.out.println("vert: " + grafoVert(3));
-		System.out.println("arist: " + grafoArist(3));
 	}
 	//public static int tiles = 17;  <-- Viejo tamaño de las casillas
 	public static int mov = 32;		//Tamaño de las casillas y valor por el que se multiplica el valor de x e y de los labels
@@ -34,11 +31,9 @@ public class MapMaker extends JFrame{
 	public MapMaker() {
 		Container cp = this.getContentPane();
 		cp.setLayout(new BoxLayout(cp, BoxLayout.X_AXIS));		//Se le pone un BoxLayout al contenedor de la ventana en el eje X que coloca los componentes en serie horizontalmente
-		JLayeredPane layeredMapMakerPanel = new JLayeredPane();		//Creación de un panel que permite colocar unos componentes por encima de otros
+		//Creación de un panel que permite colocar unos componentes por encima de otros
 		//layeredMapMakerPanel.setBackground(Color.green);		//for testing
-		layeredMapMakerPanel.setBounds(0, 0, 672, 672);		//Posición y tamaño del panel del juego
-		layeredMapMakerPanel.setPreferredSize(new Dimension(672, 672));		//Tamaño preferido para el panel que hace que alguna instrucción no ignore este valor
-		
+
 		
 				
 		JLabel cursor = new JLabel();		//Label que contiene el cursor
@@ -503,7 +498,7 @@ public class MapMaker extends JFrame{
 		derecha.add(info);		//Se añade el panel superior que contiene información general de la partida al panel que contiene toda la parte derecha (informacion)
 		derecha.add(abajo);		//Se añade el panel inferior que contiene los paneles movData y troopInfo al panel que contiene toda la parte derecha (informacion)
 		
-		cp.add(layeredMapMakerPanel);		//Se añade el panel del juego al contenedor de la ventana
+		cp.add(mapPanel);		//Se añade el panel del juego al contenedor de la ventana
 		cp.add(derecha);		//Se añade el panel de la derecha (información) al contenedor de la ventana
 		
 		//redundant in newer versions
@@ -523,36 +518,7 @@ public class MapMaker extends JFrame{
 		
 	}
 	
-	public static int grafoVert(int trop) {
-		int n = 1;
-		int vert = 1;
-		for (int i = 0; i < (trop - 1); i++) {
-			n += 2;
-			vert += n;		
-			//System.out.println("n: " + n + " vert: " + vert);
-		}
-		vert *= 2;
-		vert += n + 2;
-		return vert;
-	}
-	public static int grafoArist(int trop) {
-		int n = 1;
-		int arist = 1;
-		for (int i = 0; i < ((trop * 2) - 2); i++) {
-			n += 1;
-			arist += n;		
-			//System.out.println("n: " + n + " arist: " + arist);
-		}
-		arist *= 2;
-		arist += n + 1;
-		return arist;
-	}
-	public static Dimension grafoVertPos() {
-		
-		
-		
-		return new Dimension(1,2);
-	}
+	
 	
 	
 
