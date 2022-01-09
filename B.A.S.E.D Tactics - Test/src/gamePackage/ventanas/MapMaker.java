@@ -1,11 +1,16 @@
 package gamePackage.ventanas;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 import java.util.*;
 import java.util.logging.Logger;
 
-import javax.print.DocFlavor.STRING;
+
 import javax.swing.*;
+
+import gamePackage.terrenos.terrenos.*;
+import gamePackage.terrenos.estructuras.*;
+
 
 
 @SuppressWarnings("serial")
@@ -55,7 +60,6 @@ public class MapMaker extends JFrame{
 		cursor.setPreferredSize(new Dimension(32, 32));		//Tamaño preferido del label que contiene el gif del cursor
 		cursor.setBounds(mov*8, mov*8, 32, 32);		//Lo mismo de antes pero siendo la posición el centro del mapa
 			
-		
 		int [] brush = new int[2];
 		JButton plains = new JButton("");
 		plains.addActionListener(new ActionListener() {
@@ -154,9 +158,9 @@ public class MapMaker extends JFrame{
 
 			});
 		JComboBox color = new JComboBox();
-		color.addItem("Red");
-		color.addItem("Blue");
 		color.addItem("White");
+		color.addItem("Blue");
+		color.addItem("Red");
 		if (color.getSelectedItem()=="Blue") {
 			brush[1]=2;
 		}
@@ -166,31 +170,203 @@ public class MapMaker extends JFrame{
 		else {
 			brush[1]=1;
 		}
+		JButton exit = new JButton("");
+		exit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.exit(0);
+				
+				}
+					
+
+			});
+		JButton back = new JButton("");
+		back.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				MainMenu menu = new MainMenu();
+				menu.pack();
+				menu.setLocationRelativeTo(null);
+				menu.setResizable(false);
+				menu.setVisible(true);
+				dispose();
+				}
+					
+
+			});
+		JButton save = new JButton("");
+		save.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try {
+					ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Map.dat"));
+					oos.writeObject(mapGrid);
+					oos.close();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+				}
+					
+
+			});
+		JButton load = new JButton("");
+		load.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try {
+					ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Map.dat"));
+					
+					mapGrid = (HashMap)ois.readObject();
+					
+					ois.close();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+				}
+				
+				
+					
+
+			});
 		
 		
 
 		
 		
 		//Thread for testing mouse location relative to panels 
-		/*
 		Thread hilo = new Thread(new Runnable() {
 			public void run() {
 				try {
 					while(!Thread.interrupted()) {
 						
 						Point mouse = MouseInfo.getPointerInfo().getLocation();
-						SwingUtilities.convertPointFromScreen(mouse, cursor);
-						System.out.println(mouse);
-						Thread.sleep(1000);
+						SwingUtilities.convertPointFromScreen(mouse, cp);
+						Thread.sleep(50);
+						double x = mouse.getX();
+						double y = mouse.getY();
+						x = x/32;
+						y=y/32;
+						x=Math.floor(x);
+						y=Math.floor(y);
+						System.out.println(x);
+						System.out.println(y);
 						
-						
-						
-					
-				//Test of moving troop
-						for (int i = 0; i < 10; i++) {
-							troopLabel1.setLocation(mov*i, mov*i);
-							Thread.sleep(1000);
+						if (x<=21 && y<=21) {
+							Point clave = new Point((int) x ,(int) y);
+							ArrayList<ArrayList<Object>> casilla = new  ArrayList<>();
+							ArrayList<Object> terreno = new ArrayList<>();
+							JLabel jm = new JLabel();
+							switch (brush[0]){
+								case 0: 
+									jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/Sea.png")));	
+									terreno.add(jm);
+									terreno.add(new Sea());
+									break;
+								case 1:
+									jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/Plains.png")));	
+									terreno.add(jm);
+									terreno.add(new Plains());
+									break;
+								case 2:
+									jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/Mountain.png")));	
+									terreno.add(jm);
+									terreno.add(new Mountain());
+									break;
+								case 3:
+									jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/Forest.png")));	
+									terreno.add(jm);
+									terreno.add(new Forest());
+									break;
+								case 4:
+									jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/RoadX.png")));	
+									terreno.add(jm);
+									terreno.add(new Road());
+									break;
+								case 5:
+									switch (brush[1]) {
+										case 0:
+											jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/CityWHITE.png")));	
+											terreno.add(jm);
+											terreno.add(new City(brush[1]));
+											break;
+										case 1:
+											jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/CityRED.png")));	
+											terreno.add(jm);
+											terreno.add(new City(brush[1]));
+											break;
+										case 2:
+											jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/CityBLUE.png")));	
+											terreno.add(jm);
+											terreno.add(new City(brush[1]));
+											break;
+										}
+									break;
+								case 6:
+									switch (brush[1]) {
+									case 0:
+										jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/FactoryWHITE.png")));	
+										terreno.add(jm);
+										terreno.add(new Factory(brush[1]));
+										break;
+									case 1:
+										jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/FactoryRED.png")));	
+										terreno.add(jm);
+										terreno.add(new Factory(brush[1]));
+										break;
+									case 2:
+										jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/FactoryBLUE.png")));	
+										terreno.add(jm);
+										terreno.add(new Factory(brush[1]));
+										break;
+									}
+									break;
+								case 7:
+									switch (brush[1]) {
+									case 0:
+										break;
+									case 1:
+										jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/HqRED.png")));	
+										terreno.add(jm);
+										terreno.add(new Hq(brush[1]));
+										break;
+									case 2:
+										jm.setIcon(new ImageIcon(getClass().getResource("img/terrain/HqBLUE.png")));	
+										terreno.add(jm);
+										terreno.add(new Hq(brush[1]));
+										break;
+									}
+									break;
+								default:
+									break;
+							}
+							casilla.add(terreno);
+							mapGrid.put(clave, casilla);
 						}
+						
+						
 						
 						
 					}
@@ -199,45 +375,45 @@ public class MapMaker extends JFrame{
 				}
 			}
 		});
-		
 		hilo.start();
-		*/
+		hilo.suspend();
+	
 		
-		
-		
-		//KeyListener para mover el cursor
-		//KeyListener para mover el cursor
-		KeyListener kListener = new KeyListener() {
-			boolean released = true;		//Redundante de momento pero sirve para nno dejar que se mantenga pulsada la tecla y haya que soltar la tecla antes de que se vuelva a registrar
+		//MouseListener para Pintar
+		MouseListener ml = new MouseListener() {
+			
 			@Override
-			public void keyTyped(KeyEvent e) {
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				hilo.suspend();
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				hilo.resume();
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
 				
 			}
 			
 			@Override
-			public void keyReleased(KeyEvent e) {
+			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-				released = true;
+				
 			}
 			
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				int key = e.getKeyCode();
-				if (key == KeyEvent.VK_ESCAPE && released) {
-					MainMenu menu = new MainMenu();
-					menu.pack();
-					menu.setLocationRelativeTo(null);
-					menu.setResizable(false);
-					menu.setVisible(true);
-					dispose();
-			        //System.out.println("left");
-					//released = false;		//quitar el comentario del inicio de esta linea para dar uso a la variable released
-			    }
-
+				
 			}
 		};
+		
+		//KeyListener para mover el cursor
 		
 		
 		
@@ -274,6 +450,10 @@ public class MapMaker extends JFrame{
 		info.add(factory);
 		info.add(hq);
 		info.add(color);
+		troopInfo.add(save);
+		troopInfo.add(load);
+		troopInfo.add(back);
+		troopInfo.add(exit);
 		JLabel buildingNum = new JLabel();
 		
 		sea.setIcon(new ImageIcon(getClass().getResource("img/terrain/Sea.png")));
@@ -281,29 +461,13 @@ public class MapMaker extends JFrame{
 		mountain.setIcon(new ImageIcon(getClass().getResource("img/terrain/mountain.png")));
 		forest.setIcon(new ImageIcon(getClass().getResource("img/terrain/Forest.png")));
 		road.setIcon(new ImageIcon(getClass().getResource("img/terrain/Road.png")));
-		
-		Thread hilo = new Thread() {
-		public void run() {
-			while (true) {
-				if (brush[1]==0) {
-					city.setIcon(new ImageIcon(getClass().getResource("img/structure/CityWHITE.png")));
-					factory.setIcon(new ImageIcon(getClass().getResource("img/structure/FactoryWHITE.png")));
-				}
-				else if (brush[1]==1) {
-					city.setIcon(new ImageIcon(getClass().getResource("img/structure/CityRED.png")));
-					factory.setIcon(new ImageIcon(getClass().getResource("img/structure/FactoryRED.png")));
-					hq.setIcon(new ImageIcon(getClass().getResource("img/structure/HqRED.png")));
-				}
-				else if (brush[1]==2) {
-					city.setIcon(new ImageIcon(getClass().getResource("img/structure/CityBLUE.png")));
-					factory.setIcon(new ImageIcon(getClass().getResource("img/structure/FactoryBLUE.png")));
-					hq.setIcon(new ImageIcon(getClass().getResource("img/structure/HqBLUE.png")));
-				}
-			}
-				
-			}
-		};
-		hilo.start();
+		city.setIcon(new ImageIcon(getClass().getResource("img/structure/CityWHITE.png")));
+		factory.setIcon(new ImageIcon(getClass().getResource("img/structure/FactoryWHITE.png")));
+		hq.setIcon(new ImageIcon(getClass().getResource("img/structure/HqRED.png")));
+		save.setIcon(new ImageIcon(getClass().getResource("img/SaveIcon.png")));
+		load.setIcon(new ImageIcon(getClass().getResource("img/Load.png")));
+		back.setIcon(new ImageIcon(getClass().getResource("img/Back.png")));
+		exit.setIcon(new ImageIcon(getClass().getResource("img/Exit.png")));
 		
 		
 		sea.setOpaque(false);sea.setContentAreaFilled(false);sea.setBorderPainted(false);
@@ -314,41 +478,19 @@ public class MapMaker extends JFrame{
 		city.setOpaque(false);city.setContentAreaFilled(false);city.setBorderPainted(false);
 		factory.setOpaque(false);factory.setContentAreaFilled(false);factory.setBorderPainted(false);
 		hq.setOpaque(false);hq.setContentAreaFilled(false);hq.setBorderPainted(false);
+		save.setOpaque(false);save.setContentAreaFilled(false);save.setBorderPainted(false);
+		load.setOpaque(false);load.setContentAreaFilled(false);load.setBorderPainted(false);
+		back.setOpaque(false);back.setContentAreaFilled(false);back.setBorderPainted(false);
+		exit.setOpaque(false);exit.setContentAreaFilled(false);exit.setBorderPainted(false);
 		
 		info.add(buildingNum);
 		
 		
 		
 		//Labels de los atributos del panel movData
-		JLabel move = new JLabel();
-		JLabel attack = new JLabel();
-		JLabel capture = new JLabel();
-		
-		movData.add(move);
-		movData.add(attack);
-		movData.add(capture);
 		
 		
 		//Labels de los atributos del panel troopInfo
-		JLabel name = new JLabel();
-		JLabel health = new JLabel();
-		JLabel attack1 = new JLabel();
-		JLabel attack2 = new JLabel();
-		JLabel minRange = new JLabel();
-		JLabel maxRange = new JLabel();
-		JLabel ammo = new JLabel();
-		JLabel energy = new JLabel();
-		JLabel terrain = new JLabel();
-		
-		
-		troopInfo.add(name);
-		troopInfo.add(health);
-		troopInfo.add(attack1);
-		troopInfo.add(attack2);
-		troopInfo.add(minRange);
-		troopInfo.add(maxRange);
-		troopInfo.add(ammo);
-		troopInfo.add(energy);
 		
 		
 		abajo.add(movData);			//Se añade el panel de información de movimiento al panel que contiene toda la parte inferior
@@ -364,9 +506,8 @@ public class MapMaker extends JFrame{
 		//int width = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth();
 		//int height = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight();
 		
-		
+		addMouseListener(ml);
 		this.pack();		//Se asegura de que todos los componentes están por lo menos a su tamaño preferido
-		addKeyListener(kListener);		//Se añade el KeyListener a la ventana
 		this.setTitle("B.A.S.E.D Tactics");		//Se cambia el titulo de la ventana
 		this.setIconImage(new ImageIcon(getClass().getResource("img/tankicon.png")).getImage());		//Coloca el icono de la ventana
 		this.setSize(new Dimension(1088, 672));		//Se cambia el tamaño de la ventana
@@ -409,50 +550,6 @@ public class MapMaker extends JFrame{
 		return new Dimension(1,2);
 	}
 	
-	WindowListener wListener = new WindowListener() {
-		
-		@Override
-		public void windowOpened(WindowEvent e) {
-			// TODO Auto-generated method stub
-			hilo.start();
-		}
-		
-		@Override
-		public void windowIconified(WindowEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void windowDeiconified(WindowEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void windowDeactivated(WindowEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void windowClosing(WindowEvent e) {
-			// TODO Auto-generated method stub
-			hilo.interrupt();
-		}
-		
-		@Override
-		public void windowClosed(WindowEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void windowActivated(WindowEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-	};
 	
 
 	

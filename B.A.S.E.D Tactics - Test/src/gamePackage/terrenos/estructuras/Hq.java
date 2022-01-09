@@ -18,6 +18,7 @@ public class Hq implements Estructura {
 	boolean capturable = true;
 	boolean fabrica = true;
 	boolean visibleEncontrado = true;
+	int team = 0;
 
 	// Fisicos
 	String nombre = "Cuartel General";
@@ -25,10 +26,17 @@ public class Hq implements Estructura {
 	String imagen = "";
 
 	// Constructor
-	public Hq(Point pos, String imagen) {
+	public Hq(int team) {
 		super();
-		this.pos = pos;
-		this.imagen = imagen;
+		this.team = team;
+	}
+
+	public int getTeam() {
+		return team;
+	}
+
+	public void setTeam(int team) {
+		this.team = team;
 	}
 
 	@Override

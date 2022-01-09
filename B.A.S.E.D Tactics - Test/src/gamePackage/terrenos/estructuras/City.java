@@ -21,16 +21,25 @@ public class City implements Estructura{
 	boolean capturable = true;
 	boolean fabrica = true;
 	boolean visibleEncontrado = true;
-	
+	int team = 0;
 	//Fisicos
 	String nombre = "Ciudad";
 	Point pos = new Point(0, 0);
 	
 
 	// Constructor
-	public City() {
+	public City(int team) {
 		super();
+		this.team = team;
 
+	}
+
+	public int getTeam() {
+		return team;
+	}
+
+	public void setTeam(int team) {
+		this.team = team;
 	}
 
 	@Override

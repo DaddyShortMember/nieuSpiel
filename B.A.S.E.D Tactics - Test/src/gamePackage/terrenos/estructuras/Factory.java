@@ -18,14 +18,25 @@ public class Factory implements Estructura{
 	boolean capturable = true;
 	boolean fabrica = true;
 	boolean visibleEncontrado = true;
+	int team = 0;
 	
 	//Fisicos
 	String nombre = "Fabrica";
 	Point pos = new Point(0, 0);
+	String imagen = "";
 
 	// Constructor
-	public Factory() {
+	public Factory(int team) {
 		super();
+		this.team = team;
+	}
+
+	public int getTeam() {
+		return team;
+	}
+
+	public void setTeam(int team) {
+		this.team = team;
 	}
 
 	@Override
