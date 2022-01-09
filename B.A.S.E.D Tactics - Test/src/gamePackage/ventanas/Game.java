@@ -58,6 +58,14 @@ public class Game extends JFrame{
 		cursor.setPreferredSize(new Dimension(32, 32));		//Tamaño preferido del label que contiene el gif del cursor
 		cursor.setBounds(mov*8, mov*8, 32, 32);		//Lo mismo de antes pero siendo la posición el centro del mapa
 		
+		
+		
+		ArrayList<Object> lt = new ArrayList<>();
+		lt.add(troopLabel1);
+		ArrayList<ArrayList<Object>> llo = new ArrayList<>();
+		
+		mapGrid.put(cursor.getLocation(), null);
+		
 		JLayeredPane entityPanel = new JLayeredPane();		//Creación del panel que contiene las entidades como tropas o edificios
 		entityPanel.setLayout(null);		//Se le pone layout nulo para que deje poner componentes mediante posiciones absolutas
 		entityPanel.setBounds(0, 0, 672, 672);		//Posición y tamaño del panel de entidades
@@ -173,15 +181,16 @@ public class Game extends JFrame{
 		JPanel movData = new JPanel();		//Creación del panel inferior con información de movimiento
 		movData.setBackground(Color.yellow);		//Instrucción de prueba para diferenciar los paneles mientras no estén programados
 		movData.setPreferredSize(new Dimension(160, 256));		//Tamaño preferido del panel de información de tropas
-		movData.setLayout(new BoxLayout(movData, BoxLayout.Y_AXIS));
+		//movData.setLayout(new BoxLayout(movData, BoxLayout.Y_AXIS));
 		
 		JPanel troopInfo = new JPanel();		//Creación del panel inferior con información de tropas
 		troopInfo.setBackground(Color.white);		//Instrucción de prueba para diferenciar los paneles mientras no estén programados
 		troopInfo.setPreferredSize(new Dimension(256, 256));		//Tamaño preferido del panel de información de tropas
-		troopInfo.setLayout(new BoxLayout(troopInfo, BoxLayout.X_AXIS));
+		//troopInfo.setLayout(new BoxLayout(troopInfo, BoxLayout.X_AXIS));
 		
 		
 		//Labels de los atributos del panel info
+		/*
 		JLabel troopNum = new JLabel();
 		JLabel buildingNum = new JLabel();
 		JLabel gold = new JLabel();
@@ -189,9 +198,10 @@ public class Game extends JFrame{
 		info.add(troopNum);
 		info.add(buildingNum);
 		info.add(gold);
-		
+		*/
 		
 		//Labels de los atributos del panel movData
+		/*
 		JLabel move = new JLabel();
 		JLabel attack = new JLabel();
 		JLabel capture = new JLabel();
@@ -199,9 +209,10 @@ public class Game extends JFrame{
 		movData.add(move);
 		movData.add(attack);
 		movData.add(capture);
-		
+		*/
 		
 		//Labels de los atributos del panel troopInfo
+		/*
 		JLabel name = new JLabel();
 		JLabel health = new JLabel();
 		JLabel attack1 = new JLabel();
@@ -212,7 +223,6 @@ public class Game extends JFrame{
 		JLabel energy = new JLabel();
 		JLabel terrain = new JLabel();
 		
-		
 		troopInfo.add(name);
 		troopInfo.add(health);
 		troopInfo.add(attack1);
@@ -221,7 +231,7 @@ public class Game extends JFrame{
 		troopInfo.add(maxRange);
 		troopInfo.add(ammo);
 		troopInfo.add(energy);
-		
+		*/
 		
 		abajo.add(movData);			//Se añade el panel de información de movimiento al panel que contiene toda la parte inferior
 		abajo.add(troopInfo);		//Se añade el panel de información de tropas al panel que contiene toda la parte inferior
