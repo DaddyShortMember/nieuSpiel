@@ -362,8 +362,12 @@ public class MapMaker extends JFrame{
 								default:
 									break;
 							}
+							
 							casilla.add(terreno);
 							mapGrid.put(clave, casilla);
+							jm.setBounds((int) x,(int) y, 32, 32);
+							mapPanel.add(jm);
+							
 						}
 						
 						
