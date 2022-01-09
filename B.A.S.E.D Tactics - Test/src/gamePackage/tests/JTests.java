@@ -1,5 +1,6 @@
 package gamePackage.tests;
 import gamePackage.entidades.terrestres.*;
+import gamePackage.sonidos.*;
 import gamePackage.terrenos.estructuras.*;
 import gamePackage.terrenos.terrenos.*;
 
@@ -94,6 +95,14 @@ public class JTests {
 		
 		System.out.println("FIN TEST DE SUMINISTRO");
 		assertEquals(true, itworks);
+	}
+	
+	@Test
+	public void testSounds() {
+		SoundMngr yx = new SoundMngr("combat1.wav",0,0);
+		Thread xy = new Thread(yx);
+		xy.start();
+		assertEquals(true, xy.isAlive());
 	}
 
 }
