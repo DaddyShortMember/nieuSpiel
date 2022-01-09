@@ -25,7 +25,7 @@ public class JTests {
 	public void testGetPeaje() {
 		System.out.println("INICIO TEST GETPEAJE");
 		InfFoot x = new InfFoot(new Point(0,0), null);
-		Plains y = new Plains(new Point(0,0));
+		Plains y = new Plains();
 		int peaj = y.getPeaje(x);
 		System.out.println("FIN TEST GETPEAJE");
 		assertEquals(1, peaj);
@@ -36,7 +36,7 @@ public class JTests {
 	public void testSetEnergia() {
 		System.out.println("INICIO TEST SETENERGIA");
 		InfFoot x = new InfFoot(new Point(0,0), null);
-		Mountain y = new Mountain(new Point(0,0));
+		Mountain y = new Mountain();
 		System.out.println(x.getEnergia());
 		x.setEnergia(x.getEnergia() - y.getPeaje(x));
 		System.out.println(x.getEnergia());
@@ -48,7 +48,7 @@ public class JTests {
 	public void testSetSalud() {
 		InfFoot x = new InfFoot(new Point(0,0), null);
 		InfMech y = new InfMech(new Point(1,1), null);
-		Mountain z = new Mountain(new Point(0,0));
+		Mountain z = new Mountain();
 		int xG = x.getGolpeSec();
 		//Sistema de combate primitivo.
 		if(x.getIdTropa() == y.getIDTropa()) {
@@ -80,7 +80,7 @@ public class JTests {
 		System.out.println("INICIO TEST DE SUMINISTRO");
 		boolean itworks = false;
 		InfMech x = new InfMech(new Point(0,0), null);
-		Hq y = new Hq(new Point(0,0), null);
+		Hq y = new Hq(1);
 		
 		x.setSalud(20);
 		x.setMuniciones(1);
