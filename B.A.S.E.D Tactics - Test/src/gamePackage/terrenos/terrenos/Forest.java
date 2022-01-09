@@ -18,9 +18,8 @@ public class Forest implements Terreno {
 	String imagen = ""; //Imagen predeterminada
 
 	// Constructor
-	public Forest(Point pos) {
+	public Forest() {
 			super();
-			this.pos = pos;
 		}
 
 	@Override
