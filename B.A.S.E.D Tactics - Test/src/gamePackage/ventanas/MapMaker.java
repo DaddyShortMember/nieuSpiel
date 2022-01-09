@@ -240,6 +240,15 @@ public class MapMaker extends JFrame implements Serializable{
 					mapGrid = (HashMap)ois.readObject();
 					
 					ois.close();
+					Set<Point> keys = mapGrid.keySet();
+					mapPanel.removeAll();
+					JLabel jl = new JLabel();
+					for (Point i : keys) {
+						jl = (JLabel) mapGrid.get(i).get(0).get(0);
+						mapPanel.add(jl);
+						
+					}
+					mapPanel.repaint();
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -253,7 +262,6 @@ public class MapMaker extends JFrame implements Serializable{
 				
 				
 				}
-				
 				
 					
 
