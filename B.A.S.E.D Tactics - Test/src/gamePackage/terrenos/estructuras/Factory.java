@@ -1,12 +1,13 @@
 package gamePackage.terrenos.estructuras;
 import java.awt.Point;
+import java.io.Serializable;
 
 import gamePackage.entidades.Tropa;
 import gamePackage.logica.*;
 import gamePackage.terrenos.Estructura;
 
 
-public class Factory implements Estructura{
+public class Factory implements Estructura, Serializable{
 		
 	//Logicos
 	ListaIDTerreno idTerreno = ListaIDTerreno.FACTORY;

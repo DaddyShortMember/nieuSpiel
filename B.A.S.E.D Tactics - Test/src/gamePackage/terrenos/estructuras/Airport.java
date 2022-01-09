@@ -4,8 +4,9 @@ import gamePackage.entidades.Tropa;
 import gamePackage.logica.*;
 import gamePackage.terrenos.Estructura;
 import java.awt.Point;
+import java.io.Serializable;
 
-public class Airport implements Estructura {
+public class Airport implements Estructura, Serializable{
 
 	// Logicos
 	ListaIDTerreno idTerreno = ListaIDTerreno.AIRPORT;

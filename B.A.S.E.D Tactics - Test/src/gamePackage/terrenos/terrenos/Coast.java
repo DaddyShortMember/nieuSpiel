@@ -1,12 +1,13 @@
 package gamePackage.terrenos.terrenos;
 
 import java.awt.Point;
+import java.io.Serializable;
 
 import gamePackage.entidades.Tropa;
 import gamePackage.logica.*;
 import gamePackage.terrenos.Terreno;
 
-public class Coast implements Terreno {
+public class Coast implements Terreno, Serializable{
 
 	// Atributos Logicos
 	ListaIDTerreno idTerreno = ListaIDTerreno.COAST;
