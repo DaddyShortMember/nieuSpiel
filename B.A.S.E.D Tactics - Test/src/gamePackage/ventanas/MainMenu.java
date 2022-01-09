@@ -56,6 +56,18 @@ public class MainMenu extends JFrame{
 		
 		//JLabel playMulti = new JLabel();
 		JButton mapMaker = new JButton("");
+		mapMaker.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MapMaker juego = new MapMaker();
+						juego.pack();
+						juego.setLocationRelativeTo(null);
+						juego.setResizable(false);
+						juego.setVisible(true);
+						dispose();
+					}
+				});
 		mapMaker.setBounds(292, 536, 115, 160);
 		mapMaker.setOpaque(false);
 		mapMaker.setContentAreaFilled(false);
