@@ -28,44 +28,39 @@ import java.lang.System.Logger.Level;
  * y asi
  */
 
-//Credits to the Java Sound API crew and 
-public class SoundMngr {
+//Credits to the Java Sound API crew and some StackOverflow peoples that have carried me through this pain.
+public class SoundMngr implements Runnable {
 	Object currentSound;
-	String currentName;
-	int gain = 100;
+	Object name;
+	int rule;
+	int gain;
 	long duration;
 	Mixer mixer;
 	Clip clip;
 	File file;
 	Logger log;
+	Thread thread;
+	AudioInputStream audioStream;
+	DataLine.Info dataInfo;
+	// SourceDataLine line;
+	// AudioFormat audioFormat;
 
-	public SoundMngr(Object name, int rule, int vol) {
-		this.gain = vol;
+	public SoundMngr(Object name, int rule, int volume) {
+		this.name = name;
+		this.rule = rule;
+		this.gain = volume;
+	}
+
+	public void loadSound(Object name) {
 		if (name != null) {
 			URL url = SoundMngr.class.getResource("/gamePackage/sonidos/fx/" + (String) name);
 			if (url != null) {
 				try {
-					AudioInputStream audioStream = AudioSystem.getAudioInputStream(url);
-					DataLine.Info dataInfo = new DataLine.Info(Clip.class, audioStream.getFormat());
+					audioStream = AudioSystem.getAudioInputStream(url);
+					dataInfo = new DataLine.Info(Clip.class, audioStream.getFormat());
 					clip = (Clip) AudioSystem.getLine(dataInfo);
 					duration = audioStream.getFrameLength();
 					clip.open(audioStream);
-					clip.start();
-					if (rule == 0) {
-						clip.loop(Clip.LOOP_CONTINUOUSLY);
-						do {
-							Thread.sleep(50);
-						} while (clip.isActive());
-						clip.stop();
-						clip.close();
-						audioStream.close();
-					} else {
-						do {
-							Thread.sleep(50);
-						} while (clip.isActive());
-						clip.close();
-						audioStream.close();
-					}
 				} catch (UnsupportedAudioFileException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -75,20 +70,41 @@ public class SoundMngr {
 				} catch (LineUnavailableException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
-			}
+			} else
+				log.log(Level.INFO, "Unable to read directory");
+		}
+	}
+
+	public void setVolume(int volume) {
+		this.gain = volume; // VOLUME UNDER 100 IS MESSY CRACKLE, DO NOT CHANGE
+		if (this.gain < 0) {
+			this.gain = 100;
+		} else if (this.gain > 100) {
+			this.gain = 100;
 		} else
-			log.log(Level.INFO, "Unable to read directory");
+			this.gain = 100;
+		double value = this.gain / 100;
+		try {
+			FloatControl gainC = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+			float db = (float) (Math.log(value == 0.0 ? 0.0001 : value) / Math.log(10.0) * 20.0); // Java Sound API
+			gainC.setValue(db);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 
 	}
 
-	public void play() {
+	public void play() throws InterruptedException, IOException {
 		clip.setFramePosition(0);
+		this.start();
 		clip.start();
-
+		do {
+			Thread.sleep(50);
+		} while (this.isActive() == true);
+		clip.stop();
+		clip.close();
+		audioStream.close();
 	}
 
 	public void loop() {
@@ -96,40 +112,98 @@ public class SoundMngr {
 
 	}
 
-	public void stop() {
-		clip.stop();
+	public void stop() throws IOException {
+		if (clip != null) {
+			clip.stop();
+			clip.close();
+			audioStream.close();
+			this.stopIt();
+		}
 	}
 
-	public void end() {
-		clip.stop();
-		clip.close();
-
-	}
-
-	public void playLoop() {
+	public void playLoop() throws InterruptedException {
+		this.start();
 		clip.setFramePosition(0);
+		this.loop();
 		clip.start();
-		clip.loop(Clip.LOOP_CONTINUOUSLY);
+		do {
+			Thread.sleep(50);
+		} while (this.isActive() == true);
 	}
 
 	public boolean isActive() {
-
 		return clip.isActive();
 	}
 
-//Test
-	public static void main(String[] args) {
-		
-		Thread thread1 = new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				SoundMngr soundMngr = new SoundMngr("mainmenu.wav", 1, 1);
-				soundMngr.play();
+	public Thread getThread() {
+		return thread;
+	}
+
+	public void start() {
+		if (thread == null) {
+			thread = new Thread(this);
+			thread.start();
+		}
+	}
+
+	public void stopIt() {
+		if (thread != null) {
+			thread.interrupt();
+		}
+		thread = null;
+	}
+
+	@Override
+	public void run() {
+		this.start();
+		this.loadSound(name);
+		if (rule == 0) {
+			try {
+				this.play();
+				this.stopIt();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		});
-	thread1.run();	
+
+		} else {
+			try {
+				this.playLoop();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		try {
+			this.stop();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	@SuppressWarnings("deprecation")
+	public static void main(String[] args) {
+		Thread x = new Thread(new SoundMngr("weegee.wav", 0, 100));
+		Thread nigma = new Thread(new SoundMngr("click1.wav", 0, 100));
+		Thread sigma = new Thread(new SoundMngr("mainmenu.wav", 0, 100));
+		System.out.println(x.getName() + " x");
+		System.out.println(nigma.getName() + " nigma");
+		System.out.println(sigma.getName() + " sigma");
+		nigma.start();
+		x.start();
+		sigma.start();
+		try {
+			nigma.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(nigma.getName() + " nigma end");
 	}
 
 }
