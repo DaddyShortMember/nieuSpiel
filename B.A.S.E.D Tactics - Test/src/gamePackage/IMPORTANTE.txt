@@ -1,10 +1,10 @@
-He organizado el codigo en paquetes, pero aun falta hacer imports y arreglar algunos fallos causados por la migracion.
+Mario ha organizado el codigo en paquetes, pero aun falta hacer imports y arreglar algunos fallos causados por la migracion.
 Esto en 06.12.21.
 Lo vere arreglado en el 07.12.21.
 No ha cambiado nada primordial del codigo, por lo que el trabajo que hayan hecho es aun compatible.
 Solo hay que cambiar el package, ajustar algunos imports, y el resto sera historia.
 
 [NOTA IMPORTANTE!!]
-Al momento de hacer la migracion, he quedado como contribuidor unico del codigo, que es falso.
+Al momento de hacer la migracion, Mario ha quedado como contribuidor unico del codigo, que es falso.
 Temia que esto ocurriese, por lo que intente hacerlo directamente por GitHub, pero al final siempre paso.
 Recuerden actualizar las horas puestas programando.
