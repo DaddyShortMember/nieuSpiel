@@ -22,13 +22,10 @@ public class Factory implements Estructura{
 	//Fisicos
 	String nombre = "Fabrica";
 	Point pos = new Point(0, 0);
-	String imagen = "";
 
 	// Constructor
-	public Factory(Point pos, String imagen) {
+	public Factory() {
 		super();
-		this.pos = pos;
-		this.imagen = imagen;
 	}
 
 	@Override
