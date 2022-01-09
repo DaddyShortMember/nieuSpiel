@@ -234,32 +234,7 @@ public class MapMaker extends JFrame implements Serializable{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				try {
-					ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Map.dat"));
-					
-					mapGrid = (HashMap)ois.readObject();
-					
-					ois.close();
-					Set<Point> keys = mapGrid.keySet();
-					mapPanel.removeAll();
-					JLabel jl = new JLabel();
-					for (Point i : keys) {
-						jl = (JLabel) mapGrid.get(i).get(0).get(0);
-						mapPanel.add(jl);
-						
-					}
-					mapPanel.repaint();
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
+				loadMap(mapPanel).repaint();
 				
 				}
 				
@@ -542,7 +517,35 @@ public class MapMaker extends JFrame implements Serializable{
 		
 		
 	}
-	
+	public JPanel loadMap(JPanel mapPanel) {
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Map.dat"));
+			
+			mapGrid = (HashMap)ois.readObject();
+			
+			ois.close();
+			Set<Point> keys = mapGrid.keySet();
+			mapPanel.removeAll();
+			JLabel jl = new JLabel();
+			for (Point i : keys) {
+				jl = (JLabel) mapGrid.get(i).get(0).get(0);
+				mapPanel.add(jl);
+				
+			}
+			
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		return mapPanel;
+	}
 	
 	
 	
