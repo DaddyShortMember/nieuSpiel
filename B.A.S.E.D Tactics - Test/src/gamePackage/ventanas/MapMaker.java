@@ -46,11 +46,12 @@ public class MapMaker extends JFrame{
 		
 		JPanel mapPanel = new JPanel();		//Creación del panel en el que está el label del mapa (más tarde serán muchos componentes que forman un mapa)
 		mapPanel.setBounds(0, 0, 672, 672);		//Posición y tamaño del panel del juego
+		mapPanel.setBackground(Color.red);
 		mapPanel.setPreferredSize(new Dimension(672, 672));		//Tamaño preferido para el panel que hace que alguna instrucción no ignore este valor
-		mapPanel.setLayout(new BoxLayout(mapPanel, BoxLayout.X_AXIS));		//Se le pone un BoxLayout al panel del mapa en el eje X que coloca los componentes en serie horizontalmente
+		mapPanel.setLayout(null);		//Se le pone un BoxLayout al panel del mapa en el eje X que coloca los componentes en serie horizontalmente
 	
 		mapPanel.setBounds(0, 0, 672, 672);		//Posición y tamaño del panel del mapa
-		mapPanel.setOpaque(false);		//Hace que se pueda ver lo que haya detrás del panel
+		
 		
 		cursor.setPreferredSize(new Dimension(32, 32));		//Tamaño preferido del label que contiene el gif del cursor
 		cursor.setBounds(mov*8, mov*8, 32, 32);		//Lo mismo de antes pero siendo la posición el centro del mapa
@@ -360,9 +361,10 @@ public class MapMaker extends JFrame{
 							
 							casilla.add(terreno);
 							mapGrid.put(clave, casilla);
-							jm.setBounds((int) x,(int) y, 32, 32);
+							System.out.println((int) x + "-" + (int) y);
+							jm.setBounds((int) x * mov,(int) y * mov, 32, 32);
 							mapPanel.add(jm);
-							
+							mapPanel.repaint();
 						}
 						
 						
@@ -431,12 +433,12 @@ public class MapMaker extends JFrame{
 		JPanel movData = new JPanel();		//Creación del panel inferior con información de movimiento
 		movData.setBackground(Color.yellow);		//Instrucción de prueba para diferenciar los paneles mientras no estén programados
 		movData.setPreferredSize(new Dimension(160, 256));		//Tamaño preferido del panel de información de tropas
-		movData.setLayout(new BoxLayout(movData, BoxLayout.Y_AXIS));
+		//movData.setLayout(new BoxLayout(movData, BoxLayout.Y_AXIS));
 		
 		JPanel troopInfo = new JPanel();		//Creación del panel inferior con información de tropas
 		troopInfo.setBackground(Color.white);		//Instrucción de prueba para diferenciar los paneles mientras no estén programados
 		troopInfo.setPreferredSize(new Dimension(256, 256));		//Tamaño preferido del panel de información de tropas
-		troopInfo.setLayout(new BoxLayout(troopInfo, BoxLayout.X_AXIS));
+		//troopInfo.setLayout(new BoxLayout(troopInfo, BoxLayout.X_AXIS));
 		
 		
 		//Botones del panel derecho

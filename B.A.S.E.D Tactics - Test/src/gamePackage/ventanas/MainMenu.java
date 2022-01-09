@@ -72,10 +72,7 @@ public class MainMenu extends JFrame{
 		mapMaker.setOpaque(false);
 		mapMaker.setContentAreaFilled(false);
 		mapMaker.setBorderPainted(false);
-		
-		mapMaker.addActionListener(new ActionListener() {
-			
-		});
+
 		
 		JButton settings = new JButton("");
 		settings.setBounds(632, 541, 160, 160);
