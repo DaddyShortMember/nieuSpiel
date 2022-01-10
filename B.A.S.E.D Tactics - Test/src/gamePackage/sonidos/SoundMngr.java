@@ -2,6 +2,8 @@ package gamePackage.sonidos;
 
 import java.net.MalformedURLException;
 import java.net.URL; //Para directorios; ej. "fx/sonido1.wav"
+import java.util.concurrent.TimeUnit;
+
 import javax.sound.sampled.*; //Librerias que permiten utilizar audio (limitado a .wav y otros primitivos)
 
 import com.sun.tools.javac.Main; //Util para obtener directorio
@@ -44,6 +46,8 @@ public class SoundMngr implements Runnable {
 	DataLine.Info dataInfo;
 	// SourceDataLine line;
 	// AudioFormat audioFormat;
+	private volatile boolean kill = false;
+	private volatile boolean live = false;
 
 	public SoundMngr(Object name, int rule, int volume) {
 		this.name = name;
@@ -97,11 +101,11 @@ public class SoundMngr implements Runnable {
 
 	public void play() throws InterruptedException, IOException {
 		clip.setFramePosition(0);
-		this.start();
+		live=true;
 		clip.start();
 		do {
 			Thread.sleep(50);
-		} while (this.isActive() == true);
+		} while (kill == false);
 		clip.stop();
 		clip.close();
 		audioStream.close();
@@ -119,16 +123,20 @@ public class SoundMngr implements Runnable {
 			audioStream.close();
 			this.stopIt();
 		}
+		kill = true;
 	}
 
-	public void playLoop() throws InterruptedException {
-		this.start();
+	public void playLoop() throws InterruptedException, IOException {
+		live=true;
 		clip.setFramePosition(0);
 		this.loop();
 		clip.start();
 		do {
 			Thread.sleep(50);
-		} while (this.isActive() == true);
+		} while (kill == false);
+		clip.stop();
+		clip.close();
+		audioStream.close();
 	}
 
 	public boolean isActive() {
@@ -155,33 +163,31 @@ public class SoundMngr implements Runnable {
 
 	@Override
 	public void run() {
-		this.start();
-		this.loadSound(name);
-		if (rule == 0) {
-			try {
-				this.play();
-				this.stopIt();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		while (!kill) {
+			if (live == false) {
+				this.loadSound(name);
+				if (rule == 0) {
+					try {
+						this.play();
+						this.stop();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
-		} else {
-			try {
-				this.playLoop();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				} else {
+					try {
+						this.playLoop();
+					} catch (InterruptedException | IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
 			}
-		}
-		try {
-			this.stop();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
 	}
@@ -203,6 +209,13 @@ public class SoundMngr implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		try {
+			TimeUnit.MILLISECONDS.sleep(200);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		sigma.stop();
 		System.out.println(nigma.getName() + " nigma end");
 	}
 
