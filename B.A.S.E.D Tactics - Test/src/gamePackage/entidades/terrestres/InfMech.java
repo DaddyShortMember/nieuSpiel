@@ -8,6 +8,7 @@ import gamePackage.logica.*;
 public class InfMech implements Tropa {
 
 	// ATRIBUTOS LOGICOS
+	int team;
 	ListaIDTropa idTropa = ListaIDTropa.INF_MECH;
 	ListaTipos tipoTropa = ListaTipos.MECH;
 	ListaTipos tipoMov = ListaTipos.INFANTERIA;
@@ -32,17 +33,16 @@ public class InfMech implements Tropa {
 
 	// ATRIBUTOS FISICOS
 	String nombre = "Infanteria";
-	Point pos = new Point(0,0); //Posicion
-	String imagen = ""; //Dirección de imagen
-	
-	//Constructor
-	public InfMech(Point pos, String imagen) {
+	Point pos = new Point(0, 0); // Posicion
+	String imagen = ""; // Dirección de imagen
+
+	// Constructor
+	public InfMech(int team) {
 		super();
-		this.pos = pos;
-		this.imagen = imagen;
+		this.team = team;
 	}
-	
-	//ToString
+
+	// ToString
 	@Override
 	public String toString() {
 		return "InfMech [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
@@ -52,16 +52,14 @@ public class InfMech implements Tropa {
 				+ vision + ", alcanceMin=" + alcanceMin + ", alcanceMax=" + alcanceMax + ", municionesMax="
 				+ municionesMax + ", municionesPrim=" + municionesPrim + ", energiaMaxima=" + energiaMaxima
 				+ ", energia=" + energia + ", distanciaMaxima=" + distanciaMaxima + ", nombre=" + nombre + ", pos="
-				+ pos  + ", imagen=" + imagen + "]";
+				+ pos + ", imagen=" + imagen + "]";
 	}
-	
-	//Metodos Heredados
-	//Setters
+
+	// Metodos Heredados
+	// Setters
 	@Override
-	public void setTropa(Point pos, String imagen) {
+	public void setTropa() {
 		// TODO Auto-generated method stub
-		this.pos = pos;
-		this.imagen = imagen;
 	}
 
 	@Override
@@ -70,16 +68,14 @@ public class InfMech implements Tropa {
 	}
 
 	@Override
-	public void setPos(Point pos) {
-		//If(posY <= limYsup && posX <= limXsup || posY >= limYinf && posX >= limXinf)
-		this.pos = pos;
-		//else{ Logger? }
+	public void setPos() {
+		// If(posY <= limYsup && posX <= limXsup || posY >= limYinf && posX >= limXinf)
+		// else{ Logger? }
 	}
 
 	@Override
-	public void setImagen(String imagen) {
+	public void setImagen() {
 		// TODO Auto-generated method stub
-		this.imagen = imagen;
 	}
 
 	@Override
@@ -301,10 +297,23 @@ public class InfMech implements Tropa {
 
 	@Override
 	public boolean necesitaSuministro() {
-		if(this.municionesPrim < this.municionesMax | this.salud < this.saludMaxima | this.energia < this.energiaMaxima) {
+		if (this.municionesPrim < this.municionesMax | this.salud < this.saludMaxima
+				| this.energia < this.energiaMaxima) {
 			return true;
-		}else
-		return false;
+		} else
+			return false;
+	}
+
+	@Override
+	public void setTeam(int team) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getTeam() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

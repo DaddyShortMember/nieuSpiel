@@ -8,6 +8,7 @@ import gamePackage.logica.*;
 public class Misl implements Tropa{
 	
 	//ATRIBUTOS LOGICOS
+	int team;
 	ListaIDTropa idTropa = ListaIDTropa.MISL;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;
 	ListaTipos tipoMov = ListaTipos.V_PESADO;
@@ -36,10 +37,9 @@ public class Misl implements Tropa{
 	String imagen = ""; //Dirección de imagen
 	
 	//Constructor
-	public Misl(Point pos, String imagen) {
+	public Misl(int team) {
 		super();
-		this.pos = pos;
-		this.imagen = imagen;
+		this.team = team;
 	}
 	
 	//ToString
@@ -58,10 +58,8 @@ public class Misl implements Tropa{
 	//Metodos Heredados
 	//Setters
 	@Override
-	public void setTropa(Point pos, String imagen) {
+	public void setTropa() {
 		// TODO Auto-generated method stub
-		this.pos = pos;
-		this.imagen = imagen;
 	}
 
 	@Override
@@ -70,16 +68,14 @@ public class Misl implements Tropa{
 	}
 
 	@Override
-	public void setPos(Point pos) {
+	public void setPos() {
 		//If(posY <= limYsup && posX <= limXsup || posY >= limYinf && posX >= limXinf)
-		this.pos = pos;
 		//else{ Logger? }
 	}
 
 	@Override
-	public void setImagen(String imagen) {
+	public void setImagen() {
 		// TODO Auto-generated method stub
-		this.imagen = imagen;
 	}
 
 	@Override
@@ -302,5 +298,17 @@ public class Misl implements Tropa{
 			return true;
 		}else
 		return false;
+	}
+
+	@Override
+	public void setTeam(int team) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getTeam() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

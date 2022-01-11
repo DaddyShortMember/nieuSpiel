@@ -9,6 +9,7 @@ import gamePackage.logica.ListaTipos;
 
 public class AFightjet implements Tropa{
 	//ATRIBUTOS LÃ“GICOS
+	int team;
 			ListaIDTropa idTropa = ListaIDTropa.A_FIGHTJET;
 			ListaTipos tipoTropa = ListaTipos.AEREAH;
 			ListaTipos tipoMov = ListaTipos.AEREO;
@@ -37,10 +38,9 @@ public class AFightjet implements Tropa{
 			String imagen = ""; //DirecciÃ³n de imagen
 			
 			//Constructor
-			public AFightjet(Point pos, String imagen) {
+			public AFightjet(int team) {
 				super();
-				this.pos = pos;
-				this.imagen = imagen;
+				this.team = team;
 			}
 			
 			//ToString
@@ -270,6 +270,36 @@ public class AFightjet implements Tropa{
 					return true;
 				}else
 				return false;
+			}
+
+			@Override
+			public void setTeam(int team) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public int getTeam() {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+
+			@Override
+			public void setTropa() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void setPos() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void setImagen() {
+				// TODO Auto-generated method stub
+				
 			}
 
 }

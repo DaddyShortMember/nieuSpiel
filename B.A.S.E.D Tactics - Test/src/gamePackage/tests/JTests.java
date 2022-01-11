@@ -15,7 +15,7 @@ public class JTests {
 	@Test
 	public void testGetEnergia() {
 		System.out.println("INICIO TEST GETENERGIA");
-		InfFoot x = new InfFoot(new Point(0,0), null);
+		InfFoot x = new InfFoot(1);
 		int energy = x.getEnergia();
 		System.out.println("FIN TEST GETENERGIA");
 		assertEquals(x.getEnergiaMaxima(), energy);
@@ -24,7 +24,7 @@ public class JTests {
 	@Test
 	public void testGetPeaje() {
 		System.out.println("INICIO TEST GETPEAJE");
-		InfFoot x = new InfFoot(new Point(0,0), null);
+		InfFoot x = new InfFoot(1);
 		Plains y = new Plains();
 		int peaj = y.getPeaje(x);
 		System.out.println("FIN TEST GETPEAJE");
@@ -35,7 +35,7 @@ public class JTests {
 	@Test //Test para ver si furrula el setEnergia();
 	public void testSetEnergia() {
 		System.out.println("INICIO TEST SETENERGIA");
-		InfFoot x = new InfFoot(new Point(0,0), null);
+		InfFoot x = new InfFoot(1);
 		Mountain y = new Mountain();
 		System.out.println(x.getEnergia());
 		x.setEnergia(x.getEnergia() - y.getPeaje(x));
@@ -46,8 +46,8 @@ public class JTests {
 	
 	@Test //Test para ver si 
 	public void testSetSalud() {
-		InfFoot x = new InfFoot(new Point(0,0), null);
-		InfMech y = new InfMech(new Point(1,1), null);
+		InfFoot x = new InfFoot(1);
+		InfMech y = new InfMech(1);
 		Mountain z = new Mountain();
 		int xG = x.getGolpeSec();
 		//Sistema de combate primitivo.
@@ -79,7 +79,7 @@ public class JTests {
 	public void testSuministra() {
 		System.out.println("INICIO TEST DE SUMINISTRO");
 		boolean itworks = false;
-		InfMech x = new InfMech(new Point(0,0), null);
+		InfMech x = new InfMech(1);
 		Hq y = new Hq(1);
 		
 		x.setSalud(20);
