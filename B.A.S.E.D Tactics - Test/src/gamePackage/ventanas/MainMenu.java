@@ -95,7 +95,7 @@ public class MainMenu extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				MapMakerV2 juego = new MapMakerV2();
+				MapMaker juego = new MapMaker();
 				juego.pack();
 				juego.setLocationRelativeTo(null);
 				juego.setResizable(false);
