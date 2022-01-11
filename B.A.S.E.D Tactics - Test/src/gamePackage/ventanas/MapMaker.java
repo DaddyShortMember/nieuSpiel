@@ -224,9 +224,11 @@ public class MapMaker extends JFrame implements Serializable {
 				}
 				new Thread(new SoundMngr("weegee.wav", 0, 0)).start();
 
-				MainMenu promp = new MainMenu();
-
-				promp.setVisible(true);
+				MapMakerPrompt juego = new MapMakerPrompt();
+				juego.pack();
+				juego.setLocationRelativeTo(null);
+				juego.setResizable(false);
+				juego.setVisible(true);
 				dispose();
 			}
 

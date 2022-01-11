@@ -95,7 +95,7 @@ public class MainMenu extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				MapMaker juego = new MapMaker();
+				MapMakerPrompt juego = new MapMakerPrompt();
 				juego.pack();
 				juego.setLocationRelativeTo(null);
 				juego.setResizable(false);
@@ -133,6 +133,7 @@ public class MainMenu extends JFrame {
 				sets.setResizable(false);
 				sets.setVisible(true);
 				dispose();
+				
 
 			}
 		});
