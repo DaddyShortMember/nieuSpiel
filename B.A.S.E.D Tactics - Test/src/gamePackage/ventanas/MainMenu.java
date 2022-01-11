@@ -119,6 +119,7 @@ public class MainMenu extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				scores.finalizaDB();
+				new Thread(new SoundMngr("weegee.wav", 0, 0)).start();
 				mus.interrupt();
 				try {
 					sic.stop();
@@ -126,7 +127,12 @@ public class MainMenu extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				new Thread(new SoundMngr("weegee.wav", 0, 0)).start();
+				Settings sets = new Settings();
+				sets.setLocationRelativeTo(null);
+				sets.pack();
+				sets.setResizable(false);
+				sets.setVisible(true);
+				dispose();
 
 			}
 		});
