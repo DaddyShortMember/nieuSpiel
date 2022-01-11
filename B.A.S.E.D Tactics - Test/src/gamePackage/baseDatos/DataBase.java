@@ -3,6 +3,7 @@ package gamePackage.baseDatos;
 import java.sql.*; //Import all related to SQL
 import java.util.logging.Level; //Logger Level import, so we can designate what is critical
 import java.util.logging.Logger; //Logger Logger import, so we can log what critical is
+import java.util.Date;
 
 /*FOR THIS
  * SECTION
@@ -13,6 +14,12 @@ import java.util.logging.Logger; //Logger Logger import, so we can log what crit
  */
 
 public class DataBase {
+	static Date date = new Date();
+
+	public static Date getDate() {
+		return date;
+	}
+
 	private static Logger logDB = Logger.getLogger("Scoreboard");
 	private static Connection connect = null;
 
@@ -47,6 +54,39 @@ public class DataBase {
 		return connect;
 	}
 
+	public static void creaTablas() {
+		try {
+			Statement stat = connect.createStatement();
+			String stt = "create table gamestats(todat date not null, redwin integer(3) default 0, bluwin integer(3) default 0, amberwin integer(3) default 0, greenwin integer(3) default 0, gamesplayed integer(3), primary key(todat));";
+			stat.execute(stt);
+			logDB.log(Level.INFO, "Executed " + stt);
+			stt = "create table teamstats(tdate date not null, rfunds integer(9) default 0, bfunds integer(9) default 0, afunds integer(9) default 0, gfunds integer(9) default 0, primary key(tdate));";
+			stat.execute(stt);
+			logDB.log(Level.INFO, "Executed " + stt);
+			stat.close();
+			stt = null;
+			logDB.log(Level.INFO, "Successfully created tables");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			logDB.log(Level.SEVERE, e.toString());
+		}
+	}
+
+	public static void eliminaDB() {
+		try {
+			Statement stat = connect.createStatement();
+			String stt = "drop table if exists teamstats;";
+			stat.execute(stt);
+			stt = "drop table if exists gamestats;";
+			stat.execute(stt);
+			logDB.log(Level.INFO, "Executed " + stt);
+			logDB.log(Level.WARNING, "The Database's living status has been revoked");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			logDB.log(Level.SEVERE, e.toString());
+		}
+	}
+
 	public static void finalizaDB() {
 		try {
 			if (connect != null) {
@@ -56,6 +96,7 @@ public class DataBase {
 		} catch (SQLException e) {
 			logDB.log(Level.SEVERE, e.toString());
 		}
+		connect = null;
 	}
 
 	public static void actualizaGlobal(int r, int g, int b, int a, boolean played) {
@@ -95,7 +136,8 @@ public class DataBase {
 			} catch (Exception e) {
 				logDB.log(Level.WARNING, "DATE NOT FOUND");
 				try {
-					stt = ("insert into teamstats values(curdate(), " + rf + ", " + bf + ", " + af + ", " + gf + ");");
+					stt = ("insert into teamstats values(date('now'), " + rf + ", " + bf + ", " + af + ", " + gf
+							+ ");");
 					stat.execute(stt);
 					logDB.log(Level.INFO, "Executed " + stt);
 				} catch (Exception e2) {
@@ -108,6 +150,10 @@ public class DataBase {
 			logDB.log(Level.SEVERE, e.toString());
 		}
 
+	}
+	
+	public Connection getConn() {
+		return connect;
 	}
 
 }
