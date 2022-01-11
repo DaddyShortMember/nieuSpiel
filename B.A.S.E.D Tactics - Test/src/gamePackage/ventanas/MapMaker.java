@@ -223,7 +223,9 @@ public class MapMaker extends JFrame implements Serializable {
 					e1.printStackTrace();
 				}
 				new Thread(new SoundMngr("weegee.wav", 0, 0)).start();
-				MapMakerPrompt promp = new MapMakerPrompt();
+
+				MainMenu promp = new MainMenu();
+
 				promp.setVisible(true);
 				dispose();
 			}
@@ -275,12 +277,11 @@ public class MapMaker extends JFrame implements Serializable {
 						Point mouse = MouseInfo.getPointerInfo().getLocation();
 						SwingUtilities.convertPointFromScreen(mouse, cp);
 						try {
-							Thread.sleep(5);
-						} catch (InterruptedException e) {
+							Thread.sleep(25);
+						} catch (InterruptedException e1) {
 							// TODO Auto-generated catch block
-							e.printStackTrace();
+							e1.printStackTrace();
 						}
-
 						double x = mouse.getX();
 						double y = mouse.getY();
 						x = x / 32;
@@ -363,6 +364,8 @@ public class MapMaker extends JFrame implements Serializable {
 								break;
 							case 7:
 								switch (brush[1]) {
+								case 0:
+									break;
 								case 1:
 									jm.setIcon(new ImageIcon(getClass().getResource("img/structure/HqRED.png")));
 									terreno.add(jm);
@@ -374,33 +377,24 @@ public class MapMaker extends JFrame implements Serializable {
 									terreno.add(new Hq(brush[1]));
 									break;
 								default:
-									jm.setIcon(new ImageIcon(getClass().getResource("img/structure/CityWHITE.png")));
-									terreno.add(jm);
-									terreno.add(new City(brush[1]));
 									break;
 								}
 								break;
 							default:
 								break;
 							}
-
+							
+							try {
+								mapPanel.remove(mapPanel.getComponentAt((int) x * mov, (int) y * mov));
+								
+							} catch (Exception e) {
+								
+							}
 							casilla.add(terreno);
 							mapGrid.put(clave, casilla);
 							jm.setBounds((int) x * mov, (int) y * mov, 32, 32);
 							mapPanel.add(jm);
 							mapPanel.repaint();
-							try {
-								ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(mapName + ".dat"));
-								oos.writeObject(mapGrid);
-								oos.close();
-							} catch (FileNotFoundException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							} catch (IOException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-							loadMap(mapPanel).repaint();
 						}
 
 					}
@@ -498,8 +492,8 @@ public class MapMaker extends JFrame implements Serializable {
 		info.add(factory);
 		info.add(hq);
 		info.add(color);
-		//troopInfo.add(save);
-		//troopInfo.add(load);
+		troopInfo.add(save);
+		troopInfo.add(load);
 		troopInfo.add(back);
 		troopInfo.add(exit);
 		JLabel buildingNum = new JLabel();
