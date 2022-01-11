@@ -227,7 +227,7 @@ public class Settings extends JFrame implements Serializable {
 																		// los componentes en serie verticalmente
 
 		JPanel info = new JPanel(); // Creación del panel superior de información general de la partida
-		info.setBackground(Color.black); // Instrucción de prueba para diferenciar los paneles mientras no estén
+		info.setBackground(new Color(65,96,184)); // Instrucción de prueba para diferenciar los paneles mientras no estén
 											// programados
 		info.setPreferredSize(new Dimension(416, 416)); // Tamaño preferido del panel de información general
 
@@ -249,7 +249,11 @@ public class Settings extends JFrame implements Serializable {
 		// troopInfo.setLayout(new BoxLayout(troopInfo, BoxLayout.X_AXIS));
 
 		// Botones del panel derecho
-	
+		JLabel choose =  new JLabel();
+		choose.setText("CHOOSE COLORS");
+		
+		
+		
 		troopInfo.add(back);
 		troopInfo.add(exit);
 		
@@ -278,7 +282,8 @@ public class Settings extends JFrame implements Serializable {
 		rVg.setOpaque(false);rVg.setContentAreaFilled(false);rVg.setBorderPainted(false);
 		aVb.setOpaque(false);aVb.setContentAreaFilled(false);aVb.setBorderPainted(false);
 		aVg.setOpaque(false);aVg.setContentAreaFilled(false);aVg.setBorderPainted(false);
-
+		
+		info.add(choose);
 
 		// Labels de los atributos del panel movData
 
