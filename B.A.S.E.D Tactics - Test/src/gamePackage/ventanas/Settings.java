@@ -36,11 +36,13 @@ public class Settings extends JFrame implements Serializable {
 	}
 
 	// public static int tiles = 17; <-- Viejo tamaño de las casillas
-	public static int mov = 32; // Tamaño de las casillas y valor por el que se multiplica el valor de x e y de
-								// los labels
+	public static int mov = 32; // Tamaño de las casillas y valor por el que se multiplica el valor de x e y de		
+	public static int transparency = 100;
+	public static Color br = new Color(200, 0, 0, transparency);	
 	public HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid = new HashMap<>();
 
 	public Settings() {
+		JLayeredPane layeredPane = new JLayeredPane();
 		SoundMngr sic = new SoundMngr("Settings.wav",1,0);
 		Thread mus = new Thread(sic);
 		Container cp = this.getContentPane();
@@ -50,12 +52,11 @@ public class Settings extends JFrame implements Serializable {
 		// otros
 		// layeredSettingsPanel.setBackground(Color.green); //for testing
 
-		JLabel cursor = new JLabel(); // Label que contiene el cursor
+		JLabel black = new JLabel(); // Label que contiene el cursor
 
 		// Instrucciones para colocar las imagenes en los labels
 		mus.start();
 
-		cursor.setIcon(new ImageIcon(getClass().getResource("img/Cursor.gif")));
 
 		JPanel mapPanel = new JPanel(); // Creación del panel en el que está el label del mapa (más tarde serán
 										// muchos componentes que forman un mapa)
@@ -68,9 +69,10 @@ public class Settings extends JFrame implements Serializable {
 
 		mapPanel.setBounds(0, 0, 672, 672); // Posición y tamaño del panel del mapa
 
-		cursor.setPreferredSize(new Dimension(32, 32)); // Tamaño preferido del label que contiene el gif del cursor
-		cursor.setBounds(mov * 8, mov * 8, 32, 32); // Lo mismo de antes pero siendo la posición el centro del mapa
-
+		black.setPreferredSize(new Dimension(1088, 672)); // Tamaño preferido del label que contiene el gif del cursor
+		black.setBounds(0, 0, 1088, 672); // Lo mismo de antes pero siendo la posición el centro del mapa
+		black.setBackground(br);
+		black.setOpaque(true);
 
 		JButton exit = new JButton("");
 		exit.addActionListener(new ActionListener() {
@@ -211,7 +213,6 @@ public class Settings extends JFrame implements Serializable {
             
         });
 		
-		
 
 		
 
@@ -267,8 +268,7 @@ public class Settings extends JFrame implements Serializable {
 		exit.setContentAreaFilled(false);
 		exit.setBorderPainted(false);
 		
-		
-		
+//	    cp.add(black);
 		info.add(rVb);
 		info.add(rVg);
 		info.add(aVb);
