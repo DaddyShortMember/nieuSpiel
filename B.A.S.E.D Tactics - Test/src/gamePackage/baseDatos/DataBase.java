@@ -57,10 +57,10 @@ public class DataBase {
 	public static void creaTablas() {
 		try {
 			Statement stat = connect.createStatement();
-			String stt = "create table gamestats(todat date not null, redwin integer(3) default 0, bluwin integer(3) default 0, amberwin integer(3) default 0, greenwin integer(3) default 0, gamesplayed integer(3), primary key(todat));";
+			String stt = "create table if not exists gamestats(todat date not null primary key, redwin integer(3) default 0, bluwin integer(3) default 0, amberwin integer(3) default 0, greenwin integer(3) default 0, gamesplayed integer(3) default 0);";
 			stat.execute(stt);
 			logDB.log(Level.INFO, "Executed " + stt);
-			stt = "create table teamstats(tdate date not null, rfunds integer(9) default 0, bfunds integer(9) default 0, afunds integer(9) default 0, gfunds integer(9) default 0, primary key(tdate));";
+			stt = "create table if not exists teamstats(tdate date not null primary key, rfunds integer(9) default 0, bfunds integer(9) default 0, afunds integer(9) default 0, gfunds integer(9) default 0);";
 			stat.execute(stt);
 			logDB.log(Level.INFO, "Executed " + stt);
 			stat.close();
@@ -99,16 +99,34 @@ public class DataBase {
 		connect = null;
 	}
 
-	public static void actualizaGlobal(int r, int g, int b, int a, boolean played) {
+	public static void actualizaGlobal(boolean rw, boolean bw, boolean aw, boolean gw, boolean played) {
 		String stt;
+		int plays = 0;
+		int red = 0;
+		int blue = 0;
+		int green = 0;
+		int amber = 0;
+		if (played == true)
+			plays = 1;
+		if (rw == true)
+			red = 1;
+		if (gw == true)
+			green = 1;
+		if (bw == true)
+			blue = 1;
+		if (aw == true)
+			amber = 1;
+
 		try {
 			Statement stat = connect.createStatement();
 			try {
-				stt = ("");
+				stt = ("update gamestats set redwin = redwin + " + red + ", bluwin = bluwin + " + blue
+						+ ", amberwin = amberwin + " + amber + ", greenwin = greenwin + " + green
+						+ " where todat = date('now');");
 				stat.execute(stt);
 				logDB.log(Level.INFO, "Executed " + stt);
 			} catch (Exception e) {
-				logDB.log(Level.WARNING, "DATE NOT FOUND");
+				logDB.log(Level.WARNING, e.toString());
 				try {
 					stt = (";");
 					stat.execute(stt);
@@ -129,12 +147,12 @@ public class DataBase {
 		try {
 			Statement stat = connect.createStatement();
 			try {
-				stt = ("update teamstats set rfunds = rfunds + " + rf + ", set bfunds = bfunds + " + bf
-						+ ", set gfunds = gfunds + " + gf + ", set afunds = afunds + " + af + ";");
+				stt = ("update teamstats set rfunds = rfunds + " + rf + ",  bfunds = bfunds + " + bf
+						+ ",  gfunds = gfunds + " + gf + ",  afunds = afunds + " + af + " where tdate = date('now');");
 				stat.execute(stt);
 				logDB.log(Level.INFO, "Executed " + stt);
 			} catch (Exception e) {
-				logDB.log(Level.WARNING, "DATE NOT FOUND");
+				logDB.log(Level.WARNING, e.toString());
 				try {
 					stt = ("insert into teamstats values(date('now'), " + rf + ", " + bf + ", " + af + ", " + gf
 							+ ");");
@@ -151,7 +169,7 @@ public class DataBase {
 		}
 
 	}
-	
+
 	public Connection getConn() {
 		return connect;
 	}
