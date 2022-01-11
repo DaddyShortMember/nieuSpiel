@@ -68,7 +68,7 @@ public class Game extends JFrame{
 		lterrain.add(plabel);
 		ArrayList<Object> ltroop = new ArrayList<>();
 		ltroop.add(troopLabel1);
-		ltroop.add(new InfFoot(fakePos.getLocation(), "img/inft.png"));
+		ltroop.add(new InfFoot(1));
 		ArrayList<ArrayList<Object>> llo = new ArrayList<>();
 		llo.add(lterrain);
 		llo.add(ltroop);

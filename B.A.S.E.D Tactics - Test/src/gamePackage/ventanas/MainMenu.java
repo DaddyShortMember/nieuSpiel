@@ -14,6 +14,7 @@ import javax.swing.*;
 import gamePackage.sonidos.SoundMngr;
 
 public class MainMenu extends JFrame {
+	
 	public static void main(String[] args) {
 		MainMenu menu = new MainMenu();
 		menu.setLocationRelativeTo(null);
@@ -82,7 +83,7 @@ public class MainMenu extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				MapMaker juego = new MapMaker();
+				MapMakerV2 juego = new MapMakerV2();
 				juego.pack();
 				juego.setLocationRelativeTo(null);
 				juego.setResizable(false);
