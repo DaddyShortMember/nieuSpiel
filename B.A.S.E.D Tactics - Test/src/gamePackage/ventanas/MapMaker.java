@@ -14,11 +14,17 @@ import gamePackage.terrenos.estructuras.*;
 
 @SuppressWarnings("serial")
 public class MapMaker extends JFrame implements Serializable {
+	// Credits to Dullaghan for making the Window
+	// And to Rodrigo for making the barebones of the Brush thread
+
+
+	String mapName;
+	String tempName;
 
 	public static void main(String[] args) {
 		// creación de la instancia de la ventana y modificacion de algunos de sus
 		// atributos para que sea visible
-		MapMaker juego = new MapMaker();
+		MapMaker juego = new MapMaker("map", false);
 		juego.pack();
 		juego.setLocationRelativeTo(null);
 		juego.setResizable(false);
@@ -30,15 +36,17 @@ public class MapMaker extends JFrame implements Serializable {
 								// los labels
 	public HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid = new HashMap<>();
 
-	public MapMaker() {
-		SoundMngr sic = new SoundMngr("mapmaker.wav",1,0);
+	public MapMaker(String mapNam, boolean mapLoad) {
+		this.mapName = mapNam;
+		this.tempName = (mapNam + "Temp");
+
+		SoundMngr sic = new SoundMngr("mapmaker.wav", 1, 0);
 		Thread mus = new Thread(sic);
 		Container cp = this.getContentPane();
 		cp.setLayout(new BoxLayout(cp, BoxLayout.X_AXIS)); // Se le pone un BoxLayout al contenedor de la ventana en el
 															// eje X que coloca los componentes en serie horizontalmente
 		// Creación de un panel que permite colocar unos componentes por encima de
 		// otros
-		// layeredMapMakerPanel.setBackground(Color.green); //for testing
 
 		JLabel cursor = new JLabel(); // Label que contiene el cursor
 
@@ -50,7 +58,7 @@ public class MapMaker extends JFrame implements Serializable {
 		JPanel mapPanel = new JPanel(); // Creación del panel en el que está el label del mapa (más tarde serán
 										// muchos componentes que forman un mapa)
 		mapPanel.setBounds(0, 0, 672, 672); // Posición y tamaño del panel del juego
-		mapPanel.setBackground(Color.red);
+		mapPanel.setBackground(Color.gray);
 		mapPanel.setPreferredSize(new Dimension(672, 672)); // Tamaño preferido para el panel que hace que alguna
 															// instrucción no ignore este valor
 		mapPanel.setLayout(null); // Se le pone un BoxLayout al panel del mapa en el eje X que coloca los
@@ -62,6 +70,7 @@ public class MapMaker extends JFrame implements Serializable {
 		cursor.setBounds(mov * 8, mov * 8, 32, 32); // Lo mismo de antes pero siendo la posición el centro del mapa
 
 		int[] brush = new int[2];
+		brush[1] = 2;
 		JButton plains = new JButton("");
 		plains.addActionListener(new ActionListener() {
 
@@ -158,10 +167,9 @@ public class MapMaker extends JFrame implements Serializable {
 			}
 
 		});
-		JComboBox color = new JComboBox();
-		color.addItem("White");
-		color.addItem("Blue");
-		color.addItem("Red");
+		String factions[] = { "White", "Red", "Blue" };
+		JComboBox color = new JComboBox(factions);
+		color.setSelectedIndex(2);
 		color.addActionListener(new ActionListener() {
 
 			@Override
@@ -169,10 +177,14 @@ public class MapMaker extends JFrame implements Serializable {
 				// TODO Auto-generated method stub
 				if (color.getSelectedItem() == "Blue") {
 					brush[1] = 2;
-				} else if (color.getSelectedItem() == "White") {
-					brush[1] = 0;
-				} else {
+					hq.setEnabled(true);
+				} else if (color.getSelectedItem() == "Red") {
 					brush[1] = 1;
+					// Boton HQ
+					hq.setEnabled(true);
+				} else {
+					brush[1] = 0;
+					hq.setEnabled(false);
 				}
 
 			}
@@ -211,11 +223,8 @@ public class MapMaker extends JFrame implements Serializable {
 					e1.printStackTrace();
 				}
 				new Thread(new SoundMngr("weegee.wav", 0, 0)).start();
-				MainMenu menu = new MainMenu();
-				menu.pack();
-				menu.setLocationRelativeTo(null);
-				menu.setResizable(false);
-				menu.setVisible(true);
+				MapMakerPrompt promp = new MapMakerPrompt();
+				promp.setVisible(true);
 				dispose();
 			}
 
@@ -228,7 +237,7 @@ public class MapMaker extends JFrame implements Serializable {
 				// TODO Auto-generated method stub
 				new Thread(new SoundMngr("bip2.wav", 0, 0)).start();
 				try {
-					ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Map.dat"));
+					ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(mapName + ".dat"));
 					oos.writeObject(mapGrid);
 					oos.close();
 				} catch (FileNotFoundException e1) {
@@ -250,20 +259,28 @@ public class MapMaker extends JFrame implements Serializable {
 				// TODO Auto-generated method stub
 				new Thread(new SoundMngr("bip3.wav", 0, 0)).start();
 				loadMap(mapPanel).repaint();
-
 			}
 
 		});
 
-		// Thread for testing mouse location relative to panels
-		Thread hilo = new Thread(new Runnable() {
-			public void run() {
-				try {
-					while (!Thread.interrupted()) {
+		class Brush implements Runnable {
+			volatile boolean runner = false;
+			volatile boolean exists = true;
+			volatile boolean killer = false;
 
+			@Override
+			public void run() {
+				while (!killer) {
+					while (runner == true) {
 						Point mouse = MouseInfo.getPointerInfo().getLocation();
 						SwingUtilities.convertPointFromScreen(mouse, cp);
-						Thread.sleep(25);
+						try {
+							Thread.sleep(5);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
 						double x = mouse.getX();
 						double y = mouse.getY();
 						x = x / 32;
@@ -346,8 +363,6 @@ public class MapMaker extends JFrame implements Serializable {
 								break;
 							case 7:
 								switch (brush[1]) {
-								case 0:
-									break;
 								case 1:
 									jm.setIcon(new ImageIcon(getClass().getResource("img/structure/HqRED.png")));
 									terreno.add(jm);
@@ -359,6 +374,9 @@ public class MapMaker extends JFrame implements Serializable {
 									terreno.add(new Hq(brush[1]));
 									break;
 								default:
+									jm.setIcon(new ImageIcon(getClass().getResource("img/structure/CityWHITE.png")));
+									terreno.add(jm);
+									terreno.add(new City(brush[1]));
 									break;
 								}
 								break;
@@ -369,34 +387,58 @@ public class MapMaker extends JFrame implements Serializable {
 							casilla.add(terreno);
 							mapGrid.put(clave, casilla);
 							jm.setBounds((int) x * mov, (int) y * mov, 32, 32);
-
 							mapPanel.add(jm);
-
 							mapPanel.repaint();
+							try {
+								ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(mapName + ".dat"));
+								oos.writeObject(mapGrid);
+								oos.close();
+							} catch (FileNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							loadMap(mapPanel).repaint();
 						}
 
 					}
-				} catch (Exception e) {
-
 				}
 			}
-		});
-		hilo.start();
-		hilo.suspend();
 
+			public void pause() {
+				runner = false;
+			}
+
+			public void resume() {
+				runner = true;
+			}
+
+			public void end() {
+				killer = true;
+			}
+
+		}
+
+		Brush brusher = new Brush();
+		Thread hilo = new Thread(brusher);
+		hilo.start();
 		// MouseListener para Pintar
 		MouseListener ml = new MouseListener() {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				hilo.suspend();
+				brusher.pause();
+
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-				hilo.resume();
+				brusher.resume();
+
 			}
 
 			@Override
@@ -437,16 +479,14 @@ public class MapMaker extends JFrame implements Serializable {
 																	// componentes en serie horizontalmente
 
 		JPanel movData = new JPanel(); // Creación del panel inferior con información de movimiento
-		movData.setBackground(Color.yellow); // Instrucción de prueba para diferenciar los paneles mientras no estén
+		movData.setBackground(Color.white); // Instrucción de prueba para diferenciar los paneles mientras no estén
 												// programados
 		movData.setPreferredSize(new Dimension(160, 256)); // Tamaño preferido del panel de información de tropas
-		// movData.setLayout(new BoxLayout(movData, BoxLayout.Y_AXIS));
 
 		JPanel troopInfo = new JPanel(); // Creación del panel inferior con información de tropas
 		troopInfo.setBackground(Color.white); // Instrucción de prueba para diferenciar los paneles mientras no estén
 												// programados
 		troopInfo.setPreferredSize(new Dimension(256, 256)); // Tamaño preferido del panel de información de tropas
-		// troopInfo.setLayout(new BoxLayout(troopInfo, BoxLayout.X_AXIS));
 
 		// Botones del panel derecho
 		info.add(sea);
@@ -458,8 +498,8 @@ public class MapMaker extends JFrame implements Serializable {
 		info.add(factory);
 		info.add(hq);
 		info.add(color);
-		troopInfo.add(save);
-		troopInfo.add(load);
+		//troopInfo.add(save);
+		//troopInfo.add(load);
 		troopInfo.add(back);
 		troopInfo.add(exit);
 		JLabel buildingNum = new JLabel();
@@ -516,11 +556,14 @@ public class MapMaker extends JFrame implements Serializable {
 
 		info.add(buildingNum);
 
+		if (mapLoad == true)
+			loadMap(mapPanel).repaint();
+
 		// Labels de los atributos del panel movData
 
 		// Labels de los atributos del panel troopInfo
 
-		abajo.add(movData); // Se añade el panel de información de movimiento al panel que contiene toda
+		//abajo.add(movData); // Se añade el panel de información de movimiento al panel que contiene toda
 							// la parte inferior
 		abajo.add(troopInfo); // Se añade el panel de información de tropas al panel que contiene toda la
 								// parte inferior
@@ -533,11 +576,7 @@ public class MapMaker extends JFrame implements Serializable {
 		cp.add(mapPanel); // Se añade el panel del juego al contenedor de la ventana
 		cp.add(derecha); // Se añade el panel de la derecha (información) al contenedor de la ventana
 
-		// redundant in newer versions
-		// int width =
-		// GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth();
-		// int height =
-		// GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight():
+		
 		addMouseListener(ml);
 		this.pack(); // Se asegura de que todos los componentes están por lo menos a su tamaño
 						// preferido
@@ -551,7 +590,7 @@ public class MapMaker extends JFrame implements Serializable {
 
 	public JPanel loadMap(JPanel mapPanel) {
 		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Map.dat"));
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(mapName + ".dat"));
 
 			mapGrid = (HashMap) ois.readObject();
 
@@ -577,6 +616,14 @@ public class MapMaker extends JFrame implements Serializable {
 		}
 
 		return mapPanel;
+	}
+
+	private void pass() {
+
+	}
+
+	public void KidneyStone() {
+		pass();
 	}
 
 }
