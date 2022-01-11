@@ -10,11 +10,9 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import gamePackage.logica.PlayableMap;
 import gamePackage.sonidos.SoundMngr;
 
 public class MapMakerPrompt extends JFrame {
-	LinkedList<PlayableMap> listaMaps; // Permite cargar una lista de mapas?
 	private String nomMapa = "newmap"; // Not CaseSensitive
 
 	public static void main(String[] args) {
