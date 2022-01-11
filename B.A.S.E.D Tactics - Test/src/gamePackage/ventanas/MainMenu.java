@@ -11,18 +11,27 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import gamePackage.baseDatos.DataBase;
 import gamePackage.sonidos.SoundMngr;
 
 public class MainMenu extends JFrame {
+	
 	
 	public static void main(String[] args) {
 		MainMenu menu = new MainMenu();
 		menu.setLocationRelativeTo(null);
 		menu.setResizable(false);
 		menu.setVisible(true);
+		
 	}
 
 	public MainMenu() {
+		DataBase scores = new DataBase();
+		scores.iniciaDB();
+		scores.creaTablas();
+		//Inicializa valores de: HOY, basado en fecha de sistema
+		scores.actualizaGlobal(false, false, false, false, false);
+		scores.actualizaTEquipos(0, 0, 0, 0);
 		SoundMngr sic = new SoundMngr("mainmenu.wav",1,0);
 		Thread mus = new Thread(sic);
 		Container cp = this.getContentPane();
@@ -52,6 +61,8 @@ public class MainMenu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				scores.actualizaGlobal(false, false, false, false, true);
+				scores.finalizaDB();
 				new Thread(new SoundMngr("click1.wav", 0, 0)).start();
 				mus.interrupt();
 				try {
@@ -75,6 +86,7 @@ public class MainMenu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				scores.finalizaDB();
 				new Thread(new SoundMngr("weegee.wav", 0, 0)).start();
 				mus.interrupt();
 				try {
@@ -106,6 +118,7 @@ public class MainMenu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				scores.finalizaDB();
 				mus.interrupt();
 				try {
 					sic.stop();
@@ -128,6 +141,7 @@ public class MainMenu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				scores.finalizaDB();
 				mus.interrupt();
 				try {
 					sic.stop();
