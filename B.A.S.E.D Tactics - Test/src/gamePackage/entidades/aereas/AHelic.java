@@ -7,274 +7,304 @@ import gamePackage.logica.ListaArmas;
 import gamePackage.logica.ListaIDTropa;
 import gamePackage.logica.ListaTipos;
 
-public class AHelic implements Tropa{
-	//ATRIBUTOS LÃ“GICOS
-			ListaIDTropa idTropa = ListaIDTropa.A_HELIC;
-			ListaTipos tipoTropa = ListaTipos.AEREAH;
-			ListaTipos tipoMov = ListaTipos.AEREO;
-			boolean captura = false;
-			boolean construye = false;
-			int saludMaxima = 250;
-			int salud = this.saludMaxima;
-			int golpePrim = 130;
-			int golpeSec = 90;
-			ListaArmas armaPrincipal = ListaArmas.MISIL;
-			ListaArmas armaSecundaria = ListaArmas.AMETRALLADORA;
-			int precio = 9000;
-			int nivel = 0;
-			int vision = 2;
-			int alcanceMin = 1;
-			int alcanceMax = this.alcanceMin;
-			int municionesMax = 0;
-			int municionesPrim = this.municionesMax;
-			int energiaMaxima = 99;
-			int energia = this.energiaMaxima;
-			int distanciaMaxima = 6;
-			
-			//ATRIBUTOS FÃ�SICOS
-			String nombre = "Helicoptero Combate";
-			Point pos = new Point(0,0); //Posicion
-			String imagen = ""; //DirecciÃ³n de imagen
-			
-			//Constructor
-			public AHelic(Point pos, String imagen) {
-				super();
-				this.pos = pos;
-				this.imagen = imagen;
-			}
-			
-			//ToString
-			@Override
-			public String toString() {
-				return "AHelic [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
-						+ captura + ", construye=" + construye + ", saludMaxima=" + saludMaxima + ", salud=" + salud
-						+ ", golpePrim=" + golpePrim + ", golpeSec=" + golpeSec + ", armaPrincipal=" + armaPrincipal
-						+ ", armaSecundaria=" + armaSecundaria + ", precio=" + precio + ", nivel=" + nivel + ", vision="
-						+ vision + ", alcanceMin=" + alcanceMin + ", alcanceMax=" + alcanceMax + ", municionesMax="
-						+ municionesMax + ", municionesPrim=" + municionesPrim + ", energiaMaxima=" + energiaMaxima
-						+ ", energia=" + energia + ", distanciaMaxima=" + distanciaMaxima + ", nombre=" + nombre + ", pos="
-						+ pos  + ", imagen=" + imagen + "]";
-			}
-			
-			//Metodos Heredados
-			//Setters
-			public void setTropa(Point pos, String imagen) {
-				// TODO Auto-generated method stub
-				this.pos = pos;
-				this.imagen = imagen;
-			}
+public class AHelic implements Tropa {
+	// ATRIBUTOS LÃ“GICOS
+	int team;
+	ListaIDTropa idTropa = ListaIDTropa.A_HELIC;
+	ListaTipos tipoTropa = ListaTipos.AEREAH;
+	ListaTipos tipoMov = ListaTipos.AEREO;
+	boolean captura = false;
+	boolean construye = false;
+	int saludMaxima = 250;
+	int salud = this.saludMaxima;
+	int golpePrim = 130;
+	int golpeSec = 90;
+	ListaArmas armaPrincipal = ListaArmas.MISIL;
+	ListaArmas armaSecundaria = ListaArmas.AMETRALLADORA;
+	int precio = 9000;
+	int nivel = 0;
+	int vision = 2;
+	int alcanceMin = 1;
+	int alcanceMax = this.alcanceMin;
+	int municionesMax = 0;
+	int municionesPrim = this.municionesMax;
+	int energiaMaxima = 99;
+	int energia = this.energiaMaxima;
+	int distanciaMaxima = 6;
 
-			public Point getPos() {
-				return pos;
-			}
+	// ATRIBUTOS FÃ�SICOS
+	String nombre = "Helicoptero Combate";
+	Point pos = new Point(0, 0); // Posicion
+	String imagen = ""; // DirecciÃ³n de imagen
 
-			public void setPos(Point pos) {
-				//If(posY <= limYsup && posX <= limXsup || posY >= limYinf && posX >= limXinf)
-				this.pos = pos;
-				//else{ Logger? }
-			}
+	// Constructor
+	public AHelic(int team) {
+		super();
+		this.team = team;
+	}
 
-			public void setImagen(String imagen) {
-				// TODO Auto-generated method stub
-				this.imagen = imagen;
-			}
+	// ToString
+	@Override
+	public String toString() {
+		return "AHelic [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
+				+ captura + ", construye=" + construye + ", saludMaxima=" + saludMaxima + ", salud=" + salud
+				+ ", golpePrim=" + golpePrim + ", golpeSec=" + golpeSec + ", armaPrincipal=" + armaPrincipal
+				+ ", armaSecundaria=" + armaSecundaria + ", precio=" + precio + ", nivel=" + nivel + ", vision="
+				+ vision + ", alcanceMin=" + alcanceMin + ", alcanceMax=" + alcanceMax + ", municionesMax="
+				+ municionesMax + ", municionesPrim=" + municionesPrim + ", energiaMaxima=" + energiaMaxima
+				+ ", energia=" + energia + ", distanciaMaxima=" + distanciaMaxima + ", nombre=" + nombre + ", pos="
+				+ pos + ", imagen=" + imagen + "]";
+	}
 
-			
-			public void setSalud(int salud) {
-				// TODO Auto-generated method stub
-				if(salud <= saludMaxima)
-					this.salud = salud;
-				else {
-					//Logger?
-				}
-			}
+	// Metodos Heredados
+	// Setters
+	public void setTropa(Point pos, String imagen) {
+		// TODO Auto-generated method stub
+		this.pos = pos;
+		this.imagen = imagen;
+	}
 
-			
-			public void setEnergia(int energia) {
-				// TODO Auto-generated method stub
-				if(energia <= energiaMaxima)
-					this.energia = energia;
-				else {
-					//Logger?
-				}
-			}
+	public Point getPos() {
+		return pos;
+	}
 
-			
-			public void setMuniciones(int municiones) {
-				// TODO Auto-generated method stub
-				if(municiones <= municionesMax)
-					this.municionesPrim = municiones;
-				else {
-					//Logger?
-				}
-			}
+	public void setPos(Point pos) {
+		// If(posY <= limYsup && posX <= limXsup || posY >= limYinf && posX >= limXinf)
+		this.pos = pos;
+		// else{ Logger? }
+	}
 
+	public void setImagen(String imagen) {
+		// TODO Auto-generated method stub
+		this.imagen = imagen;
+	}
 
-			public void setNivel(int nivel) {
-				// TODO Auto-generated method stub
-				this.nivel = nivel;
-			}
-				//Getters
-			public String getNombre() {
-				// TODO Auto-generated method stub
-				return nombre;
-			}
+	public void setSalud(int salud) {
+		// TODO Auto-generated method stub
+		if (salud <= saludMaxima)
+			this.salud = salud;
+		else {
+			// Logger?
+		}
+	}
 
-			public ListaIDTropa getIDTropa() {
-				// TODO Auto-generated method stub
-				return idTropa;
-			}
+	public void setEnergia(int energia) {
+		// TODO Auto-generated method stub
+		if (energia <= energiaMaxima)
+			this.energia = energia;
+		else {
+			// Logger?
+		}
+	}
 
-			public ListaTipos getTipoTropa() {
-				// TODO Auto-generated method stub
-				return tipoTropa;
-			}
+	public void setMuniciones(int municiones) {
+		// TODO Auto-generated method stub
+		if (municiones <= municionesMax)
+			this.municionesPrim = municiones;
+		else {
+			// Logger?
+		}
+	}
 
-			public ListaTipos getTipoMov() {
-				// TODO Auto-generated method stub
-				return tipoMov;
-			}
+	public void setNivel(int nivel) {
+		// TODO Auto-generated method stub
+		this.nivel = nivel;
+	}
 
-			public ListaArmas[] getArmas() {
-				ListaArmas[] armas = new ListaArmas[2];
-				armas[0] = armaPrincipal;
-				armas[1] = armaSecundaria;
-				// TODO Auto-generated method stub
-				return armas;
-			}
+	// Getters
+	public String getNombre() {
+		// TODO Auto-generated method stub
+		return nombre;
+	}
 
-			public boolean getCaptura() {
-				// TODO Auto-generated method stub
-				return captura;
-			}
+	public ListaIDTropa getIDTropa() {
+		// TODO Auto-generated method stub
+		return idTropa;
+	}
 
-			public int getPrecio() {
-				// TODO Auto-generated method stub
-				return precio;
-			}
+	public ListaTipos getTipoTropa() {
+		// TODO Auto-generated method stub
+		return tipoTropa;
+	}
 
-			public boolean getConstruye() {
-				// TODO Auto-generated method stub
-				return construye;
-			}
+	public ListaTipos getTipoMov() {
+		// TODO Auto-generated method stub
+		return tipoMov;
+	}
 
-			public int getSalud() {
-				// TODO Auto-generated method stub
-				return salud;
-			}
+	public ListaArmas[] getArmas() {
+		ListaArmas[] armas = new ListaArmas[2];
+		armas[0] = armaPrincipal;
+		armas[1] = armaSecundaria;
+		// TODO Auto-generated method stub
+		return armas;
+	}
 
-			public int getGolpePrim() {
-				// TODO Auto-generated method stub
-				return golpePrim;
-			}
+	public boolean getCaptura() {
+		// TODO Auto-generated method stub
+		return captura;
+	}
 
-			public int getGolpeSec() {
-				// TODO Auto-generated method stub
-				return golpeSec;
-			}
+	public int getPrecio() {
+		// TODO Auto-generated method stub
+		return precio;
+	}
 
-			public int getDistMax() {
-				// TODO Auto-generated method stub
-				return distanciaMaxima;
-			}
+	public boolean getConstruye() {
+		// TODO Auto-generated method stub
+		return construye;
+	}
 
-			public int getEnergia() {
-				// TODO Auto-generated method stub
-				return energia;
-			}
+	public int getSalud() {
+		// TODO Auto-generated method stub
+		return salud;
+	}
 
-			public int[] getAlcance() {
-				int[] alc = new int[2];
-				alc[0] = alcanceMin;
-				alc[1] = alcanceMax;
-				// TODO Auto-generated method stub
-				return alc;
-			}
+	public int getGolpePrim() {
+		// TODO Auto-generated method stub
+		return golpePrim;
+	}
 
-			public int getMuniciones() {
-				// TODO Auto-generated method stub
-				return municionesPrim;
-			}
+	public int getGolpeSec() {
+		// TODO Auto-generated method stub
+		return golpeSec;
+	}
 
-			public int getVision() {
-				// TODO Auto-generated method stub
-				return vision;
-			}
+	public int getDistMax() {
+		// TODO Auto-generated method stub
+		return distanciaMaxima;
+	}
 
-			public int getNivel() {
-				// TODO Auto-generated method stub
-				return nivel;
-			}
+	public int getEnergia() {
+		// TODO Auto-generated method stub
+		return energia;
+	}
 
-				//Metodos Logicos
-			public boolean atacaA(ListaTipos tipoTropa) {
-				// TODO Auto-generated method stub
-				boolean target;
-				switch (tipoTropa) {
-				case AEREO:
-					target = true;
-					break;
-				case ACORAZADO:
-					target = true;
-					break;
-				case V_LIGERO:
-					target = true;
-					break;
-				case V_PESADO:
-					target = true;
-					break;
-				case ACUATICO:
-					target = false;
-					break;
-				case SUBACUATICO:
-					target = false;
-					break;
-				case INFANTERIA:
-					target = true;
-					break;
-				default:
-					target = false;
-				}
-				
-				return target;
-			}
+	public int[] getAlcance() {
+		int[] alc = new int[2];
+		alc[0] = alcanceMin;
+		alc[1] = alcanceMax;
+		// TODO Auto-generated method stub
+		return alc;
+	}
 
-			//Metodos Inutiles Para Esta Tropa
-			public void setTipoMov(ListaTipos tipoMov) {
-				// TODO Auto-generated method stub
-				//Nada
-			}
-			public void setTipoTropa(ListaTipos tipoTropa) {
-				// TODO Auto-generated method stub
-				//Nada
-			}
+	public int getMuniciones() {
+		// TODO Auto-generated method stub
+		return municionesPrim;
+	}
 
-			//Metodos Unicos Para Esta Tropa
-				//Setters
-			public void setVision(int vis) {
-				this.vision = vis;
-			}
-				//Getters
+	public int getVision() {
+		// TODO Auto-generated method stub
+		return vision;
+	}
 
-			public int getSaludMax() {
-				// TODO Auto-generated method stub
-				return saludMaxima;
-			}
+	public int getNivel() {
+		// TODO Auto-generated method stub
+		return nivel;
+	}
 
-			public int getEnergiaMax() {
-				// TODO Auto-generated method stub
-				return energiaMaxima;
-			}
+	// Metodos Logicos
+	public boolean atacaA(ListaTipos tipoTropa) {
+		// TODO Auto-generated method stub
+		boolean target;
+		switch (tipoTropa) {
+		case AEREO:
+			target = true;
+			break;
+		case ACORAZADO:
+			target = true;
+			break;
+		case V_LIGERO:
+			target = true;
+			break;
+		case V_PESADO:
+			target = true;
+			break;
+		case ACUATICO:
+			target = false;
+			break;
+		case SUBACUATICO:
+			target = false;
+			break;
+		case INFANTERIA:
+			target = true;
+			break;
+		default:
+			target = false;
+		}
 
-			public int getMunicionesMax() {
-				// TODO Auto-generated method stub
-				return municionesMax;
-			}
-			public boolean necesitaSuministro() {
-				if(this.municionesPrim < this.municionesMax || this.salud < this.saludMaxima || this.energia < this.energiaMaxima) {
-					return true;
-				}else
-				return false;
-			}
+		return target;
+	}
+
+	// Metodos Inutiles Para Esta Tropa
+	public void setTipoMov(ListaTipos tipoMov) {
+		// TODO Auto-generated method stub
+		// Nada
+	}
+
+	public void setTipoTropa(ListaTipos tipoTropa) {
+		// TODO Auto-generated method stub
+		// Nada
+	}
+
+	// Metodos Unicos Para Esta Tropa
+	// Setters
+	public void setVision(int vis) {
+		this.vision = vis;
+	}
+	// Getters
+
+	public int getSaludMax() {
+		// TODO Auto-generated method stub
+		return saludMaxima;
+	}
+
+	public int getEnergiaMax() {
+		// TODO Auto-generated method stub
+		return energiaMaxima;
+	}
+
+	public int getMunicionesMax() {
+		// TODO Auto-generated method stub
+		return municionesMax;
+	}
+
+	public boolean necesitaSuministro() {
+		if (this.municionesPrim < this.municionesMax || this.salud < this.saludMaxima
+				|| this.energia < this.energiaMaxima) {
+			return true;
+		} else
+			return false;
+	}
+
+	@Override
+	public void setTeam(int team) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getTeam() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setTropa() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPos() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setImagen() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

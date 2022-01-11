@@ -5,9 +5,9 @@ import java.awt.Point;
 import gamePackage.entidades.Tropa;
 import gamePackage.logica.*;
 
-public class AntiA implements Tropa{
-	
-	//ATRIBUTOS LOGICOS
+public class AntiA implements Tropa {
+	int team;
+	// ATRIBUTOS LOGICOS
 	ListaIDTropa idTropa = ListaIDTropa.ANTI_A;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;
 	ListaTipos tipoMov = ListaTipos.ACORAZADO;
@@ -29,20 +29,13 @@ public class AntiA implements Tropa{
 	int energiaMaxima = 60;
 	int energia = this.energiaMaxima;
 	int distanciaMaxima = 6;
-	
-	//ATRIBUTOS FISICOS
+
+	// ATRIBUTOS FISICOS
 	String nombre = "Anti-Aereo";
-	Point pos = new Point(0,0); //Posicion
-	String imagen = ""; //Dirección de imagen
-	
-	//Constructor
-	public AntiA(Point pos, String imagen) {
-		super();
-		this.pos = pos;
-		this.imagen = imagen;
-	}
-	
-	//ToString
+	Point pos = new Point(0, 0); // Posicion
+	String imagen = ""; // Dirección de imagen
+
+	// ToString
 	@Override
 	public String toString() {
 		return "AntiA [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
@@ -52,16 +45,19 @@ public class AntiA implements Tropa{
 				+ vision + ", alcanceMin=" + alcanceMin + ", alcanceMax=" + alcanceMax + ", municionesMax="
 				+ municionesMax + ", municionesPrim=" + municionesPrim + ", energiaMaxima=" + energiaMaxima
 				+ ", energia=" + energia + ", distanciaMaxima=" + distanciaMaxima + ", nombre=" + nombre + ", pos="
-				+ pos  + ", imagen=" + imagen + "]";
+				+ pos + ", imagen=" + imagen + "]";
 	}
-	
-	//Metodos Heredados
-	//Setters
+
+	// Metodos Heredados
+	// Constructor
+	public AntiA(int team) {
+		super();
+		this.team = team;
+	}
+
 	@Override
-	public void setTropa(Point pos, String imagen) {
+	public void setTropa() {
 		// TODO Auto-generated method stub
-		this.pos = pos;
-		this.imagen = imagen;
 	}
 
 	@Override
@@ -70,45 +66,41 @@ public class AntiA implements Tropa{
 	}
 
 	@Override
-	public void setPos(Point pos) {
-		//If(posY <= limYsup && posX <= limXsup || posY >= limYinf && posX >= limXinf)
-		this.pos = pos;
-		//else{ Logger? }
+	public void setPos() {
 	}
 
 	@Override
-	public void setImagen(String imagen) {
+	public void setImagen() {
 		// TODO Auto-generated method stub
-		this.imagen = imagen;
 	}
 
 	@Override
 	public void setSalud(int salud) {
 		// TODO Auto-generated method stub
-		if(salud <= saludMaxima)
+		if (salud <= saludMaxima)
 			this.salud = salud;
 		else {
-			//Logger?
+			// Logger?
 		}
 	}
 
 	@Override
 	public void setEnergia(int energia) {
 		// TODO Auto-generated method stub
-		if(energia <= energiaMaxima)
+		if (energia <= energiaMaxima)
 			this.energia = energia;
 		else {
-			//Logger?
+			// Logger?
 		}
 	}
 
 	@Override
 	public void setMuniciones(int municiones) {
 		// TODO Auto-generated method stub
-		if(municiones <= municionesMax)
+		if (municiones <= municionesMax)
 			this.municionesPrim = municiones;
 		else {
-			//Logger?
+			// Logger?
 		}
 	}
 
@@ -117,7 +109,8 @@ public class AntiA implements Tropa{
 		// TODO Auto-generated method stub
 		this.nivel = nivel;
 	}
-		//Getters
+
+	// Getters
 	@Override
 	public String getNombre() {
 		// TODO Auto-generated method stub
@@ -226,7 +219,7 @@ public class AntiA implements Tropa{
 		return nivel;
 	}
 
-		//Metodos Logicos
+	// Metodos Logicos
 	@Override
 	public boolean atacaA(ListaTipos tipoTropa) {
 		// TODO Auto-generated method stub
@@ -256,28 +249,29 @@ public class AntiA implements Tropa{
 		default:
 			target = false;
 		}
-		
+
 		return target;
 	}
 
-	//Metodos Inutiles Para Esta Tropa
+	// Metodos Inutiles Para Esta Tropa
 	@Override
 	public void setTipoMov(ListaTipos tipoMov) {
 		// TODO Auto-generated method stub
-		//Nada
+		// Nada
 	}
+
 	@Override
 	public void setTipoTropa(ListaTipos tipoTropa) {
 		// TODO Auto-generated method stub
-		//Nada
+		// Nada
 	}
 
-	//Metodos Unicos Para Esta Tropa
-		//Setters
+	// Metodos Unicos Para Esta Tropa
+	// Setters
 	public void setVision(int vis) {
 		this.vision = vis;
 	}
-		//Getters
+	// Getters
 
 	@Override
 	public int getSaludMax() {
@@ -296,10 +290,25 @@ public class AntiA implements Tropa{
 		// TODO Auto-generated method stub
 		return municionesMax;
 	}
+
 	@Override
 	public boolean necesitaSuministro() {
-		if(this.municionesPrim < this.municionesMax || this.salud < this.saludMaxima || this.energia < this.energiaMaxima) {
+		if (this.municionesPrim < this.municionesMax || this.salud < this.saludMaxima
+				|| this.energia < this.energiaMaxima) {
 			return true;
-		}else
-		return false;
-	}	}
+		} else
+			return false;
+	}
+
+	@Override
+	public void setTeam(int team) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public int getTeam() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+}

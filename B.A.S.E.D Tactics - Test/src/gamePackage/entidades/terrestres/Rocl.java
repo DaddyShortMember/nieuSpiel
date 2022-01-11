@@ -5,9 +5,10 @@ import java.awt.Point;
 import gamePackage.entidades.Tropa;
 import gamePackage.logica.*;
 
-public class Rocl implements Tropa{
-	
-	//ATRIBUTOS LOGICOS
+public class Rocl implements Tropa {
+
+	// ATRIBUTOS LOGICOS
+	int team;
 	ListaIDTropa idTropa = ListaIDTropa.ROCL;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;
 	ListaTipos tipoMov = ListaTipos.V_PESADO;
@@ -29,39 +30,35 @@ public class Rocl implements Tropa{
 	int energiaMaxima = 50;
 	int energia = this.energiaMaxima;
 	int distanciaMaxima = 5;
-	
-	//ATRIBUTOS FISICOS
+
+	// ATRIBUTOS FISICOS
 	String nombre = "Tiracohetes";
-	Point pos = new Point(0,0); //Posicion
-	String imagen = ""; //Dirección de imagen
-	
-	//Constructor
-	public Rocl(Point pos, String imagen) {
+	Point pos = new Point(0, 0); // Posicion
+	String imagen = ""; // Dirección de imagen
+
+	// Constructor
+	public Rocl(int team) {
 		super();
-		this.pos = pos;
-		this.imagen = imagen;
+		this.team = team;
 	}
-	
-	//ToString
+
+	// ToString
 	@Override
 	public String toString() {
-		return "Rocl [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura="
-				+ captura + ", construye=" + construye + ", saludMaxima=" + saludMaxima + ", salud=" + salud
-				+ ", golpePrim=" + golpePrim + ", golpeSec=" + golpeSec + ", armaPrincipal=" + armaPrincipal
-				+ ", armaSecundaria=" + armaSecundaria + ", precio=" + precio + ", nivel=" + nivel + ", vision="
-				+ vision + ", alcanceMin=" + alcanceMin + ", alcanceMax=" + alcanceMax + ", municionesMax="
-				+ municionesMax + ", municionesPrim=" + municionesPrim + ", energiaMaxima=" + energiaMaxima
-				+ ", energia=" + energia + ", distanciaMaxima=" + distanciaMaxima + ", nombre=" + nombre + ", pos="
-				+ pos  + ", imagen=" + imagen + "]";
+		return "Rocl [idTropa=" + idTropa + ", tipoTropa=" + tipoTropa + ", tipoMov=" + tipoMov + ", captura=" + captura
+				+ ", construye=" + construye + ", saludMaxima=" + saludMaxima + ", salud=" + salud + ", golpePrim="
+				+ golpePrim + ", golpeSec=" + golpeSec + ", armaPrincipal=" + armaPrincipal + ", armaSecundaria="
+				+ armaSecundaria + ", precio=" + precio + ", nivel=" + nivel + ", vision=" + vision + ", alcanceMin="
+				+ alcanceMin + ", alcanceMax=" + alcanceMax + ", municionesMax=" + municionesMax + ", municionesPrim="
+				+ municionesPrim + ", energiaMaxima=" + energiaMaxima + ", energia=" + energia + ", distanciaMaxima="
+				+ distanciaMaxima + ", nombre=" + nombre + ", pos=" + pos + ", imagen=" + imagen + "]";
 	}
-	
-	//Metodos Heredados
-	//Setters
+
+	// Metodos Heredados
+	// Setters
 	@Override
-	public void setTropa(Point pos, String imagen) {
+	public void setTropa() {
 		// TODO Auto-generated method stub
-		this.pos = pos;
-		this.imagen = imagen;
 	}
 
 	@Override
@@ -70,45 +67,43 @@ public class Rocl implements Tropa{
 	}
 
 	@Override
-	public void setPos(Point pos) {
-		//If(posY <= limYsup && posX <= limXsup || posY >= limYinf && posX >= limXinf)
-		this.pos = pos;
-		//else{ Logger? }
+	public void setPos() {
+		// If(posY <= limYsup && posX <= limXsup || posY >= limYinf && posX >= limXinf)
+		// else{ Logger? }
 	}
 
 	@Override
-	public void setImagen(String imagen) {
+	public void setImagen() {
 		// TODO Auto-generated method stub
-		this.imagen = imagen;
 	}
 
 	@Override
 	public void setSalud(int salud) {
 		// TODO Auto-generated method stub
-		if(salud <= saludMaxima)
+		if (salud <= saludMaxima)
 			this.salud = salud;
 		else {
-			//Logger?
+			// Logger?
 		}
 	}
 
 	@Override
 	public void setEnergia(int energia) {
 		// TODO Auto-generated method stub
-		if(energia <= energiaMaxima)
+		if (energia <= energiaMaxima)
 			this.energia = energia;
 		else {
-			//Logger?
+			// Logger?
 		}
 	}
 
 	@Override
 	public void setMuniciones(int municiones) {
 		// TODO Auto-generated method stub
-		if(municiones <= municionesMax)
+		if (municiones <= municionesMax)
 			this.municionesPrim = municiones;
 		else {
-			//Logger?
+			// Logger?
 		}
 	}
 
@@ -117,7 +112,8 @@ public class Rocl implements Tropa{
 		// TODO Auto-generated method stub
 		this.nivel = nivel;
 	}
-		//Getters
+
+	// Getters
 	@Override
 	public String getNombre() {
 		// TODO Auto-generated method stub
@@ -226,7 +222,7 @@ public class Rocl implements Tropa{
 		return nivel;
 	}
 
-		//Metodos Logicos
+	// Metodos Logicos
 	@Override
 	public boolean atacaA(ListaTipos tipoTropa) {
 		// TODO Auto-generated method stub
@@ -256,28 +252,29 @@ public class Rocl implements Tropa{
 		default:
 			target = false;
 		}
-		
+
 		return target;
 	}
 
-	//Metodos Inutiles Para Esta Tropa
+	// Metodos Inutiles Para Esta Tropa
 	@Override
 	public void setTipoMov(ListaTipos tipoMov) {
 		// TODO Auto-generated method stub
-		//Nada
+		// Nada
 	}
+
 	@Override
 	public void setTipoTropa(ListaTipos tipoTropa) {
 		// TODO Auto-generated method stub
-		//Nada
+		// Nada
 	}
 
-	//Metodos Unicos Para Esta Tropa
-		//Setters
+	// Metodos Unicos Para Esta Tropa
+	// Setters
 	public void setVision(int vis) {
 		this.vision = vis;
 	}
-		//Getters
+	// Getters
 
 	@Override
 	public int getSaludMax() {
@@ -296,12 +293,26 @@ public class Rocl implements Tropa{
 		// TODO Auto-generated method stub
 		return municionesMax;
 	}
+
 	@Override
 	public boolean necesitaSuministro() {
-		if(this.municionesPrim < this.municionesMax || this.salud < this.saludMaxima || this.energia < this.energiaMaxima) {
+		if (this.municionesPrim < this.municionesMax || this.salud < this.saludMaxima
+				|| this.energia < this.energiaMaxima) {
 			return true;
-		}else
-		return false;
+		} else
+			return false;
+	}
+
+	@Override
+	public void setTeam(int team) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getTeam() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
