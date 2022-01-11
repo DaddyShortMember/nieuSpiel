@@ -33,24 +33,7 @@ public class DataBase {
 		} catch (SQLException e2) {
 			logDB.log(Level.SEVERE, e2.toString());
 		}
-		if (connect == null) {
-			logDB.log(Level.WARNING, "CONNECTION NULL; ATTEMPTING CREATION");
-			try {
-				Statement stat = connect.createStatement();
-				String stt = "create table gamestats(todat date not null, redwin integer(3) default 0, bluwin integer(3) default 0, amberwin integer(3) default 0, greenwin integer(3) default 0, gamesplayed integer(3), primary key(todat));";
-				stat.execute(stt);
-				logDB.log(Level.INFO, "Executed " + stt);
-				stt = "create table teamstats(tdate date not null, rfunds integer(9) default 0, bfunds integer(9) default 0, afunds integer(9) default 0, gfunds integer(9) default 0, primary key(tdate));";
-				stat.execute(stt);
-				logDB.log(Level.INFO, "Executed " + stt);
-				stat.close();
-				stt = null;
-				logDB.log(Level.INFO, "Successfully created tables");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				logDB.log(Level.SEVERE, e.toString());
-			}
-		}
+		
 		return connect;
 	}
 
@@ -122,7 +105,7 @@ public class DataBase {
 			try {
 				stt = ("update gamestats set redwin = redwin + " + red + ", bluwin = bluwin + " + blue
 						+ ", amberwin = amberwin + " + amber + ", greenwin = greenwin + " + green
-						+ " where todat = date('now');");
+						+ ", gamesplayed = gamesplayed +" + plays +" where todat = date('now');");
 				stat.execute(stt);
 				logDB.log(Level.INFO, "Executed " + stt);
 			} catch (Exception e) {
