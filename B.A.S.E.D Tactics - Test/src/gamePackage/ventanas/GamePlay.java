@@ -15,7 +15,11 @@ public abstract class GamePlay {
 // metodos para la partida	
 	public int combat(Tropa atacante, Tropa defensor, Terreno cobertura, Terreno cobertura1){
 		defensor.setSalud(defensor.getSalud()-damage(atacante, defensor, cobertura1));
-		atacante.setSalud(atacante.getSalud()-damage(defensor, atacante, cobertura));
+		
+		if (defensor.getAlcance()[0]==1) {
+			atacante.setSalud(atacante.getSalud()-damage(defensor, atacante, cobertura));
+		}
+		
 		if (defensor.getSalud()>=0) {
 			defensor.setSalud(0);	
 			if (atacante.getNivel()<3) {
