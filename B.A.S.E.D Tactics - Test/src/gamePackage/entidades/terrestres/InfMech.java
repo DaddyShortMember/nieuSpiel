@@ -56,7 +56,13 @@ public class InfMech implements Tropa {
 	}
 
 	// Metodos Heredados
+	public float getHP() {
+		float percent = (getSalud()*getSaludMax())/(100);
+		return percent;
+		 
+	}
 	// Setters
+	
 	@Override
 	public void setTropa() {
 		// TODO Auto-generated method stub

@@ -56,6 +56,11 @@ public class VFlare {
 	}
 	
 	//Metodos Heredados
+	public float getHP() {
+		float percent = (getSalud()*getSaludMax())/(100);
+		return percent;
+		 
+	}
 	//Setters
 	
 	public void setTropa(Point pos, String imagen) {

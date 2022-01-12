@@ -56,6 +56,11 @@ public class InfBike implements Tropa {
 	}
 
 	// Metodos Heredados
+	public float getHP() {
+		float percent = (getSalud()*getSaludMax())/(100);
+		return percent;
+		 
+	}
 	// Setters
 	public void setTropa() {
 		// TODO Auto-generated method stub

@@ -56,6 +56,11 @@ public class VRecon implements Tropa {
 	}
 
 	// Metodos Heredados
+	public float getHP() {
+		float percent = (getSalud()*getSaludMax())/(100);
+		return percent;
+		 
+	}
 	// Setters
 	@Override
 	public void setTropa() {

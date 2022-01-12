@@ -58,6 +58,11 @@ public class InfFoot implements Tropa {
 	// Metodos Heredados
 	// Setters
 
+	public float getHP() {
+		float percent = (getSalud()*getSaludMax())/(100);
+		return percent;
+		 
+	}
 	@Override
 	public void setSalud(int salud) {
 		// TODO Auto-generated method stub
@@ -67,6 +72,7 @@ public class InfFoot implements Tropa {
 			// Logger?
 		}
 	}
+
 
 	@Override
 	public void setEnergia(int energia) {
