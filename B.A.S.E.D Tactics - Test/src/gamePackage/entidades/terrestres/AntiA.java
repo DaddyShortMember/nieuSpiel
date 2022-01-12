@@ -11,10 +11,11 @@ public class AntiA implements Tropa {
 	ListaIDTropa idTropa = ListaIDTropa.ANTI_A;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;
 	ListaTipos tipoMov = ListaTipos.ACORAZADO;
+	ListaBlindaje tipoBlindage = ListaBlindaje.VH_H;
 	boolean captura = false;
 	boolean construye = false;
 	int saludMaxima = 200;
-	int salud = this.saludMaxima;
+	float salud = this.saludMaxima;
 	int golpePrim = 120;
 	int golpeSec = 0;
 	ListaArmas armaPrincipal = ListaArmas.CANNON;
@@ -49,6 +50,11 @@ public class AntiA implements Tropa {
 	}
 
 	// Metodos Heredados
+	public float getHP() {
+		float percent = (getSalud()*getSaludMax())/(100);
+		return percent;
+		 
+	}
 	// Constructor
 	public AntiA(int team) {
 		super();
@@ -163,7 +169,7 @@ public class AntiA implements Tropa {
 	}
 
 	@Override
-	public int getSalud() {
+	public float getSalud() {
 		// TODO Auto-generated method stub
 		return salud;
 	}
@@ -311,4 +317,17 @@ public class AntiA implements Tropa {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public ListaBlindaje getBlindaje() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSalud(float f) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

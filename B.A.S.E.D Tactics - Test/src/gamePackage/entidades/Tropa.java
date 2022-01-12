@@ -77,21 +77,23 @@ public interface Tropa {
 	public void setTeam(int team);
 	public void setTipoMov(ListaTipos tipoMov);
 	public void setTipoTropa(ListaTipos tipoTropa);
-	public void setSalud(int salud);
+	public void setSalud(float f);
 	public void setEnergia(int energia);
 	public void setMuniciones(int municiones);
 	public void setNivel(int nivel);
 		//Getters
+	public float getHP();
 	public int getTeam();
 	public ListaIDTropa getIDTropa();
 	public ListaTipos getTipoTropa();
 	public ListaTipos getTipoMov();
 	public ListaArmas[] getArmas();
+	public ListaBlindaje getBlindaje();
 	public boolean getCaptura();
 	public int getPrecio();
 	public boolean getConstruye();
 	public int getSaludMax();
-	public int getSalud();
+	public float getSalud();
 	public int getGolpePrim();
 	public int getGolpeSec();
 	public int getDistMax();
@@ -102,8 +104,10 @@ public interface Tropa {
 	public int getMuniciones();
 	public int getVision();
 	public int getNivel();
+	
 		//Metodos
 	public boolean necesitaSuministro();
 	public boolean atacaA(ListaTipos tipoTropa);
+	void setSalud(int salud);
 	
 }

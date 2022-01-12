@@ -9,16 +9,16 @@ public class InfMech implements Tropa {
 
 	// ATRIBUTOS LOGICOS
 	int team;
-	ListaIDTropa idTropa = ListaIDTropa.INF_MECH;
+	ListaIDTropa idTropa = ListaIDTropa.INF;
 	ListaTipos tipoTropa = ListaTipos.MECH;
 	ListaTipos tipoMov = ListaTipos.INFANTERIA;
 	boolean captura = true;
 	boolean construye = false;
 	int saludMaxima = 120;
-	int salud = this.saludMaxima;
+	float salud = this.saludMaxima;
 	int golpePrim = 110;
 	int golpeSec = 65;
-	ListaArmas armaPrincipal = ListaArmas.LANZACOHETES;
+	ListaArmas armaPrincipal = ListaArmas.TCANNON;
 	ListaArmas armaSecundaria = ListaArmas.AMETRALLADORA;
 	int precio = 2500;
 	int nivel = 0;
@@ -173,7 +173,7 @@ public class InfMech implements Tropa {
 	}
 
 	@Override
-	public int getSalud() {
+	public float getSalud() {
 		// TODO Auto-generated method stub
 		return salud;
 	}
@@ -320,6 +320,18 @@ public class InfMech implements Tropa {
 	public int getTeam() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public ListaBlindaje getBlindaje() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSalud(float f) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

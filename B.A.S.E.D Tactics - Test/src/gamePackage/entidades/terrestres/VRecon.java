@@ -9,13 +9,14 @@ public class VRecon implements Tropa {
 
 	// ATRIBUTOS LOGICOS
 	int team;
-	ListaIDTropa idTropa = ListaIDTropa.INF_FOOT;
+	ListaIDTropa idTropa = ListaIDTropa.V_RECON;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;
 	ListaTipos tipoMov = ListaTipos.V_PESADO;
+	ListaBlindaje tipoBlindage = ListaBlindaje.VH_L;
 	boolean captura = false;
 	boolean construye = false;
 	int saludMaxima = 130;
-	int salud = this.saludMaxima;
+	float salud = this.saludMaxima;
 	int golpePrim = 0;
 	int golpeSec = 75;
 	ListaArmas armaPrincipal = ListaArmas.NADA;
@@ -172,7 +173,7 @@ public class VRecon implements Tropa {
 	}
 
 	@Override
-	public int getSalud() {
+	public float getSalud() {
 		// TODO Auto-generated method stub
 		return salud;
 	}
@@ -319,6 +320,18 @@ public class VRecon implements Tropa {
 	public int getTeam() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public ListaBlindaje getBlindaje() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSalud(float f) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

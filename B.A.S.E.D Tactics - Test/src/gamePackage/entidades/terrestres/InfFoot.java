@@ -9,13 +9,13 @@ public class InfFoot implements Tropa {
 
 	// ATRIBUTOS LOGICOS
 	int team;
-	ListaIDTropa idTropa = ListaIDTropa.INF_FOOT;
+	ListaIDTropa idTropa = ListaIDTropa.INF;
 	ListaTipos tipoTropa = ListaTipos.INFANTERIA;
 	ListaTipos tipoMov = ListaTipos.INFANTERIA;
 	boolean captura = true;
 	boolean construye = false;
 	int saludMaxima = 100;
-	int salud = this.saludMaxima;
+	float salud = this.saludMaxima;
 	int golpePrim = 0;
 	int golpeSec = 55;
 	ListaArmas armaPrincipal = ListaArmas.NADA;
@@ -153,7 +153,7 @@ public class InfFoot implements Tropa {
 	}
 
 	@Override
-	public int getSalud() {
+	public float getSalud() {
 		// TODO Auto-generated method stub
 		return salud;
 	}
@@ -333,5 +333,18 @@ public class InfFoot implements Tropa {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public ListaBlindaje getBlindaje() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSalud(float f) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

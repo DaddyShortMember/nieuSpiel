@@ -3,10 +3,7 @@ package gamePackage.logica;
 public enum ListaIDTropa {
 	
 			//Infanteria
-			INF_FOOT, //Infanteria normal
-			INF_MECH, //Mech
-			INF_BIKE, //MOTO
-			
+			INF, //Infanteria 
 			//Vehiculos
 			V_RECON, //Reconocimiento
 			ANTI_A, //Anti-aereo

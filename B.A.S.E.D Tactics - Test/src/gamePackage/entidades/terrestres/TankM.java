@@ -12,10 +12,11 @@ public class TankM implements Tropa {
 	ListaIDTropa idTropa = ListaIDTropa.TANK_M;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;
 	ListaTipos tipoMov = ListaTipos.ACORAZADO;
+	ListaBlindaje tipoBlindage = ListaBlindaje.TK;
 	boolean captura = false;
 	boolean construye = false;
-	int saludMaxima = 500;
-	int salud = this.saludMaxima;
+	int saludMaxima = 350;
+	float salud = this.saludMaxima;
 	int golpePrim = 185;
 	int golpeSec = 95;
 	ListaArmas armaPrincipal = ListaArmas.TCANNON_MED;
@@ -172,7 +173,7 @@ public class TankM implements Tropa {
 	}
 
 	@Override
-	public int getSalud() {
+	public float getSalud() {
 		// TODO Auto-generated method stub
 		return salud;
 	}
@@ -319,6 +320,18 @@ public class TankM implements Tropa {
 	public int getTeam() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public ListaBlindaje getBlindaje() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSalud(float f) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

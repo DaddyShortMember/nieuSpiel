@@ -15,7 +15,7 @@ public class AntiT implements Tropa {
 	boolean captura = false;
 	boolean construye = false;
 	int saludMaxima = 200;
-	int salud = this.saludMaxima;
+	float salud = this.saludMaxima;
 	int golpePrim = 150;
 	int golpeSec = 0;
 	ListaArmas armaPrincipal = ListaArmas.CANNON;
@@ -56,6 +56,14 @@ public class AntiT implements Tropa {
 	}
 
 	// Metodos Heredados
+	public float getHP() {
+		float percent = getSalud()/getSaludMax();
+		percent=percent*10;
+		Math.ceil(percent);
+		percent=percent/10;
+		return percent;
+		 
+	}
 	// Setters
 	@Override
 	public void setTropa() {
@@ -79,7 +87,7 @@ public class AntiT implements Tropa {
 	}
 
 	@Override
-	public void setSalud(int salud) {
+	public void setSalud(float salud) {
 		// TODO Auto-generated method stub
 		if (salud <= saludMaxima)
 			this.salud = salud;
@@ -167,7 +175,7 @@ public class AntiT implements Tropa {
 	}
 
 	@Override
-	public int getSalud() {
+	public float getSalud() {
 		// TODO Auto-generated method stub
 		return salud;
 	}
@@ -314,6 +322,19 @@ public class AntiT implements Tropa {
 	public int getTeam() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public ListaBlindaje getBlindaje() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void setSalud(int salud) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
