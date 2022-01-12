@@ -31,6 +31,7 @@ public class Game extends JFrame{
 	//public static int tiles = 17;  <-- Viejo tamaño de las casillas
 	public static int mov = 32;		//Tamaño de las casillas y valor por el que se multiplica el valor de x e y de los labels
 	public HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid = new HashMap<>();
+	public int turn;
 	
 	public Game() {
 		Container cp = this.getContentPane();
@@ -103,39 +104,83 @@ public class Game extends JFrame{
 		layeredGamePanel.add(mapPanel, 0, 0);		//Se añade el panel que contiene el mapa con prioridad baja para que esté por debajo del resto de cosas que se añadan
 		layeredGamePanel.add(entityPanel, 1, 0);		//Se añade el panel de entidades con mayor prioridad que el del mapa para que se vean por encima de este
 		
+			
 		
-		
-		//Thread for testing mouse location relative to panels 
-		/*
-		Thread hilo = new Thread(new Runnable() {
+		class CursorMovement implements Runnable{
+			volatile boolean stateSwitcher = false;
+			volatile boolean on = true;
+			@Override
 			public void run() {
-				try {
-					while(!Thread.interrupted()) {
-						
+				while (on) {
+					while(stateSwitcher == true) {
 						Point mouse = MouseInfo.getPointerInfo().getLocation();
-						SwingUtilities.convertPointFromScreen(mouse, cursor);
-						System.out.println(mouse);
-						Thread.sleep(1000);
-						
-						
-						
-					
-				//Test of moving troop
-						for (int i = 0; i < 10; i++) {
-							troopLabel1.setLocation(mov*i, mov*i);
-							Thread.sleep(1000);
+						SwingUtilities.convertPointFromScreen(mouse, layeredGamePanel);
+						try {
+							Thread.sleep(10);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
 						}
-						
-						
+						double x = mouse.getX();
+						double y = mouse.getY();
+						x = x / mov; y = y / mov;
+						x = Math.floor(x); y = Math.floor(y);
+						if (x>= 0 && x <= 21 && y>= 0 && y <= 21) {
+							int xCT = (int) (x * mov); int yCT = (int) (y * mov); //xCT = x Cursor Tile 
+							cursor.setLocation(xCT, yCT);
+						}
 					}
-				} catch (Exception e) {
-					
 				}
 			}
-		});
+			public void pause() {
+				stateSwitcher = false;
+			}
+			
+			public void resume() {
+				stateSwitcher = true;
+			}
+			
+
+			
+		}
 		
-		hilo.start();
-		*/
+		CursorMovement cm = new CursorMovement();
+		Thread tCM = new Thread(cm);
+		tCM.start();
+		
+		MouseListener ml = new MouseListener() {
+			
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				cm.pause();
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				cm.resume();
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		};
 		
 		
 		
@@ -229,15 +274,22 @@ public class Game extends JFrame{
 		
 		//Labels de los atributos del panel movData
 		
-		JButton move = new JButton();
-		JButton attack = new JButton();
-		JButton capture = new JButton();
-		JButton turnEnd = new JButton();
+		JButton move = new JButton("MOVER");
+		JButton attack = new JButton("ATACAR");
+		JButton capture = new JButton("CAPTURAR");
+		JButton turnEnd = new JButton("TERMINAR TURNO");
 		
 		movData.add(move);
 		movData.add(attack);
 		movData.add(capture);
+		movData.add(turnEnd);
 		
+		turnEnd.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//turnEnder(turn, count);
+			}
+		});
 		
 		//Labels de los atributos del panel troopInfo
 		/*
@@ -277,6 +329,7 @@ public class Game extends JFrame{
 		
 		this.pack();		//Se asegura de que todos los componentes están por lo menos a su tamaño preferido
 		addKeyListener(kListener);		//Se añade el KeyListener a la ventana
+		addMouseListener(ml);
 		this.setTitle("B.A.S.E.D Tactics");		//Se cambia el titulo de la ventana
 		this.setIconImage(new ImageIcon(getClass().getResource("img/tankicon.png")).getImage());		//Coloca el icono de la ventana
 		this.setSize(new Dimension(1088, 672));		//Se cambia el tamaño de la ventana
