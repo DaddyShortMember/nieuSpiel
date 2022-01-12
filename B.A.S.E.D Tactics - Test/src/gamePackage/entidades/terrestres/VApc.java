@@ -7,7 +7,7 @@ import gamePackage.logica.*;
 
 public class VApc implements Tropa {
 
-	// ATRIBUTOS LOGICOS
+	// ATRIBUTOS LOGIC4OS
 	int team;
 	ListaIDTropa idTropa = ListaIDTropa.V_APC;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;

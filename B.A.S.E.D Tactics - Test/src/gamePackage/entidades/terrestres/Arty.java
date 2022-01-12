@@ -7,7 +7,7 @@ import gamePackage.logica.*;
 
 public class Arty implements Tropa {
 
-	// ATRIBUTOS LOGICOS
+	// ATRIBUTOS LOGICS
 	int team;
 	ListaIDTropa idTropa = ListaIDTropa.ARTY;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;

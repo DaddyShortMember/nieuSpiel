@@ -7,7 +7,7 @@ import gamePackage.logica.*;
 
 public class InfBike implements Tropa {
 
-	// ATRIBUTOS LÃ“GICOS
+	// ATRIBUTOS LOGICOS
 	int team;
 	ListaIDTropa idTropa = ListaIDTropa.INF;
 	ListaTipos tipoTropa = ListaTipos.INFANTERIA;

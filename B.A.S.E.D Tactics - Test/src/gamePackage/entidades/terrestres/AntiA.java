@@ -259,7 +259,7 @@ public class AntiA implements Tropa {
 		return target;
 	}
 
-	// Metodos Inutiles Para Esta Tropa
+	// Metodos Inutiles
 	@Override
 	public void setTipoMov(ListaTipos tipoMov) {
 		// TODO Auto-generated method stub

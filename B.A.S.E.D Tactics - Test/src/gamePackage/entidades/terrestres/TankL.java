@@ -7,7 +7,7 @@ import gamePackage.logica.*;
 
 public class TankL implements Tropa {
 
-	// ATRIBUTOS LOGICOS
+	// ATRIBUTOS LOGI4COS
 	int team;
 	ListaIDTropa idTropa = ListaIDTropa.ANTI_A;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;

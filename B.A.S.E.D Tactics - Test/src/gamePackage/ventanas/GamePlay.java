@@ -12,7 +12,7 @@ import gamePackage.terrenos.Terreno;
 
 
 public abstract class GamePlay {
-	
+// metodos para la partida	
 	public int combat(Tropa atacante, Tropa defensor, Terreno cobertura, Terreno cobertura1){
 		defensor.setSalud(defensor.getSalud()-damage(atacante, defensor, cobertura1));
 		atacante.setSalud(atacante.getSalud()-damage(defensor, atacante, cobertura));

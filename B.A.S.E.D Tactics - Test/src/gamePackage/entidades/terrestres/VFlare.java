@@ -7,7 +7,7 @@ import gamePackage.logica.ListaIDTropa;
 import gamePackage.logica.ListaTipos;
 
 public class VFlare {
-	//ATRIBUTOS LÃ“GICOS
+	//ATRIBUTOS Loogicos
 	ListaIDTropa idTropa = ListaIDTropa.V_FLARE;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;
 	ListaTipos tipoMov = ListaTipos.ACORAZADO;

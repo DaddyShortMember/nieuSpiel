@@ -7,7 +7,7 @@ import gamePackage.logica.*;
 
 public class VRecon implements Tropa {
 
-	// ATRIBUTOS LOGICOS
+	// ATRIBUTOS Logicos
 	int team;
 	ListaIDTropa idTropa = ListaIDTropa.V_RECON;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;

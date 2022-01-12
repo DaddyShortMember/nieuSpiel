@@ -7,7 +7,7 @@ import gamePackage.logica.*;
 
 public class Misl implements Tropa{
 	
-	//ATRIBUTOS LOGICOS
+	//ATRIBUTOS LOGI4COS
 	int team;
 	ListaIDTropa idTropa = ListaIDTropa.MISL;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;

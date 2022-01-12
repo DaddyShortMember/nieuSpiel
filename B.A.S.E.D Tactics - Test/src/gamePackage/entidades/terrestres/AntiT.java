@@ -7,7 +7,7 @@ import gamePackage.logica.*;
 
 public class AntiT implements Tropa {
 
-	// ATRIBUTOS LÃ“GICOS
+	// ATRIBUTOS Logicos
 	int team;
 	ListaIDTropa idTropa = ListaIDTropa.ANTI_T;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;

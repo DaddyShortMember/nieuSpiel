@@ -63,7 +63,7 @@ public interface Tropa {
 	
 	*/
 	
-	//Metodos Fisicos
+	//Metodos Fisics
 		//Setters
 	public String getNombre();
 	public void setTropa();

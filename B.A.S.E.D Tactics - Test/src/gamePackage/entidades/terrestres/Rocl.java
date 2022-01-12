@@ -7,7 +7,7 @@ import gamePackage.logica.*;
 
 public class Rocl implements Tropa {
 
-	// ATRIBUTOS LOGICOS
+	// ATRIBUTOS LOGIC4S
 	int team;
 	ListaIDTropa idTropa = ListaIDTropa.ROCL;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;

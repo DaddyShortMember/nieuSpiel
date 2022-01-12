@@ -7,7 +7,7 @@ import gamePackage.logica.*;
 
 public class TankM implements Tropa {
 
-	// ATRIBUTOS LOGICOS
+	// ATRIBUTOS LOGICOS4
 	int team;
 	ListaIDTropa idTropa = ListaIDTropa.TANK_M;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;

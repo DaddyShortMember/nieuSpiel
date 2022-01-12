@@ -7,7 +7,7 @@ import gamePackage.logica.*;
 
 public class InfMech implements Tropa {
 
-	// ATRIBUTOS LOGICOS
+	// ATRIBUTOS LOGIOS
 	int team;
 	ListaIDTropa idTropa = ListaIDTropa.INF;
 	ListaTipos tipoTropa = ListaTipos.MECH;
