@@ -1,17 +1,13 @@
 package gamePackage.sonidos;
 
-import java.net.MalformedURLException;
 import java.net.URL; //Para directorios; ej. "fx/sonido1.wav"
-import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.sound.sampled.*; //Librerias que permiten utilizar audio (limitado a .wav y otros primitivos)
 
-import com.sun.tools.javac.Main; //Util para obtener directorio
-
 import java.io.File; //Fichero
 import java.io.IOException;
-import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
 
 //Gestor de sonido
 //Todo sonido es un hilo.
@@ -32,6 +28,8 @@ import java.lang.System.Logger.Level;
 
 //Credits to the Java Sound API crew and some StackOverflow peoples that have carried me through this pain.
 public class SoundMngr implements Runnable {
+
+	private static Logger logSounds = Logger.getLogger("SoundStatus");
 	Object currentSound;
 	Object name;
 	int rule;
@@ -40,7 +38,6 @@ public class SoundMngr implements Runnable {
 	Mixer mixer;
 	Clip clip;
 	File file;
-	Logger log;
 	Thread thread;
 	AudioInputStream audioStream;
 	DataLine.Info dataInfo;
@@ -57,26 +54,32 @@ public class SoundMngr implements Runnable {
 
 	public void loadSound(Object name) {
 		if (name != null) {
+			logSounds.log(Level.INFO,"New audiofile received: " + name);
 			URL url = SoundMngr.class.getResource("/gamePackage/sonidos/fx/" + (String) name);
 			if (url != null) {
 				try {
+					logSounds.log(Level.INFO,"Audiofile exists, attempting to play");
 					audioStream = AudioSystem.getAudioInputStream(url);
 					dataInfo = new DataLine.Info(Clip.class, audioStream.getFormat());
 					clip = (Clip) AudioSystem.getLine(dataInfo);
 					duration = audioStream.getFrameLength();
 					clip.open(audioStream);
+					logSounds.log(Level.INFO,"Audio initialized");
 				} catch (UnsupportedAudioFileException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					logSounds.log(Level.WARNING,"Audiofile is unsupported, try another",e);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					logSounds.log(Level.SEVERE,"Unable to obtain file",e);
 				} catch (LineUnavailableException e) {
 					// TODO Auto-generated catch block
+					logSounds.log(Level.WARNING,"Line is unavailable. Try again when the sound finishes.",e);
 					e.printStackTrace();
 				}
-			} else
-				log.log(Level.INFO, "Unable to read directory");
+			} else {}
+				
 		}
 	}
 
@@ -118,6 +121,7 @@ public class SoundMngr implements Runnable {
 
 	public void stop() throws IOException {
 		if (clip != null) {
+			logSounds.log(Level.INFO,"Audio Stopped");
 			clip.stop();
 			clip.close();
 			audioStream.close();
@@ -126,6 +130,7 @@ public class SoundMngr implements Runnable {
 	}
 
 	public void playLoop() throws InterruptedException, IOException {
+		logSounds.log(Level.INFO,"Audio will play on loop");
 		live = true;
 		clip.setFramePosition(0);
 		this.loop();
@@ -161,17 +166,20 @@ public class SoundMngr implements Runnable {
 	}
 
 	public void changeSound(String newSound) {
+		logSounds.log(Level.INFO,"Audiofile changed to " + newSound);
 		this.name = newSound;
 	}
 	
 	public void primer() {
 		kill = false;
 		live = false;
+		logSounds.log(Level.INFO,"Soundmanager ready to play new sound");
 	}
 
 	@Override
 	public void run() {
 		while (!kill) {
+			logSounds.log(Level.INFO,"Audio running");
 			if (live == false) {
 				this.loadSound(name);
 				if (rule == 0) {
@@ -181,8 +189,10 @@ public class SoundMngr implements Runnable {
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
+						logSounds.log(Level.WARNING,"Audio thread has been interrupted",e);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
+						logSounds.log(Level.SEVERE,"Audiofile not found",e);
 						e.printStackTrace();
 					}
 
@@ -191,6 +201,7 @@ public class SoundMngr implements Runnable {
 						this.playLoop();
 					} catch (InterruptedException | IOException e) {
 						// TODO Auto-generated catch block
+						logSounds.log(Level.SEVERE,"An error has ocurred",e);
 						e.printStackTrace();
 					}
 				}
@@ -200,11 +211,16 @@ public class SoundMngr implements Runnable {
 
 	}
 
-	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 		SoundMngr sounds = new SoundMngr("combat1.wav", 0, 0);
 		Thread x = new Thread(sounds);
 		x.start();
+		try {
+			sounds.stop();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		sounds.changeSound("combat2.wav");
 		sounds.primer();
 		sounds.run();
