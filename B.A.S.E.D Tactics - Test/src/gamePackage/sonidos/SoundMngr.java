@@ -101,7 +101,7 @@ public class SoundMngr implements Runnable {
 
 	public void play() throws InterruptedException, IOException {
 		clip.setFramePosition(0);
-		live=true;
+		live = true;
 		clip.start();
 		do {
 			Thread.sleep(50);
@@ -121,13 +121,12 @@ public class SoundMngr implements Runnable {
 			clip.stop();
 			clip.close();
 			audioStream.close();
-			this.stopIt();
 		}
 		kill = true;
 	}
 
 	public void playLoop() throws InterruptedException, IOException {
-		live=true;
+		live = true;
 		clip.setFramePosition(0);
 		this.loop();
 		clip.start();
@@ -161,6 +160,15 @@ public class SoundMngr implements Runnable {
 		thread = null;
 	}
 
+	public void changeSound(String newSound) {
+		this.name = newSound;
+	}
+	
+	public void primer() {
+		kill = false;
+		live = false;
+	}
+
 	@Override
 	public void run() {
 		while (!kill) {
@@ -186,7 +194,7 @@ public class SoundMngr implements Runnable {
 						e.printStackTrace();
 					}
 				}
-				
+
 			}
 		}
 
@@ -194,29 +202,12 @@ public class SoundMngr implements Runnable {
 
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
-		Thread x = new Thread(new SoundMngr("weegee.wav", 0, 100));
-		Thread nigma = new Thread(new SoundMngr("click1.wav", 0, 100));
-		Thread sigma = new Thread(new SoundMngr("mainmenu.wav", 0, 100));
-		System.out.println(x.getName() + " x");
-		System.out.println(nigma.getName() + " nigma");
-		System.out.println(sigma.getName() + " sigma");
-		nigma.start();
+		SoundMngr sounds = new SoundMngr("combat1.wav", 0, 0);
+		Thread x = new Thread(sounds);
 		x.start();
-		sigma.start();
-		try {
-			nigma.join();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			TimeUnit.MILLISECONDS.sleep(200);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		sigma.stop();
-		System.out.println(nigma.getName() + " nigma end");
-	}
+		sounds.changeSound("combat2.wav");
+		sounds.primer();
+		sounds.run();
 
+	}
 }
