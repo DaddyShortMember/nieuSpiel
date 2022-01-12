@@ -1,12 +1,17 @@
 package gamePackage.ventanas;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.*;
 import java.util.logging.Logger;
 import javax.swing.*;
 import gamePackage.entidades.*;
 import gamePackage.entidades.terrestres.*;
-import gamePackage.terrenos.terrenos.*;
+import gamePackage.logica.ListaIDTerreno;
+import gamePackage.terrenos.Estructura;
 
 
 
@@ -21,8 +26,7 @@ public class Game extends JFrame{
 		juego.setResizable(false);
 		juego.setVisible(true);
 		Logger logger = Logger.getLogger(Game.class.getName());
-		System.out.println("vert: " + grafoVert(3));
-		System.out.println("arist: " + grafoArist(3));
+
 	}
 	//public static int tiles = 17;  <-- Viejo tamaño de las casillas
 	public static int mov = 32;		//Tamaño de las casillas y valor por el que se multiplica el valor de x e y de los labels
@@ -36,58 +40,62 @@ public class Game extends JFrame{
 		layeredGamePanel.setBounds(0, 0, 672, 672);		//Posición y tamaño del panel del juego
 		layeredGamePanel.setPreferredSize(new Dimension(672, 672));		//Tamaño preferido para el panel que hace que alguna instrucción no ignore este valor
 		
-		JLabel mapLabel = new JLabel();		//Label temporal que contiene todo el mapa en una sola imagen
-		
-		JLabel troopLabel1 = new JLabel();		//Label de prueba que contiene una imagen de tropa
-		
 		JLabel cursor = new JLabel();		//Label que contiene el cursor
 		
 		//Instrucciones para colocar las imagenes en los labels
-		mapLabel.setIcon(new ImageIcon(getClass().getResource("img/mapa1.png")));		
-		troopLabel1.setIcon(new ImageIcon(getClass().getResource("img/inft.png")));
 		cursor.setIcon(new ImageIcon(getClass().getResource("img/Cursor.gif")));
 		
-		mapLabel.setPreferredSize(new Dimension(672, 672));		//De nuevo se coloca el tamaño preferido para que las instrucciones tiendan a usar este valor
+		//mapLabel.setPreferredSize(new Dimension(672, 672));		//De nuevo se coloca el tamaño preferido para que las instrucciones tiendan a usar este valor
 		
 		JPanel mapPanel = new JPanel();		//Creación del panel en el que está el label del mapa (más tarde serán muchos componentes que forman un mapa)
-		mapPanel.setLayout(new BoxLayout(mapPanel, BoxLayout.X_AXIS));		//Se le pone un BoxLayout al panel del mapa en el eje X que coloca los componentes en serie horizontalmente
-		mapPanel.add(mapLabel);		//Añadir el label que contiene el mapa
+		mapPanel.setLayout(null);		//Se le pone un BoxLayout al panel del mapa en el eje X que coloca los componentes en serie horizontalmente
+		//mapPanel.add(mapLabel);		//Añadir el label que contiene el mapa
 		mapPanel.setBounds(0, 0, 672, 672);		//Posición y tamaño del panel del mapa
-		mapPanel.setOpaque(false);		//Hace que se pueda ver lo que haya detrás del panel
+		//mapPanel.setOpaque(true);		//Hace que se pueda ver lo que haya detrás del panel
 		
-		troopLabel1.setPreferredSize(new Dimension(32, 32));		//Tamaño preferido del label que contiene la imagen de la tropa
-		troopLabel1.setBounds(mov*6, mov*7, 32, 32);		//Posición y tamaño  del label siendo la posición la multiplicación del tamaño de las casillas por la casilla en la queremos que esté
 		
+		mapPanel=loadMap(mapPanel);
+		mapPanel.repaint();
+		ArrayList<ListaIDTerreno> buildings = new ArrayList<>(); buildings.add(ListaIDTerreno.CITY);buildings.add(ListaIDTerreno.FACTORY);buildings.add(ListaIDTerreno.HQ);
+		int building1 = 0;
+		int building2 = 0;
+		int building3 = 0;
+		int building4 = 0;
+		for (Point p : mapGrid.keySet()) {
+			try {
+				Estructura struc = (Estructura) mapGrid.get(p).get(0).get(1);
+				if (buildings.contains(struc.getIDTerreno())) {
+					switch (struc.getTeam()) {
+					case 1: 
+						building1+=1;
+						break;
+					case 2:
+						building2+=1;
+						break;
+					case 3:
+						building3+=1;
+						break;
+					case 4:
+						building4+=1;
+						break;
+					default:
+						break;
+					}
+				}
+			} catch (Exception e) {
+				
+			}
+			System.out.println(building1 + "-" + building2);	
+		}
+		
+		
+
 		cursor.setPreferredSize(new Dimension(32, 32));		//Tamaño preferido del label que contiene el gif del cursor
 		cursor.setBounds(mov*8, mov*8, 32, 32);		//Lo mismo de antes pero siendo la posición el centro del mapa
-		
-		Point fakePos = new Point(10, 10);
-		
-		JLabel plabel = new JLabel();
-		ArrayList<Object> lterrain = new ArrayList<>();
-		lterrain.add(plabel);
-		ArrayList<Object> ltroop = new ArrayList<>();
-		ltroop.add(troopLabel1);
-		ltroop.add(new InfFoot(1));
-		ArrayList<ArrayList<Object>> llo = new ArrayList<>();
-		llo.add(lterrain);
-		llo.add(ltroop);
-		
-		mapGrid.put(fakePos, llo);
-		ArrayList<Object> f = mapGrid.get(fakePos).get(1);
-		Tropa t = (Tropa) f.get(1);
-		t.setSalud(2);
-		f = mapGrid.get(fakePos).get(1);
-		t = (Tropa) f.get(1);
-		
-		
-		System.out.println(t.getSalud());
-		//mapGrid.replace(fakePos, mapGrid.get(fakePos).get(1).get(1));
 		
 		JLayeredPane entityPanel = new JLayeredPane();		//Creación del panel que contiene las entidades como tropas o edificios
 		entityPanel.setLayout(null);		//Se le pone layout nulo para que deje poner componentes mediante posiciones absolutas
 		entityPanel.setBounds(0, 0, 672, 672);		//Posición y tamaño del panel de entidades
-		entityPanel.add(troopLabel1, 0, 0);		//Se añade el label de una tropa con un valor que define su prioridad para presentarse por encima o por debajo de otro label
 		entityPanel.add(cursor, 1, 0);		//Se añade el label del cursor con una prioridad mayor que hace que esté sobre las tropas y entidades
 		
 		entityPanel.setOpaque(false);		//Se cambia el atributo del panel para hacer que se pueda ver lo que tiene debajo (otro panel)
@@ -149,6 +157,7 @@ public class Game extends JFrame{
 			@Override
 			public void keyPressed(KeyEvent e) {
 				// TODO Auto-generated method stub
+				System.out.println("fuck");
 				int x = cursor.getLocation().x;
 				int y = cursor.getLocation().y;
 				int key = e.getKeyCode();
@@ -219,15 +228,16 @@ public class Game extends JFrame{
 		*/
 		
 		//Labels de los atributos del panel movData
-		/*
-		JLabel move = new JLabel();
-		JLabel attack = new JLabel();
-		JLabel capture = new JLabel();
+		
+		JButton move = new JButton();
+		JButton attack = new JButton();
+		JButton capture = new JButton();
+		JButton turnEnd = new JButton();
 		
 		movData.add(move);
 		movData.add(attack);
 		movData.add(capture);
-		*/
+		
 		
 		//Labels de los atributos del panel troopInfo
 		/*
@@ -275,9 +285,51 @@ public class Game extends JFrame{
 		
 		
 		
-		
+		}
+	
+	public JPanel loadMap(JPanel mapPanel) {
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("BeanIsland.dat"));
+
+			mapGrid = (HashMap) ois.readObject();
+
+			ois.close();
+			Set<Point> keys = mapGrid.keySet();
+			mapPanel.removeAll();
+			JLabel jl = new JLabel();
+			for (Point i : keys) {
+				jl = (JLabel) mapGrid.get(i).get(0).get(0);
+				mapPanel.add(jl);
+
+			}
+
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		return mapPanel;
 	}
 	
+	public int income(int count) {
+		return count*1000;
+	}
+	
+	public int turnEnder(int turn, int count) {
+		income(count);
+		return turn+1;
+	}
+	
+	
+	
+	}
+/*	
 	public static int grafoVert(int trop) {
 		int n = 1;
 		int vert = 1;
@@ -309,10 +361,10 @@ public class Game extends JFrame{
 		return new Dimension(1,2);
 	}
 	
+*/	
 	
 	
-	
-}
+
 
 //TODO list
 /*

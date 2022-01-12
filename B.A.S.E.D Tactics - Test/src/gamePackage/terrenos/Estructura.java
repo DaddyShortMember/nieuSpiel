@@ -38,4 +38,5 @@ public interface Estructura extends Terreno{
 	public boolean getConstruible();
 	public int getIngresos();
 	public boolean suministra(Tropa trop);
+	public int getTeam();
 }

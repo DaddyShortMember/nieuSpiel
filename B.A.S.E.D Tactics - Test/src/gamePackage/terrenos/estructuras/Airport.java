@@ -170,4 +170,10 @@ public class Airport implements Estructura, Serializable{
 		return sumi;
 	}
 
+	@Override
+	public int getTeam() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
