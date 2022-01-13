@@ -13,11 +13,13 @@ public class Airport implements Estructura, Serializable{
 	boolean construibleSobre = false;
 	int defensa = 3;
 	int ingresos = 1000;
+	float hp= 2;
 	boolean cuartelGeneral = false;
 	boolean construible = false;
 	boolean capturable = true;
 	boolean fabrica = true;
 	boolean visibleEncontrado = true;
+	int team = 0;
 
 	// Fisicos
 	String nombre = "Aeropuerto";
@@ -25,11 +27,35 @@ public class Airport implements Estructura, Serializable{
 	String imagen = "";
 
 	// Constructor
-	public Airport(Point pos, String imagen) {
+	public Airport(int team) {
 		super();
-		this.pos = pos;
-		this.imagen = imagen;
+		this.team=team;
+
 	}
+	public float getHp() {
+		return hp;
+	}
+	public void setHp(float hp) {
+		this.hp=hp;
+		if (getHp()<=0) {
+			if (getTeam()!=1) {
+				setTeam(1);
+			}else if (getTeam()!=2) {
+				setTeam(2);
+				
+			}
+		}
+	}
+	public int getTeam() {
+		return team;
+	}
+
+	public void setTeam(int team) {
+		this.team = team;
+	}
+	
+
+
 
 	@Override
 	public Point getPos() {
@@ -139,7 +165,7 @@ public class Airport implements Estructura, Serializable{
 					trop.setMuniciones((trop.getMuniciones() + 1));
 				}
 				if (trop.getSalud() <= trop.getSaludMax()) {
-					trop.setMuniciones((trop.getSalud() + 1));
+					trop.setSalud((trop.getSalud() + 1));
 				}
 			}
 		}
@@ -170,10 +196,5 @@ public class Airport implements Estructura, Serializable{
 		return sumi;
 	}
 
-	@Override
-	public int getTeam() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }

@@ -41,6 +41,7 @@ public class Hq implements Estructura, Serializable{
 			if (getTeam()!=1) {
 				setTeam(1);
 			}else if (getTeam()!=2) {
+				setTeam(2);
 				
 			}
 		}

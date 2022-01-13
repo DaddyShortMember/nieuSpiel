@@ -14,6 +14,8 @@ public class Port implements Estructura, Serializable{
 	boolean construibleSobre = false;
 	int defensa = 3;
 	int ingresos = 1000;
+	int team = 0;
+	float hp = 2;
 	boolean cuartelGeneral = false;
 	boolean construible = false;
 	boolean capturable = true;
@@ -26,12 +28,33 @@ public class Port implements Estructura, Serializable{
 	String imagen = "";
 
 	// Constructor
-	public Port(Point pos, String imagen) {
+	public Port(int team) {
 		super();
-		this.pos = pos;
-		this.imagen = imagen;
+		this.team=team;
 	}
 
+	public float getHp() {
+		return hp;
+	}
+	public void setHp(float hp) {
+		this.hp=hp;
+		if (getHp()<=0) {
+			if (getTeam()!=1) {
+				setTeam(1);
+			}else if (getTeam()!=2) {
+				setTeam(2);
+				
+			}
+		}
+	}
+	public int getTeam() {
+		return team;
+	}
+
+	public void setTeam(int team) {
+		this.team = team;
+	}
+	
 	@Override
 	public Point getPos() {
 		// TODO Auto-generated method stub
@@ -140,7 +163,7 @@ public class Port implements Estructura, Serializable{
 					trop.setMuniciones((trop.getMuniciones() + 1));
 				}
 				if (trop.getSalud() <= trop.getSaludMax()) {
-					trop.setMuniciones((trop.getSalud() + 1));
+					trop.setSalud((trop.getSalud() + 1));
 				}
 			}
 		}
@@ -171,10 +194,5 @@ public class Port implements Estructura, Serializable{
 		return sumi;
 	}
 
-	@Override
-	public int getTeam() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }
