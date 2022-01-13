@@ -2,11 +2,13 @@ package gamePackage.entidades.terrestres;
 
 import java.awt.Point;
 
+import gamePackage.entidades.ListaBlindaje;
+import gamePackage.entidades.Tropa;
 import gamePackage.logica.ListaArmas;
 import gamePackage.logica.ListaIDTropa;
 import gamePackage.logica.ListaTipos;
 
-public class VFlare {
+public class VFlare implements Tropa{
 	//ATRIBUTOS Loogicos
 	ListaIDTropa idTropa = ListaIDTropa.V_FLARE;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;
@@ -14,7 +16,7 @@ public class VFlare {
 	boolean captura = false;
 	boolean construye = false;
 	int saludMaxima = 180;
-	int salud = this.saludMaxima;
+	float salud = this.saludMaxima;
 	int golpePrim = 0;
 	int golpeSec = 85;
 	ListaArmas armaPrincipal = ListaArmas.NADA;
@@ -178,7 +180,7 @@ public class VFlare {
 	}
 
 	
-	public int getSalud() {
+	public float getSalud() {
 		// TODO Auto-generated method stub
 		return salud;
 	}
@@ -310,6 +312,48 @@ public class VFlare {
 			return true;
 		}else
 		return false;
+	}
+
+	@Override
+	public void setTropa() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPos() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setImagen() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTeam(int team) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSalud(float f) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getTeam() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ListaBlindaje getBlindaje() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 
