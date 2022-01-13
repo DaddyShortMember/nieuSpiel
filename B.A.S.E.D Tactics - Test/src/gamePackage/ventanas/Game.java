@@ -167,7 +167,7 @@ public class Game extends JFrame{
 		
 		
 		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("BeanIsland.dat"));
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("testmap.dat"));
 			
 			mapGrid = (HashMap) ois.readObject();
 			//System.out.println("ini");
@@ -487,7 +487,7 @@ public class Game extends JFrame{
 		
 	}
 	
-	public void createTropa(Point pos, HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid,JLayeredPane lp, JPanel troopPanel, int turn) {
+	public void createTropa(Point pos, HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid, JLayeredPane lp, JPanel troopPanel, int turn) {
 		JInternalFrame jif = new JInternalFrame();
 		Point casilla = new Point((int) pos.getX()/32, (int) pos.getY()/32);
 		int teamTester;
@@ -499,7 +499,9 @@ public class Game extends JFrame{
 			teamTester = 1;
 			break;
 		}
-		if (((Terreno) mapGrid.get(casilla).get(0).get(1)).getIDTerreno() != ListaIDTerreno.FACTORY) {
+		System.out.println(mapGrid.get(casilla).size());
+		if (((Terreno) mapGrid.get(casilla).get(0).get(1)).getIDTerreno() != ListaIDTerreno.FACTORY || mapGrid.get(casilla).size() == 2) {
+			System.out.println("returned");
 			return;
 		} else if (((Factory) mapGrid.get(casilla).get(0).get(1)).getTeam() != teamTester) {
 			return;
@@ -904,9 +906,28 @@ public class Game extends JFrame{
 		jif.setSize(new Dimension(192, 256));		//Se cambia el tamaño de la ventana
 		lp.add(jif, 4, 0);
 	}
-	
-	
+	/*
+	public void moverTropa(Point pos, HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid, JLayeredPane lp, JPanel troopPanel, int turn) {
+		JInternalFrame jif2 = new JInternalFrame();
+		Point casilla = new Point((int) pos.getX()/32, (int) pos.getY()/32);
+		int teamTester;
+		switch (turn%2) {
+		case 0:
+			teamTester = 2;
+			break;
+		default:
+			teamTester = 1;
+			break;
+		}
+		if (((Terreno) mapGrid.get(casilla).get(0).get(1)) && mapGrid.get(casilla).size() == 2) {
+			return;
+		} else if (((Factory) mapGrid.get(casilla).get(0).get(1)).getTeam() != teamTester) {
+			return;
+		}
 	}
+	*/
+	}
+
 /*	
 	public static int grafoVert(int trop) {
 		int n = 1;
