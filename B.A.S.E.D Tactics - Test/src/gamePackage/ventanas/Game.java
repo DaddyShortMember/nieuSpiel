@@ -41,6 +41,8 @@ public class Game extends JFrame{
 	
 	public Game() {
 		
+		p1.setfunds(1000);
+		p2.setfunds(1000);
 		Container cp = this.getContentPane();
 		cp.setLayout(new BoxLayout(cp, BoxLayout.X_AXIS));		//Se le pone un BoxLayout al contenedor de la ventana en el eje X que coloca los componentes en serie horizontalmente
 		JLayeredPane layeredGamePanel = new JLayeredPane();		//CreaciÃ³n de un panel que permite colocar unos componentes por encima de otros
