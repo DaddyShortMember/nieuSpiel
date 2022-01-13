@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.util.*;
 import java.util.logging.Logger;
 import javax.swing.*;
+
 import gamePackage.entidades.*;
 import gamePackage.entidades.terrestres.*;
 import gamePackage.logica.ListaIDTerreno;
@@ -482,12 +483,28 @@ public class Game extends JFrame{
 		
 	}
 	
+	public void terminaTurno(int team, JPanel mapPanel, HashMap<Point, ArrayList<ArrayList<Object>>> mapGridFunc3) {
+		
+	}
+	
 	public void createTropa(Point pos, HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid,JLayeredPane lp, JPanel troopPanel, int turn) {
 		JInternalFrame jif = new JInternalFrame();
 		Point casilla = new Point((int) pos.getX()/32, (int) pos.getY()/32);
-		if (((Terreno) mapGrid.get(casilla).get(0).get(1)).getIDTerreno() == ListaIDTerreno.FACTORY) {
+		int teamTester;
+		switch (turn%2) {
+		case 0:
+			teamTester = 2;
+			break;
+		default:
+			teamTester = 1;
+			break;
+		}
+		if (((Terreno) mapGrid.get(casilla).get(0).get(1)).getIDTerreno() != ListaIDTerreno.FACTORY) {
+			return;
+		} else if (((Factory) mapGrid.get(casilla).get(0).get(1)).getTeam() != teamTester) {
 			return;
 		}
+		System.out.println(((Factory) mapGrid.get(casilla).get(0).get(1)).getTeam());
 		jif.pack();
 		jif.setLocation((int) pos.getX()+32,(int) pos.getY());
 		jif.setResizable(false);
@@ -509,11 +526,11 @@ public class Game extends JFrame{
 				InfFoot tr = new InfFoot(0);
 				switch (turn%2){
 					case 0:
-						tr.setTeam(0);
+						tr.setTeam(1);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/InftBLUE.png")));
 						break;
 					default:
-						tr.setTeam(1);
+						tr.setTeam(2);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/InftRED.png")));
 						break;
 				}		
@@ -543,11 +560,11 @@ public class Game extends JFrame{
 				InfMech tr = new InfMech(0);
 				switch (turn%2){
 					case 0:
-						tr.setTeam(0);
+						tr.setTeam(1);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/MecBLUE.png")));
 						break;
 					default:
-						tr.setTeam(1);
+						tr.setTeam(2);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/MecRED.png")));
 						break;
 				}		
@@ -577,11 +594,11 @@ public class Game extends JFrame{
 				InfBike tr = new InfBike(0);
 				switch (turn%2){
 					case 0:
-						tr.setTeam(0);
+						tr.setTeam(1);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/BikeBLUE.png")));
 						break;
 					default:
-						tr.setTeam(1);
+						tr.setTeam(2);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/BikeRED.png")));
 						break;
 				}		
@@ -611,11 +628,11 @@ public class Game extends JFrame{
 				Rocl tr = new Rocl(0);
 				switch (turn%2){
 					case 0:
-						tr.setTeam(0);
+						tr.setTeam(1);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/RocketBLUE.png")));
 						break;
 					default:
-						tr.setTeam(1);
+						tr.setTeam(2);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/RocketRED.png")));
 						break;
 				}		
@@ -645,11 +662,11 @@ public class Game extends JFrame{
 				AntiA tr = new AntiA(0);
 				switch (turn%2){
 					case 0:
-						tr.setTeam(0);
+						tr.setTeam(1);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/AaBLUE.png")));
 						break;
 					default:
-						tr.setTeam(1);
+						tr.setTeam(2);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/AaRED.png")));
 						break;
 				}		
@@ -679,11 +696,11 @@ public class Game extends JFrame{
 				VApc tr = new VApc(0);
 				switch (turn%2){
 					case 0:
-						tr.setTeam(0);
+						tr.setTeam(1);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/ToaBLUE.png")));
 						break;
 					default:
-						tr.setTeam(1);
+						tr.setTeam(2);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/ToaRED.png")));
 						break;
 				}		
@@ -713,11 +730,11 @@ public class Game extends JFrame{
 				Arty tr = new Arty(0);
 				switch (turn%2){
 					case 0:
-						tr.setTeam(0);
+						tr.setTeam(1);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/ArtilleryBLUE.png")));
 						break;
 					default:
-						tr.setTeam(1);
+						tr.setTeam(2);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/ArtilleryRED.png")));
 						break;
 				}		
@@ -747,11 +764,11 @@ public class Game extends JFrame{
 				TankL tr = new TankL(0);
 				switch (turn%2){
 					case 0:
-						tr.setTeam(0);
+						tr.setTeam(1);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/LTankBLUE.png")));
 						break;
 					default:
-						tr.setTeam(1);
+						tr.setTeam(2);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/LTankRED.png")));
 						break;
 				}		
@@ -850,7 +867,7 @@ public class Game extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				VRecon tr = new VRecon(1);
 				switch (turn%2){
-					case 1:
+					case 0:
 						tr.setTeam(1);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/ReconBLUE.png")));
 						break;
