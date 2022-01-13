@@ -24,7 +24,7 @@ public class Game extends JFrame{
 	
 	public static void main(String[] args){
 		//creaciÃ³n de la instancia de la ventana y modificacion de algunos de sus atributos para que sea visible 
-		Game juego = new Game();
+		Game juego = new Game("BeanIsland");
 		juego.pack();
 		juego.setLocationRelativeTo(null);
 		juego.setResizable(false);
@@ -41,7 +41,7 @@ public class Game extends JFrame{
 	Player p1 = new Player(1);
 	Player p2 = new Player(2);
 	
-	public Game() {
+	public Game(String nomMapa) {
 		
 		p1.setfunds(1000);
 		p2.setfunds(1000);
@@ -234,7 +234,7 @@ public class Game extends JFrame{
 		
 		
 		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("testmap.dat"));
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nomMapa + ".dat"));
 			
 			mapGrid = (HashMap) ois.readObject();
 			//System.out.println("ini");
