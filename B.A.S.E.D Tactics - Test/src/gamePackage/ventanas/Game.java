@@ -130,9 +130,11 @@ public class Game extends JFrame{
 			volatile boolean on = true;
 			@Override
 			public void run() {
+				
 				Tropa t = (Tropa) mapGrid.get(ogPos).get(1).get(1);
 				Point pos = ogPos;
 				while (on) {
+					mapGrid = reloadHMap();
 					while(stateSwitcher == true) {
 						Point mouse = MouseInfo.getPointerInfo().getLocation();
 						SwingUtilities.convertPointFromScreen(mouse, layeredGamePanel);
@@ -185,7 +187,6 @@ public class Game extends JFrame{
 
 		ThreadMV mv = new ThreadMV();
 		Thread tMV = new Thread(mv);
-		tMV.start();
 		
 		class CursorMovement implements Runnable{
 			volatile boolean stateSwitcher = false;
@@ -1016,7 +1017,11 @@ public class Game extends JFrame{
 		jif.setSize(new Dimension(336, 336));		//Se cambia el tamaÃ±o de la ventana
 		lp.add(jif, 4, 0);
 	}
-
+	
+	public synchronized HashMap<Point, ArrayList<ArrayList<Object>>> reloadHMap(){
+		return this.mapGrid;
+	}
+	
 	public void moverTropa(Point pos, HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid, JLayeredPane lp, JPanel troopPanel, int turn, Point casilla, Point og) {
 		JInternalFrame jif = new JInternalFrame();
 		jif.pack();
