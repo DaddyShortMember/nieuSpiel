@@ -43,7 +43,7 @@ public class Settings extends JFrame implements Serializable {
 
 	public Settings() {
 		JLayeredPane layeredPane = new JLayeredPane();
-		SoundMngr sic = new SoundMngr("Settings.wav",1,0);
+		SoundMngr sic = new SoundMngr("Settings.wav",0,0);
 		Thread mus = new Thread(sic);
 		Container cp = this.getContentPane();
 		cp.setLayout(new BoxLayout(cp, BoxLayout.X_AXIS)); // Se le pone un BoxLayout al contenedor de la ventana en el
