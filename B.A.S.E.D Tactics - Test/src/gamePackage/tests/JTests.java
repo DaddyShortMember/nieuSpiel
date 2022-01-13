@@ -60,7 +60,7 @@ public class JTests {
 		if(z.getDefensa() == 0) {
 		}
 		else
-			xG = (xG + x.getSalud())/(z.getDefensa());
+			xG = (int) ((xG + x.getSalud())/(z.getDefensa()));
 		System.out.println("DMG == " + xG);
 		while(y.getSalud() > 0) {
 			System.out.println("Was " + y.getSalud() + " HP");

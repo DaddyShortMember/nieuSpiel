@@ -1,6 +1,6 @@
 package gamePackage.entidades.terrestres;
 
-import java.awt.Point;
+/*import java.awt.Point;
 
 import gamePackage.entidades.ListaBlindaje;
 import gamePackage.entidades.Tropa;
@@ -358,3 +358,4 @@ public class VFlare implements Tropa{
 	
 
 }
+*/

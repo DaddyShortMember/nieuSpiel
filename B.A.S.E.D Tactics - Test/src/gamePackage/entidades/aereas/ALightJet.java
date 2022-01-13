@@ -1,4 +1,4 @@
-package gamePackage.entidades.aereas;
+/*package gamePackage.entidades.aereas;
 
 import java.awt.Point;
 
@@ -355,3 +355,4 @@ public class ALightJet implements Tropa{
 	}
 
 }
+*/

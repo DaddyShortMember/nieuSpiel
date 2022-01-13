@@ -1,4 +1,4 @@
-package gamePackage.entidades.acuaticas;
+/*package gamePackage.entidades.acuaticas;
 
 import gamePackage.entidades.ListaBlindaje;
 import gamePackage.entidades.Tropa;
@@ -372,3 +372,4 @@ public class NShip implements Tropa {
 	}
 
 }
+*/

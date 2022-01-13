@@ -1,4 +1,4 @@
-package gamePackage.entidades.acuaticas;
+/*package gamePackage.entidades.acuaticas;
 
 import java.awt.Point;
 
@@ -347,3 +347,4 @@ public class NCrus implements Tropa{
 	}
 
 }
+*/

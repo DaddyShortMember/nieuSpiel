@@ -1,4 +1,4 @@
-package gamePackage.entidades.acuaticas;
+/*package gamePackage.entidades.acuaticas;
 
 import java.awt.Point;
 
@@ -354,3 +354,4 @@ public class NSubm implements Tropa{
 		return null;
 	}
 }
+*/

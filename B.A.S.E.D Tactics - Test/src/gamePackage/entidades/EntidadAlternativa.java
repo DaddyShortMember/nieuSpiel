@@ -1,4 +1,4 @@
-package gamePackage.entidades;
+/*package gamePackage.entidades;
 //By Dalajan
 import java.awt.Point;
 
@@ -439,3 +439,4 @@ public class EntidadAlternativa {
 	
 	
 }
+*/

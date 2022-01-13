@@ -1,4 +1,4 @@
-package gamePackage.entidades.aereas;
+/*package gamePackage.entidades.aereas;
 
 import java.awt.Point;
 
@@ -324,3 +324,4 @@ public class ABomber implements Tropa{
 	}
 
 }
+*/
