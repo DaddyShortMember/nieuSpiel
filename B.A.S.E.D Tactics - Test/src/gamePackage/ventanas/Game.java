@@ -10,8 +10,8 @@ import java.util.logging.Logger;
 import javax.swing.*;
 
 import gamePackage.entidades.*;
+import gamePackage.logica.*;
 import gamePackage.entidades.terrestres.*;
-import gamePackage.logica.ListaIDTerreno;
 import gamePackage.terrenos.*;
 import gamePackage.terrenos.estructuras.*;
 import gamePackage.terrenos.terrenos.*;
@@ -930,7 +930,7 @@ public class Game extends JFrame{
 		jif.setSize(new Dimension(192, 256));		//Se cambia el tamaÃ±o de la ventana
 		lp.add(jif, 4, 0);
 	}
-	/*
+
 	public void moverTropa(Point pos, HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid, JLayeredPane lp, JPanel troopPanel, int turn) {
 		JInternalFrame jif2 = new JInternalFrame();
 		Point casilla = new Point((int) pos.getX()/32, (int) pos.getY()/32);
@@ -943,14 +943,17 @@ public class Game extends JFrame{
 			teamTester = 1;
 			break;
 		}
-		if (((Terreno) mapGrid.get(casilla).get(0).get(1)) && mapGrid.get(casilla).size() == 2) {
+		if (mapGrid.get(casilla).size() != 2) {
 			return;
-		} else if (((Factory) mapGrid.get(casilla).get(0).get(1)).getTeam() != teamTester) {
+		} else if (((Factory) mapGrid.get(casilla).get(1).get(1)).getTeam() != teamTester) {
 			return;
 		}
+		
+		
+		
 	}
-	*/
-	}
+	
+}
 
 /*	
 	public static int grafoVert(int trop) {
