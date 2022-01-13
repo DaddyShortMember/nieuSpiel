@@ -8,11 +8,25 @@ import java.util.HashMap;
 import  gamePackage.entidades.*;
 import  gamePackage.ventanas.*;
 import  gamePackage.logica.*;
+import gamePackage.terrenos.Estructura;
 import gamePackage.terrenos.Terreno;
 
 
 public abstract class GamePlay {
 // metodos para la partida	
+	public static boolean capture(Tropa t,Estructura c) {
+	
+		c.setHp(c.getHp()-	t.getHP());
+		if (c.getHp()==0) {
+			if (c.getCG()==true) {
+				return true;
+			}
+			c.setHp(2);
+			return false;
+			
+		}
+		return false;
+	}
 	public static float damage(Tropa atacante, Tropa defensor, Terreno cobertura){
 		float damage = 0; 
 		

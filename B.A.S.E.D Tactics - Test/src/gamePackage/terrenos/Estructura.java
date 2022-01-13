@@ -39,4 +39,6 @@ public interface Estructura extends Terreno{
 	public int getIngresos();
 	public boolean suministra(Tropa trop);
 	public int getTeam();
+	public void setHp(float f);
+	public float getHp();
 }
