@@ -57,7 +57,10 @@ public class VApc implements Tropa {
 
 	// Metodos Heredados
 	public float getHP() {
-		float percent = (getSalud()*getSaludMax())/(100);
+		float percent = (getSalud()/getSaludMax());
+		percent = percent * 10;
+		percent=(float) Math.ceil(percent);
+		percent=percent/10;
 		return percent;
 		 
 	}
@@ -318,7 +321,7 @@ public class VApc implements Tropa {
 	@Override
 	public int getTeam() {
 		// TODO Auto-generated method stub
-		return 0;
+		return team;
 	}
 
 	@Override
@@ -330,6 +333,7 @@ public class VApc implements Tropa {
 	@Override
 	public void setSalud(float f) {
 		// TODO Auto-generated method stub
+		this.salud=f;
 		
 	}
 

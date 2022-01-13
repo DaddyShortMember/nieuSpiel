@@ -12,7 +12,7 @@ public class TankH implements Tropa {
 	ListaIDTropa idTropa = ListaIDTropa.TANK_H;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;
 	ListaTipos tipoMov = ListaTipos.ACORAZADO;
-	ListaBlindaje tipoBlindage = ListaBlindaje.TK;
+	ListaBlindaje tipoBlindaje = ListaBlindaje.TK;
 	boolean captura = false;
 	boolean construye = false;
 	int saludMaxima = 500;
@@ -58,7 +58,10 @@ public class TankH implements Tropa {
 
 	// Metodos Heredados
 	public float getHP() {
-		float percent = (getSalud()*getSaludMax())/(100);
+		float percent = (getSalud()/getSaludMax());
+		percent = percent * 10;
+		percent=(float) Math.ceil(percent);
+		percent=percent/10;
 		return percent;
 		 
 	}
@@ -144,10 +147,7 @@ public class TankH implements Tropa {
 		// TODO Auto-generated method stub
 		return tipoMov;
 	}
-	public ListaBlindaje getBlindage() {
-		// TODO Auto-generated method stub
-		return tipoBlindage;
-	}
+
 
 	@Override
 	public ListaArmas[] getArmas() {
@@ -323,13 +323,13 @@ public class TankH implements Tropa {
 	@Override
 	public int getTeam() {
 		// TODO Auto-generated method stub
-		return 0;
+		return team;
 	}
 
 	@Override
 	public ListaBlindaje getBlindaje() {
 		// TODO Auto-generated method stub
-		return null;
+		return tipoBlindaje;
 	}
 
 	@Override

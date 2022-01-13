@@ -12,6 +12,7 @@ public class AntiT implements Tropa {
 	ListaIDTropa idTropa = ListaIDTropa.ANTI_T;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;
 	ListaTipos tipoMov = ListaTipos.ACORAZADO;
+	ListaBlindaje tipoBlindaje=ListaBlindaje.VH_H;
 	boolean captura = false;
 	boolean construye = false;
 	int saludMaxima = 200;
@@ -57,9 +58,9 @@ public class AntiT implements Tropa {
 
 	// Metodos Heredados
 	public float getHP() {
-		float percent = getSalud()/getSaludMax();
-		percent=percent*10;
-		Math.ceil(percent);
+		float percent = (getSalud()/getSaludMax());
+		percent = percent * 10;
+		percent=(float) Math.ceil(percent);
 		percent=percent/10;
 		return percent;
 		 
@@ -86,15 +87,7 @@ public class AntiT implements Tropa {
 		// TODO Auto-generated method stub
 	}
 
-	@Override
-	public void setSalud(float salud) {
-		// TODO Auto-generated method stub
-		if (salud <= saludMaxima)
-			this.salud = salud;
-		else {
-			// Logger?
-		}
-	}
+
 
 	@Override
 	public void setEnergia(int energia) {
@@ -321,15 +314,22 @@ public class AntiT implements Tropa {
 	@Override
 	public int getTeam() {
 		// TODO Auto-generated method stub
-		return 0;
+		return team;
 	}
 
 	@Override
 	public ListaBlindaje getBlindaje() {
 		// TODO Auto-generated method stub
-		return null;
+		return tipoBlindaje;
 	}
 
+
+	@Override
+	public void setSalud(float salud) {
+		// TODO Auto-generated method stub
+		
+		this.salud=salud;
+	}
 
 	@Override
 	public void setSalud(int salud) {

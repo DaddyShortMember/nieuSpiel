@@ -9,10 +9,10 @@ public class TankL implements Tropa {
 
 	// ATRIBUTOS LOGI4COS
 	int team;
-	ListaIDTropa idTropa = ListaIDTropa.ANTI_A;
+	ListaIDTropa idTropa = ListaIDTropa.TANK_L;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;
 	ListaTipos tipoMov = ListaTipos.ACORAZADO;
-	ListaBlindaje tipoBlindage = ListaBlindaje.TK;
+	ListaBlindaje tipoBlindaje = ListaBlindaje.TK;
 	boolean captura = false;
 	boolean construye = false;
 	int saludMaxima = 200;
@@ -58,7 +58,10 @@ public class TankL implements Tropa {
 
 	// Metodos Heredados
 	public float getHP() {
-		float percent = (getSalud()*getSaludMax())/(100);
+		float percent = (getSalud()/getSaludMax());
+		percent = percent * 10;
+		percent=(float) Math.ceil(percent);
+		percent=percent/10;
 		return percent;
 		 
 	}
@@ -319,17 +322,18 @@ public class TankL implements Tropa {
 	@Override
 	public int getTeam() {
 		// TODO Auto-generated method stub
-		return 0;
+		return team;
 	}
 
 	@Override
 	public ListaBlindaje getBlindaje() {
 		// TODO Auto-generated method stub
-		return null;
+		return tipoBlindaje;
 	}
 
 	@Override
-	public void setSalud(float f) {
+	public void setSalud(float salud) {
+		this.salud=salud;
 		// TODO Auto-generated method stub
 		
 	}

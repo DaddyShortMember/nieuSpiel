@@ -13,21 +13,40 @@ import gamePackage.terrenos.Terreno;
 
 public abstract class GamePlay {
 // metodos para la partida	
-	public int combat(Tropa atacante, Tropa defensor, Terreno cobertura, Terreno cobertura1){
+	public static float damage(Tropa atacante, Tropa defensor, Terreno cobertura){
+		float damage = 0; 
+		
+		
+		switch (weaponChoice(atacante,defensor)) {
+		case 0:
+			damage = ((atacante.getGolpePrim() * damageNumbers(atacante.getArmas()[0] , defensor.getBlindaje())* atacante.getHP()) * (((atacante.getNivel()/10)+1)) * (1 - (cobertura.getDefensa()/10)));
+			atacante.setMuniciones(atacante.getMuniciones()-1);
+			break;
+		case 1:
+			damage = ((atacante.getGolpePrim() * damageNumbers(atacante.getArmas()[0] , defensor.getBlindaje())   * atacante.getHP()) * ((atacante.getNivel()/10)+1) * (1 - (cobertura.getDefensa()/10)));
+		
+			break;
+		case 2:
+			damage = 0;
+			break;
+		}
+		return damage;
+	}
+	public static int combat(Tropa atacante, Tropa defensor, Terreno cobertura, Terreno cobertura1){
 		defensor.setSalud(defensor.getSalud()-damage(atacante, defensor, cobertura1));
 		
 		if (defensor.getAlcance()[0]==1) {
 			atacante.setSalud(atacante.getSalud()-damage(defensor, atacante, cobertura));
 		}
 		
-		if (defensor.getSalud()>=0) {
+		if (defensor.getSalud()<=0) {
 			defensor.setSalud(0);	
 			if (atacante.getNivel()<3) {
 				atacante.setNivel(atacante.getNivel()+1);
 				return 1;
 			}
 		}
-		if (atacante.getSalud()>=0) {
+		if (atacante.getSalud()<=0) {
 			atacante.setSalud(0);
 			if (defensor.getNivel()<3) {
 				defensor.setNivel(defensor.getNivel()+1);
@@ -39,26 +58,8 @@ public abstract class GamePlay {
 		
 		
 	}
-	public float damage(Tropa atacante, Tropa defensor, Terreno cobertura){
-		float damage = 0; 
-		
-		
-		switch (weaponChoice(atacante,defensor)) {
-		case 0:
-			damage = ((atacante.getGolpePrim() * damageNumbers(atacante.getArmas()[0] , defensor.getBlindaje())   * atacante.getHP()) * ((atacante.getNivel()/10+1)) * (10 - (cobertura.getDefensa()/10)));
-			break;
-		case 1:
-			damage = ((atacante.getGolpePrim() * damageNumbers(atacante.getArmas()[0] , defensor.getBlindaje())   * atacante.getHP()) * ((atacante.getNivel()/10)+1) * (10 - (cobertura.getDefensa()/10)));
-			atacante.setMuniciones(atacante.getMuniciones()-1);
-			break;
-		case 2:
-			damage = 0;
-			break;
-		}
-		return damage;
-	}
-
-	public int weaponChoice(Tropa  a , Tropa d) {
+	
+	public static int weaponChoice(Tropa  a , Tropa d) {
 		int attack = 0;
 		if (d.getIDTropa()==ListaIDTropa.INF) {
 			switch (a.getArmas()[0]) {
@@ -97,7 +98,7 @@ public abstract class GamePlay {
 		}
 		return attack;
 	}
-	public float damageNumbers(ListaArmas a , ListaBlindaje d) {
+	public static float damageNumbers(ListaArmas a , ListaBlindaje d) {
 		float reduction = 100;
 		switch (a) {
 		case AMETRALLADORA:
@@ -114,8 +115,7 @@ public abstract class GamePlay {
 			case TK:
 				reduction= 10;
 				break;
-			}
-			
+			}		
 			break;
 		case TCANNON:
 			switch (d) {

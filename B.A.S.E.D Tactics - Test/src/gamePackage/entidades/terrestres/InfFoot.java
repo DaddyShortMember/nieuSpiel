@@ -12,6 +12,7 @@ public class InfFoot implements Tropa {
 	ListaIDTropa idTropa = ListaIDTropa.INF;
 	ListaTipos tipoTropa = ListaTipos.INFANTERIA;
 	ListaTipos tipoMov = ListaTipos.INFANTERIA;
+	ListaBlindaje tipoBlindaje=ListaBlindaje.INFANTERIA;
 	boolean captura = true;
 	boolean construye = false;
 	int saludMaxima = 100;
@@ -35,6 +36,7 @@ public class InfFoot implements Tropa {
 	String nombre = "Infanteria";
 	Point pos = new Point(0, 0); // Posicion
 	String imagen = ""; // Dirección de imagen
+	
 
 	// Constructor
 	public InfFoot(int team) {
@@ -59,7 +61,10 @@ public class InfFoot implements Tropa {
 	// Setters
 
 	public float getHP() {
-		float percent = (getSalud()*getSaludMax())/(100);
+		float percent = (getSalud()/getSaludMax());
+		percent = percent * 10;
+		percent=(float) Math.ceil(percent);
+		percent=percent/10;
 		return percent;
 		 
 	}
@@ -337,7 +342,7 @@ public class InfFoot implements Tropa {
 	@Override
 	public ListaBlindaje getBlindaje() {
 		// TODO Auto-generated method stub
-		return null;
+		return tipoBlindaje;
 	}
 
 	@Override

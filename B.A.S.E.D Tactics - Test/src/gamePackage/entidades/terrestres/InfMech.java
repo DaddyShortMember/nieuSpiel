@@ -12,6 +12,7 @@ public class InfMech implements Tropa {
 	ListaIDTropa idTropa = ListaIDTropa.INF;
 	ListaTipos tipoTropa = ListaTipos.MECH;
 	ListaTipos tipoMov = ListaTipos.INFANTERIA;
+	ListaBlindaje tipoBlindaje=ListaBlindaje.INFANTERIA;
 	boolean captura = true;
 	boolean construye = false;
 	int saludMaxima = 120;
@@ -57,7 +58,10 @@ public class InfMech implements Tropa {
 
 	// Metodos Heredados
 	public float getHP() {
-		float percent = (getSalud()*getSaludMax())/(100);
+		float percent = (getSalud()/getSaludMax());
+		percent = percent * 10;
+		percent=(float) Math.ceil(percent);
+		percent=percent/10;
 		return percent;
 		 
 	}
@@ -319,18 +323,19 @@ public class InfMech implements Tropa {
 	@Override
 	public int getTeam() {
 		// TODO Auto-generated method stub
-		return 0;
+		return team;
 	}
 
 	@Override
 	public ListaBlindaje getBlindaje() {
 		// TODO Auto-generated method stub
-		return null;
+		return tipoBlindaje;
 	}
 
 	@Override
 	public void setSalud(float f) {
 		// TODO Auto-generated method stub
+		this.salud=f;
 		
 	}
 

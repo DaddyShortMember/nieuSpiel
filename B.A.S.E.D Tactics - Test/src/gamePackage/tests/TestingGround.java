@@ -4,15 +4,76 @@ package gamePackage.tests;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import gamePackage.logica.*;
+import gamePackage.ventanas.*;
+import gamePackage.ventanas.*;
+import gamePackage.entidades.terrestres.*;
+import gamePackage.terrenos.terrenos.*;
+import gamePackage.terrenos.estructuras.*;
+import gamePackage.terrenos.*;
+import gamePackage.entidades.*;
+
 
 public class TestingGround {
+	
+	
+
+	
+
+
+	
+	
 	public static void main(String[] args) {
 		ArrayList<Vertice> ver;
+		 HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid = new HashMap<>();
+		 ArrayList<ArrayList<Object>> casilla = new ArrayList<>();
+		 ArrayList<ArrayList<Object>> casilla2 = new ArrayList<>();
+		ArrayList<Object> terreno = new ArrayList<>();
+		ArrayList<Object> tropa = new ArrayList<>();
+		ArrayList<Object> terreno2 = new ArrayList<>();
+		ArrayList<Object> tropa2 = new ArrayList<>();
+		Point locate = new Point(5,3);
+		Point locate2 = new Point(5,4);
+		AntiA a = new AntiA(1);
+		Rocl d = new Rocl(2);
+		Road carretera = new Road();
+		City ciudad = new City(0);
+		tropa.add(a);
+		terreno.add(carretera);
+		tropa2.add(d);
+		terreno2.add(ciudad);
+		casilla.add(terreno);
+		casilla.add(tropa);
+		casilla2.add(terreno2);
+		casilla2.add(tropa2);
+		
+		
+		
+		
+		
+		mapGrid.put(locate,casilla);
+		mapGrid.put(locate2,casilla2);
+		Tropa troop1=(Tropa)mapGrid.get(locate).get(1).get(0) ;
+		Tropa troop2=(Tropa)mapGrid.get(locate2).get(1).get(0) ;
+		Terreno terrein1=(Terreno)mapGrid.get(locate).get(0).get(0) ;
+		Terreno terrain2=(Terreno)mapGrid.get(locate2).get(0).get(0) ;
+		
+		GamePlay.combat(troop1,troop2,terrain2,terrein1);
+		System.out.println(troop1);
+		System.out.println(troop2);
+		System.out.println(troop1.getHP());
+		
+		
 		
 		for (int i = 0; i < 5; i++) {
+			
 			//ver.add(Vertice(1,));
+			
+
+			
+			
 			
 		}
 	}
@@ -60,6 +121,7 @@ public class TestingGround {
 		return listaPos;
 	}
 }
+
 
 /*
 Ejemplo de un grafo formado desde una tropa "." con movimiento=3 

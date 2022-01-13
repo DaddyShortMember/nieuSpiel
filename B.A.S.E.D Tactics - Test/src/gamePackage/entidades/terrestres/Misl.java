@@ -15,7 +15,7 @@ public class Misl implements Tropa{
 	boolean captura = false;
 	boolean construye = false;
 	int saludMaxima = 160;
-	int salud = this.saludMaxima;
+	float salud = this.saludMaxima;
 	int golpePrim = 450;
 	int golpeSec = 0;
 	ListaArmas armaPrincipal = ListaArmas.MISIL_AA;
@@ -57,7 +57,10 @@ public class Misl implements Tropa{
 	
 	//Metodos Heredados
 	public float getHP() {
-		float percent = (getSalud()*getSaludMax())/(100);
+		float percent = (getSalud()/getSaludMax());
+		percent = percent * 10;
+		percent=(float) Math.ceil(percent);
+		percent=percent/10;
 		return percent;
 		 
 	}
@@ -314,7 +317,7 @@ public class Misl implements Tropa{
 	@Override
 	public int getTeam() {
 		// TODO Auto-generated method stub
-		return 0;
+		return team;
 	}
 
 	@Override
@@ -326,6 +329,7 @@ public class Misl implements Tropa{
 	@Override
 	public void setSalud(float f) {
 		// TODO Auto-generated method stub
+		this.salud=f;
 		
 	}
 }

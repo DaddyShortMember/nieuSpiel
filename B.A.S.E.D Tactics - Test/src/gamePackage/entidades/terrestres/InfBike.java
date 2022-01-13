@@ -12,6 +12,7 @@ public class InfBike implements Tropa {
 	ListaIDTropa idTropa = ListaIDTropa.INF;
 	ListaTipos tipoTropa = ListaTipos.INFANTERIA;
 	ListaTipos tipoMov = ListaTipos.V_LIGERO;
+	ListaBlindaje tipoBlindaje=ListaBlindaje.INFANTERIA;
 	boolean captura = true;
 	boolean construye = false;
 	int saludMaxima = 120;
@@ -56,7 +57,14 @@ public class InfBike implements Tropa {
 	}
 
 	// Metodos Heredados
-	
+	public float getHP() {
+		float percent = (getSalud()/getSaludMax());
+		percent = percent * 10;
+		percent=(float) Math.ceil(percent);
+		percent=percent/10;
+		return percent;
+		 
+	}
 	// Setters
 	public void setTropa() {
 		// TODO Auto-generated method stub
@@ -313,25 +321,20 @@ public class InfBike implements Tropa {
 	@Override
 	public int getTeam() {
 		// TODO Auto-generated method stub
-		return 0;
+		return team;
 	}
 
-	@Override
-	public float getHP() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public ListaBlindaje getBlindaje() {
 		// TODO Auto-generated method stub
-		return null;
+		return tipoBlindaje;
 	}
 
 	@Override
 	public void setSalud(float f) {
 		// TODO Auto-generated method stub
-		
+		this.salud=f;
 	}
 
 }

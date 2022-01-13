@@ -12,7 +12,7 @@ public class VRecon implements Tropa {
 	ListaIDTropa idTropa = ListaIDTropa.V_RECON;
 	ListaTipos tipoTropa = ListaTipos.TERRESTRE;
 	ListaTipos tipoMov = ListaTipos.V_PESADO;
-	ListaBlindaje tipoBlindage = ListaBlindaje.VH_L;
+	ListaBlindaje tipoBlindaje = ListaBlindaje.VH_L;
 	boolean captura = false;
 	boolean construye = false;
 	int saludMaxima = 130;
@@ -58,7 +58,10 @@ public class VRecon implements Tropa {
 
 	// Metodos Heredados
 	public float getHP() {
-		float percent = (getSalud()*getSaludMax())/(100);
+		float percent = (getSalud()/getSaludMax());
+		percent = percent * 10;
+		percent=(float) Math.ceil(percent);
+		percent=percent/10;
 		return percent;
 		 
 	}
@@ -319,18 +322,19 @@ public class VRecon implements Tropa {
 	@Override
 	public int getTeam() {
 		// TODO Auto-generated method stub
-		return 0;
+		return team;
 	}
 
 	@Override
 	public ListaBlindaje getBlindaje() {
 		// TODO Auto-generated method stub
-		return null;
+		return tipoBlindaje;
 	}
 
 	@Override
 	public void setSalud(float f) {
 		// TODO Auto-generated method stub
+		this.salud=f;
 		
 	}
 
