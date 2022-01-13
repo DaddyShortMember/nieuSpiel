@@ -34,7 +34,7 @@ public class Game extends JFrame{
 	}
 	//public static int tiles = 17;  <-- Viejo tamaÃ±o de las casillas
 	public static int mov = 32;		//TamaÃ±o de las casillas y valor por el que se multiplica el valor de x e y de los labels
-	public HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid = new HashMap<>();
+	public volatile HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid = new HashMap<>();
 	public int turn = 1;
 	public boolean estadoMov = false;
 	Point ogPos = new Point();
@@ -130,12 +130,12 @@ public class Game extends JFrame{
 			volatile boolean on = true;
 			@Override
 			public void run() {
-				
+				mapGrid = loadMap();
 				Tropa t = (Tropa) mapGrid.get(ogPos).get(1).get(1);
 				Point pos = ogPos;
 				while (on) {
-					mapGrid = reloadHMap();
 					while(stateSwitcher == true) {
+						System.out.println("Thread de Mov");
 						Point mouse = MouseInfo.getPointerInfo().getLocation();
 						SwingUtilities.convertPointFromScreen(mouse, layeredGamePanel);
 						try {
@@ -188,6 +188,7 @@ public class Game extends JFrame{
 		ThreadMV mv = new ThreadMV();
 		Thread tMV = new Thread(mv);
 		
+		
 		class CursorMovement implements Runnable{
 			volatile boolean stateSwitcher = false;
 			volatile boolean on = true;
@@ -195,6 +196,7 @@ public class Game extends JFrame{
 			public void run() {
 				while (on) {
 					while(stateSwitcher == true) {
+						System.out.println("Thread de cursor general");
 						Point mouse = MouseInfo.getPointerInfo().getLocation();
 						SwingUtilities.convertPointFromScreen(mouse, layeredGamePanel);
 						try {
@@ -273,13 +275,8 @@ public class Game extends JFrame{
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				cm.pause();	
-				
 				Point casilla = new Point((int) cursor.getX()/32, (int) cursor.getY()/32);
-				if (!estadoMov) {
-					ogPos = casilla;
-					estadoMov = true;
-				}
+				
 				int teamTester;
 				switch (turn%2) {
 				case 0:
@@ -290,25 +287,42 @@ public class Game extends JFrame{
 					break;
 				}
 				if (mapGrid.get(casilla).size() == 2) {
-					if (estadoMov) {
+					if (estadoMov == false) {
 						if (((Tropa) mapGrid.get(casilla).get(1).get(1)).getTeam() == teamTester) {
-						moverTropa(cursor.getLocation(), mapGrid, layeredGamePanel, troopPanel, turn, casilla, ogPos);
-						}
+								estadoMov = true;
+								ogPos = casilla;
+								if (tMV.isAlive()) {
+									mv.resume();
+								} else {
+									tMV.start();
+									mv.resume();
+								}
+						} 
+						
+				
 					}
+				 else {
+					moverTropa(cursor.getLocation(), mapGrid, layeredGamePanel, troopPanel, turn, casilla, ogPos);
+					mv.pause();
+					cm.resume();
+					estadoMov = false;
+				 }
 				} else if (!(((Terreno) mapGrid.get(casilla).get(0).get(1)).getIDTerreno() != ListaIDTerreno.FACTORY || mapGrid.get(casilla).size() == 2)) {
 					if (((Factory) mapGrid.get(casilla).get(0).get(1)).getTeam() == teamTester) {
 						createTropa(cursor.getLocation(), mapGrid, layeredGamePanel, troopPanel, turn, casilla);
 						} 
-					}
-					
-				
+				}
 				
 			}
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-				cm.resume();
+				if (!estadoMov) {
+					cm.resume();
+				}
+				
+				
 			}
 			
 			@Override
@@ -1023,18 +1037,35 @@ public class Game extends JFrame{
 	}
 	
 	public void moverTropa(Point pos, HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid, JLayeredPane lp, JPanel troopPanel, int turn, Point casilla, Point og) {
-		JInternalFrame jif = new JInternalFrame();
-		jif.pack();
-		jif.setLocation(336, 336);
-		jif.setResizable(false);
-		jif.setVisible(true);
-		Container jifCP = jif.getContentPane();
-		JLabel jm = new JLabel();
-		
-		
-		
-		
-		
+		Tropa t = (Tropa) mapGrid.get(og).get(1).get(1);
+		JLabel tl = (JLabel) mapGrid.get(og).get(1).get(0);
+		ArrayList<Object> al = new ArrayList<>();
+		al.add(t); al.add(tl);
+		mapGrid.get(og).remove(1);
+		mapGrid.get(casilla).add(al);
+		troopPanel.repaint();
+	}
+	
+	public HashMap<Point, ArrayList<ArrayList<Object>>> loadMap() {
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("BeanIsland.dat"));
+
+			mapGrid = (HashMap) ois.readObject();
+
+			ois.close();
+
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		return mapGrid;
 	}
 	
 }
