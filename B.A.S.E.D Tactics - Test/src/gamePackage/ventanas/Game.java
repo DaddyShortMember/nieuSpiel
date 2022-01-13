@@ -36,6 +36,8 @@ public class Game extends JFrame{
 	public static int mov = 32;		//TamaÃ±o de las casillas y valor por el que se multiplica el valor de x e y de los labels
 	public HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid = new HashMap<>();
 	public int turn = 1;
+	public boolean estadoMov = false;
+	Point ogPos = new Point();
 	Player p1 = new Player(1);
 	Player p2 = new Player(2);
 	
@@ -123,7 +125,67 @@ public class Game extends JFrame{
 		layeredGamePanel.add(mapPanel, 0, 0);		//Se aÃ±ade el panel que contiene el mapa con prioridad baja para que estÃ© por debajo del resto de cosas que se aÃ±adan
 		layeredGamePanel.add(entityPanel, 1, 0);		//Se aÃ±ade el panel de entidades con mayor prioridad que el del mapa para que se vean por encima de este
 		
+		class ThreadMV implements Runnable{
+			volatile boolean stateSwitcher = false;
+			volatile boolean on = true;
+			@Override
+			public void run() {
+				Tropa t = (Tropa) mapGrid.get(ogPos).get(1).get(1);
+				Point pos = ogPos;
+				while (on) {
+					while(stateSwitcher == true) {
+						Point mouse = MouseInfo.getPointerInfo().getLocation();
+						SwingUtilities.convertPointFromScreen(mouse, layeredGamePanel);
+						try {
+							Thread.sleep(10);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						double x = mouse.getX();
+						double y = mouse.getY();
+						x = x / mov; y = y / mov;
+						x = Math.floor(x); y = Math.floor(y);
+						Point cN = new Point((int)pos.getX(), (int)pos.getY()-1);
+						Point cS = new Point((int)pos.getX(), (int)pos.getY()+1);
+						Point cE = new Point((int)pos.getX()+1, (int)pos.getY());
+						Point cO = new Point((int)pos.getX()-1, (int)pos.getY());
+						int peajeN = ((Terreno) mapGrid.get(cN).get(0).get(1)).getPeaje(t);
+						int peajeS = ((Terreno) mapGrid.get(cS).get(0).get(1)).getPeaje(t);
+						int peajeE = ((Terreno) mapGrid.get(cE).get(0).get(1)).getPeaje(t);
+						int peajeO = ((Terreno) mapGrid.get(cO).get(0).get(1)).getPeaje(t);
+						if (((t.getDistMax()-peajeN)>=0) && (t.getEnergia() != 0) && (mapGrid.get(cN).size() == 1) && (mouse.equals(cN))) {
+							cursor.setLocation(cN);
+						} else if (((t.getDistMax()-peajeS)>=0) && (t.getEnergia() != 0) && (mapGrid.get(cS).size() == 1) && (mouse.equals(cS))) {
+							cursor.setLocation(cS);
+						} else if (((t.getDistMax()-peajeE)>=0) && (t.getEnergia() != 0) && (mapGrid.get(cE).size() == 1) && (mouse.equals(cE))) {
+							cursor.setLocation(cE);
+						} else if (((t.getDistMax()-peajeO)>=0) && (t.getEnergia() != 0) && (mapGrid.get(cO).size() == 1) && (mouse.equals(cO))) {
+							cursor.setLocation(cO);
+						}
+						if (x>= 0 && x <= 21 && y>= 0 && y <= 21) {
+							int xCT = (int) (x * mov); int yCT = (int) (y * mov); //xCT = x Cursor Tile 
+							cursor.setLocation(xCT, yCT);
+						}
+						
+					}
+				}
+			}
+			public void pause() {
+				stateSwitcher = false;
+			}
 			
+			public void resume() {
+				stateSwitcher = true;
+			}
+			
+
+			
+		}
+
+		ThreadMV mv = new ThreadMV();
+		Thread tMV = new Thread(mv);
+		tMV.start();
 		
 		class CursorMovement implements Runnable{
 			volatile boolean stateSwitcher = false;
@@ -210,11 +272,36 @@ public class Game extends JFrame{
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				cm.pause();
-				System.out.println("a");
-				System.out.println(mapGrid.keySet());
-				createTropa(cursor.getLocation(), mapGrid, layeredGamePanel, troopPanel, 1);
-				System.out.println("b");
+				cm.pause();	
+				
+				Point casilla = new Point((int) cursor.getX()/32, (int) cursor.getY()/32);
+				if (!estadoMov) {
+					ogPos = casilla;
+					estadoMov = true;
+				}
+				int teamTester;
+				switch (turn%2) {
+				case 0:
+					teamTester = 2;
+					break;
+				default:
+					teamTester = 1;
+					break;
+				}
+				if (mapGrid.get(casilla).size() == 2) {
+					if (estadoMov) {
+						if (((Tropa) mapGrid.get(casilla).get(1).get(1)).getTeam() == teamTester) {
+						moverTropa(cursor.getLocation(), mapGrid, layeredGamePanel, troopPanel, turn, casilla, ogPos);
+						}
+					}
+				} else if (!(((Terreno) mapGrid.get(casilla).get(0).get(1)).getIDTerreno() != ListaIDTerreno.FACTORY || mapGrid.get(casilla).size() == 2)) {
+					if (((Factory) mapGrid.get(casilla).get(0).get(1)).getTeam() == teamTester) {
+						createTropa(cursor.getLocation(), mapGrid, layeredGamePanel, troopPanel, turn, casilla);
+						} 
+					}
+					
+				
+				
 			}
 			
 			@Override
@@ -348,6 +435,7 @@ public class Game extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				terminaTurno(turn, mapPanel, mapGrid);
+				System.out.println(turn);
 			}
 		});
 		
@@ -439,6 +527,11 @@ public class Game extends JFrame{
 	}
 	
 	*/
+	
+	public void mover(HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid, Point pos) {
+		
+	}
+	
 	public int income(int count) {
 		return count*1000;
 	}
@@ -511,33 +604,17 @@ public class Game extends JFrame{
 		}
 	}
 	
-	public void createTropa(Point pos, HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid, JLayeredPane lp, JPanel troopPanel, int turn) {
+	public void createTropa(Point pos, HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid, JLayeredPane lp, JPanel troopPanel, int turn, Point casilla) {
 		JInternalFrame jif = new JInternalFrame();
-		Point casilla = new Point((int) pos.getX()/32, (int) pos.getY()/32);
-		int teamTester;
-		switch (turn%2) {
-		case 0:
-			teamTester = 2;
-			break;
-		default:
-			teamTester = 1;
-			break;
-		}
-		System.out.println(mapGrid.get(casilla).size());
-		if (((Terreno) mapGrid.get(casilla).get(0).get(1)).getIDTerreno() != ListaIDTerreno.FACTORY || mapGrid.get(casilla).size() == 2) {
-			System.out.println("returned");
-			return;
-		} else if (((Factory) mapGrid.get(casilla).get(0).get(1)).getTeam() != teamTester) {
-			return;
-		}
-		System.out.println(((Factory) mapGrid.get(casilla).get(0).get(1)).getTeam());
+		
 		jif.pack();
-		jif.setLocation((int) pos.getX()+32,(int) pos.getY());
+		jif.setLocation(192, 160);
 		jif.setResizable(false);
 		jif.setVisible(true);
 		Container jifCP = jif.getContentPane();
 		JLabel jm = new JLabel();
-		JButton infFoot = new JButton();
+		JButton infFoot = new JButton("1500");
+		infFoot.setVerticalTextPosition(JButton.BOTTOM);
 		switch (turn%2) {
 		case 0:
 			infFoot.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/InftBLUE.png")));
@@ -570,8 +647,8 @@ public class Game extends JFrame{
 				jif.dispose();
 			}
 		});
-		
-		JButton infMech = new JButton();
+		JButton infMech = new JButton("2500");
+		infMech.setVerticalTextPosition(JButton.BOTTOM);
 		switch (turn%2) {
 		case 0:
 			infMech.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/MecBLUE.png")));
@@ -605,7 +682,8 @@ public class Game extends JFrame{
 			}
 		});
 		
-		JButton infBike = new JButton();
+		JButton infBike = new JButton("2500");
+		infBike.setVerticalTextPosition(JButton.BOTTOM);
 		switch (turn%2) {
 		case 0:
 			infBike.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/BikeBLUE.png")));
@@ -639,7 +717,8 @@ public class Game extends JFrame{
 			}
 		});
 		
-		JButton rocl = new JButton();
+		JButton rocl = new JButton("15000");
+		rocl.setVerticalTextPosition(JButton.BOTTOM);
 		switch (turn%2) {
 		case 0:
 			rocl.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/RocketBLUE.png")));
@@ -673,7 +752,8 @@ public class Game extends JFrame{
 			}
 		});
 		
-		JButton antiA = new JButton();
+		JButton antiA = new JButton("8000");
+		antiA.setVerticalTextPosition(JButton.BOTTOM);
 		switch (turn%2) {
 		case 0:
 			antiA.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/AaBLUE.png")));
@@ -707,7 +787,8 @@ public class Game extends JFrame{
 			}
 		});
 		
-		JButton vAPC = new JButton();
+		JButton vAPC = new JButton("5000");
+		vAPC.setVerticalTextPosition(JButton.BOTTOM);
 		switch (turn%2) {
 		case 0:
 			vAPC.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/ToaBLUE.png")));
@@ -741,7 +822,8 @@ public class Game extends JFrame{
 			}
 		});
 		
-		JButton arty = new JButton();
+		JButton arty = new JButton("6000");
+		arty.setVerticalTextPosition(JButton.BOTTOM);
 		switch (turn%2) {
 		case 0:
 			arty.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/ArtilleryBLUE.png")));
@@ -775,7 +857,8 @@ public class Game extends JFrame{
 			}
 		});
 		
-		JButton tankL = new JButton();
+		JButton tankL = new JButton("6000");
+		tankL.setVerticalTextPosition(JButton.BOTTOM);
 		switch (turn%2) {
 		case 0:
 			tankL.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/LTankBLUE.png")));
@@ -809,7 +892,8 @@ public class Game extends JFrame{
 			}
 		});
 		
-		JButton tankM = new JButton();
+		JButton tankM = new JButton("12000");
+		tankM.setVerticalTextPosition(JButton.BOTTOM);
 		switch (turn%2) {
 		case 0:
 			tankM.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/MTankBLUE.png")));
@@ -843,7 +927,8 @@ public class Game extends JFrame{
 			}
 		});
 		
-		JButton tankH = new JButton();
+		JButton tankH = new JButton("16000");
+		tankH.setVerticalTextPosition(JButton.BOTTOM);
 		switch (turn%2) {
 		case 0:
 			tankH.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/HTankBLUE.png")));
@@ -879,7 +964,8 @@ public class Game extends JFrame{
 		
 		
 		
-		JButton vRecon = new JButton();
+		JButton vRecon = new JButton("4000");
+		vRecon.setVerticalTextPosition(JButton.BOTTOM);
 		switch (turn%2) {
 		case 0:
 			vRecon.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/ReconBLUE.png")));
@@ -917,37 +1003,30 @@ public class Game extends JFrame{
 		jifCP.add(infFoot);
 		jifCP.add(infMech);
 		jifCP.add(infBike);
-		jifCP.add(rocl);
+		jifCP.add(vRecon);
 		jifCP.add(antiA);
-		jifCP.add(vAPC);
 		jifCP.add(arty);
+		jifCP.add(rocl);
 		jifCP.add(tankL);
 		jifCP.add(tankM);
 		jifCP.add(tankH);
-		jifCP.add(vRecon);
+		jifCP.add(vAPC);
 		
 		jif.pack();		//Se asegura de que todos los componentes estÃ¡n por lo menos a su tamaÃ±o preferido
-		jif.setSize(new Dimension(192, 256));		//Se cambia el tamaÃ±o de la ventana
+		jif.setSize(new Dimension(336, 336));		//Se cambia el tamaÃ±o de la ventana
 		lp.add(jif, 4, 0);
 	}
 
-	public void moverTropa(Point pos, HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid, JLayeredPane lp, JPanel troopPanel, int turn) {
-		JInternalFrame jif2 = new JInternalFrame();
-		Point casilla = new Point((int) pos.getX()/32, (int) pos.getY()/32);
-		int teamTester;
-		switch (turn%2) {
-		case 0:
-			teamTester = 2;
-			break;
-		default:
-			teamTester = 1;
-			break;
-		}
-		if (mapGrid.get(casilla).size() != 2) {
-			return;
-		} else if (((Factory) mapGrid.get(casilla).get(1).get(1)).getTeam() != teamTester) {
-			return;
-		}
+	public void moverTropa(Point pos, HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid, JLayeredPane lp, JPanel troopPanel, int turn, Point casilla, Point og) {
+		JInternalFrame jif = new JInternalFrame();
+		jif.pack();
+		jif.setLocation(336, 336);
+		jif.setResizable(false);
+		jif.setVisible(true);
+		Container jifCP = jif.getContentPane();
+		JLabel jm = new JLabel();
+		
+		
 		
 		
 		
