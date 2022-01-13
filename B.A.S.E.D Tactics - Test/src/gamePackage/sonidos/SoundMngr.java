@@ -78,7 +78,10 @@ public class SoundMngr implements Runnable {
 					logSounds.log(Level.WARNING,"Line is unavailable. Try again when the sound finishes.",e);
 					e.printStackTrace();
 				}
-			} else {}
+			} else {
+				loadSound("bido.wav");
+				logSounds.log(Level.WARNING,"Audiofile cannot be changed to " + name + " as it does NOT exist.");
+			}
 				
 		}
 	}
@@ -212,18 +215,9 @@ public class SoundMngr implements Runnable {
 	}
 
 	public static void main(String[] args) {
-		SoundMngr sounds = new SoundMngr("combat1.wav", 0, 0);
+		SoundMngr sounds = new SoundMngr("combat3.wav", 0, 0);
 		Thread x = new Thread(sounds);
 		x.start();
-		try {
-			sounds.stop();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		sounds.changeSound("combat2.wav");
-		sounds.primer();
-		sounds.run();
 
 	}
 }
