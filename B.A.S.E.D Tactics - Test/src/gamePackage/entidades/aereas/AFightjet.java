@@ -2,6 +2,7 @@ package gamePackage.entidades.aereas;
 
 import java.awt.Point;
 
+import gamePackage.entidades.ListaBlindaje;
 import gamePackage.entidades.Tropa;
 import gamePackage.logica.ListaArmas;
 import gamePackage.logica.ListaIDTropa;
@@ -16,7 +17,7 @@ public class AFightjet implements Tropa{
 			boolean captura = false;
 			boolean construye = false;
 			int saludMaxima = 350;
-			int salud = this.saludMaxima;
+			float salud = this.saludMaxima;
 			int golpePrim = 300;
 			int golpeSec = 0;
 			ListaArmas armaPrincipal = ListaArmas.MISIL_AA;
@@ -153,7 +154,7 @@ public class AFightjet implements Tropa{
 				return construye;
 			}
 
-			public int getSalud() {
+			public float getSalud() {
 				// TODO Auto-generated method stub
 				return salud;
 			}
@@ -300,6 +301,24 @@ public class AFightjet implements Tropa{
 			public void setImagen() {
 				// TODO Auto-generated method stub
 				
+			}
+
+			@Override
+			public void setSalud(float f) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public float getHP() {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+
+			@Override
+			public ListaBlindaje getBlindaje() {
+				// TODO Auto-generated method stub
+				return null;
 			}
 
 }

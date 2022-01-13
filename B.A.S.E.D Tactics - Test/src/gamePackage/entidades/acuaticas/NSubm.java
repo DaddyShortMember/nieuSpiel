@@ -2,11 +2,13 @@ package gamePackage.entidades.acuaticas;
 
 import java.awt.Point;
 
+import gamePackage.entidades.ListaBlindaje;
+import gamePackage.entidades.Tropa;
 import gamePackage.logica.ListaArmas;
 import gamePackage.logica.ListaIDTropa;
 import gamePackage.logica.ListaTipos;
 
-public class NSubm {
+public class NSubm implements Tropa{
 	//ATRIBUTOS LÃ“GICOS
 	ListaIDTropa idTropa = ListaIDTropa.N_SUBM;
 	ListaTipos tipoTropa = ListaTipos.SUBMARINA;
@@ -14,7 +16,7 @@ public class NSubm {
 	boolean captura = false;
 	boolean construye = false;
 	int saludMaxima = 200;
-	int salud = this.saludMaxima;
+	float salud = this.saludMaxima;
 	int golpePrim = 120;
 	int golpeSec = 200;
 	ListaArmas armaPrincipal = ListaArmas.TORPEDO;
@@ -170,7 +172,7 @@ public class NSubm {
 	}
 
 	
-	public int getSalud() {
+	public float getSalud() {
 		// TODO Auto-generated method stub
 		return salud;
 	}
@@ -302,5 +304,53 @@ public class NSubm {
 			return true;
 		}else
 		return false;
+	}
+
+	@Override
+	public void setTropa() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPos() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setImagen() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTeam(int team) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSalud(float f) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public float getHP() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getTeam() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ListaBlindaje getBlindaje() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

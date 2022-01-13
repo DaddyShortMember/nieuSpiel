@@ -1,5 +1,6 @@
 package gamePackage.entidades.acuaticas;
 
+import gamePackage.entidades.ListaBlindaje;
 import gamePackage.entidades.Tropa;
 import gamePackage.logica.ListaArmas;
 import gamePackage.logica.ListaIDTropa;
@@ -16,7 +17,7 @@ public class NShip implements Tropa {
 	boolean captura = false;
 	boolean construye = false;
 	int saludMaxima = 350;
-	int salud = this.saludMaxima;
+	float salud = this.saludMaxima;
 	int golpePrim = 150;
 	int golpeSec = 0;
 	ListaArmas armaPrincipal = ListaArmas.CANNON;
@@ -171,11 +172,6 @@ public class NShip implements Tropa {
 		return construye;
 	}
 
-	@Override
-	public int getSalud() {
-		// TODO Auto-generated method stub
-		return salud;
-	}
 
 	@Override
 	public int getGolpePrim() {
@@ -349,6 +345,30 @@ public class NShip implements Tropa {
 	public Point getPos() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void setSalud(float f) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public float getHP() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ListaBlindaje getBlindaje() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public float getSalud() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

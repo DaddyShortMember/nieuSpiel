@@ -2,6 +2,7 @@ package gamePackage.entidades.aereas;
 
 import java.awt.Point;
 
+import gamePackage.entidades.ListaBlindaje;
 import gamePackage.entidades.Tropa;
 import gamePackage.logica.*;
 
@@ -15,7 +16,7 @@ public class AHelit implements Tropa {
 	boolean captura = false;
 	boolean construye = false;
 	int saludMaxima = 200;
-	int salud = this.saludMaxima;
+	float salud = this.saludMaxima;
 	int golpePrim = 0;
 	int golpeSec = 0;
 	ListaArmas armaPrincipal = ListaArmas.NADA;
@@ -167,7 +168,7 @@ public class AHelit implements Tropa {
 	}
 
 	@Override
-	public int getSalud() {
+	public float getSalud() {
 		// TODO Auto-generated method stub
 		return salud;
 	}
@@ -314,6 +315,24 @@ public class AHelit implements Tropa {
 	public int getTeam() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void setSalud(float f) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public float getHP() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ListaBlindaje getBlindaje() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

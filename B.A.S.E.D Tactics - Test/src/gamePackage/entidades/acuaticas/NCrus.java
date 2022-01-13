@@ -2,11 +2,13 @@ package gamePackage.entidades.acuaticas;
 
 import java.awt.Point;
 
+import gamePackage.entidades.ListaBlindaje;
+import gamePackage.entidades.Tropa;
 import gamePackage.logica.ListaArmas;
 import gamePackage.logica.ListaIDTropa;
 import gamePackage.logica.ListaTipos;
 
-public class NCrus {
+public class NCrus implements Tropa{
 	//ATRIBUTOS LÃ“GICOS
 	ListaIDTropa idTropa = ListaIDTropa.N_CRUS;
 	ListaTipos tipoTropa = ListaTipos.MARINA;
@@ -14,7 +16,7 @@ public class NCrus {
 	boolean captura = false;
 	boolean construye = false;
 	int saludMaxima = 300;
-	int salud = this.saludMaxima;
+	float salud = this.saludMaxima;
 	int golpePrim = 100;
 	int golpeSec = 150;
 	ListaArmas armaPrincipal = ListaArmas.MISIL_AB;
@@ -163,7 +165,7 @@ public class NCrus {
 	}
 
 	
-	public int getSalud() {
+	public float getSalud() {
 		// TODO Auto-generated method stub
 		return salud;
 	}
@@ -294,6 +296,54 @@ public class NCrus {
 			return true;
 		}else
 		return false;
+	}
+
+	@Override
+	public void setTropa() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPos() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setImagen() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTeam(int team) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSalud(float f) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public float getHP() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getTeam() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ListaBlindaje getBlindaje() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

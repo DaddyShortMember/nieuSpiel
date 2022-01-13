@@ -2,11 +2,13 @@ package gamePackage.entidades.aereas;
 
 import java.awt.Point;
 
+import gamePackage.entidades.ListaBlindaje;
+import gamePackage.entidades.Tropa;
 import gamePackage.logica.ListaArmas;
 import gamePackage.logica.ListaIDTropa;
 import gamePackage.logica.ListaTipos;
 
-public class ALightJet {
+public class ALightJet implements Tropa{
 	//ATRIBUTOS LÃ“GICOS
 	ListaIDTropa idTropa = ListaIDTropa.A_LIGHTJET;
 	ListaTipos tipoTropa = ListaTipos.AEREAH;
@@ -14,7 +16,7 @@ public class ALightJet {
 	boolean captura = false;
 	boolean construye = false;
 	int saludMaxima = 300;
-	int salud = this.saludMaxima;
+	float salud = this.saludMaxima;
 	int golpePrim = 200;
 	int golpeSec = 0;
 	ListaArmas armaPrincipal = ListaArmas.AMETRALLADORA;
@@ -170,7 +172,7 @@ public class ALightJet {
 	}
 
 	
-	public int getSalud() {
+	public float getSalud() {
 		// TODO Auto-generated method stub
 		return salud;
 	}
@@ -302,6 +304,54 @@ public class ALightJet {
 			return true;
 		}else
 		return false;
+	}
+
+	@Override
+	public void setTropa() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPos() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setImagen() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTeam(int team) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSalud(float f) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public float getHP() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getTeam() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ListaBlindaje getBlindaje() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
