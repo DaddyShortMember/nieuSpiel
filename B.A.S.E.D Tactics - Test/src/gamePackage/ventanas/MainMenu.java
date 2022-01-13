@@ -71,7 +71,7 @@ public class MainMenu extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				Game juego = new Game();
+				MapLoaderPrompt juego = new MapLoaderPrompt();
 				juego.pack();
 				juego.setLocationRelativeTo(null);
 				juego.setResizable(false);

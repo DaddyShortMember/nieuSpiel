@@ -92,12 +92,12 @@ public class MapLoaderPrompt extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new Thread(new SoundMngr("click1.wav", 0, 0)).start();
-//				MapMaker mmaker = new MapMaker(nomMapa, true); CHANGE TO GAME WINDOW and implement loading
-//				mmaker.setLocationRelativeTo(null);
-//				mmaker.pack();
-//				mmaker.setResizable(false);
-//				mmaker.setVisible(true);
-//				dispose();
+				Game mmaker = new Game(nomMapa);
+				mmaker.setLocationRelativeTo(null);
+				mmaker.pack();
+				mmaker.setResizable(false);
+				mmaker.setVisible(true);
+				dispose();
 
 			}
 		});
