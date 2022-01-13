@@ -33,14 +33,11 @@ public class Game extends JFrame{
 	}
 	//public static int tiles = 17;  <-- Viejo tamaño de las casillas
 	public static int mov = 32;		//Tamaño de las casillas y valor por el que se multiplica el valor de x e y de los labels
-	HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid = new HashMap<>();
+	public HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid = new HashMap<>();
 	public int turn;
 	
 	public Game() {
 		
-		ArrayList<Integer> mierda = new ArrayList<>();
-		mierda.add(2);
-		mierda.add(5);
 		Container cp = this.getContentPane();
 		cp.setLayout(new BoxLayout(cp, BoxLayout.X_AXIS));		//Se le pone un BoxLayout al contenedor de la ventana en el eje X que coloca los componentes en serie horizontalmente
 		JLayeredPane layeredGamePanel = new JLayeredPane();		//Creación de un panel que permite colocar unos componentes por encima de otros
@@ -65,10 +62,15 @@ public class Game extends JFrame{
 		troopPanel.setLayout(null);
 		troopPanel.setBounds(0, 1, 672, 672);
 		troopPanel.setOpaque(false);
-		mapGrid = loadHashMap();
-		mapPanel=loadMap(mapPanel, mapGrid);
-		mapPanel.repaint();
 		
+		//-------------------------------------------------------------------------
+		
+
+		
+		
+		//-------------------------------------------------------------------------
+		
+		/*
 		ArrayList<ListaIDTerreno> buildings = new ArrayList<>(); buildings.add(ListaIDTerreno.CITY);buildings.add(ListaIDTerreno.FACTORY);buildings.add(ListaIDTerreno.HQ);
 		int building1 = 0;
 		int building2 = 0;
@@ -100,7 +102,7 @@ public class Game extends JFrame{
 			}
 			//System.out.println(building1 + "-" + building2);	
 		}
-		
+		*/
 		
 
 		cursor.setPreferredSize(new Dimension(32, 32));		//Tamaño preferido del label que contiene el gif del cursor
@@ -159,17 +161,55 @@ public class Game extends JFrame{
 		CursorMovement cm = new CursorMovement();
 		Thread tCM = new Thread(cm);
 		tCM.start();
+		
+		//----------------------------------
+		
+		
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("BeanIsland.dat"));
+			
+			mapGrid = (HashMap) ois.readObject();
+			//System.out.println("ini");
+			//System.out.println(mapGrid.get(new Point(0,0)).get(0).get(0));
+			//System.out.println("fin");
+
+			ois.close();
+
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		//System.out.println(mapGrid);
+		mapPanel.removeAll();
+		
+		Set<Point> keys = mapGrid.keySet();
+		JLabel jl = new JLabel();
+		for (Point i : keys) {
+			jl = (JLabel) mapGrid.get(i).get(0).get(0);
+			mapPanel.add(jl);
+		}
+		
+		
+		mapPanel.repaint();
+		
+		//----------------------------------
+		
 		MouseListener ml = new MouseListener() {
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				cm.pause();
-				
-				System.out.println(mierda);
-				System.out.println(cursor.getLocation());
-				System.out.println(mapGrid);
-				System.out.println(mapGrid.get(cursor.getLocation()));
-				System.out.println((Terreno) mapGrid.get(cursor.getLocation()).get(0).get(1));
+				System.out.println("a");
+				System.out.println(mapGrid.keySet());
+				createTropa(cursor.getLocation(), mapGrid, layeredGamePanel, troopPanel, 1);
+				System.out.println("b");
 			}
 			
 			@Override
@@ -354,7 +394,7 @@ public class Game extends JFrame{
 		
 		
 		}
-	
+	/*
 	public HashMap<Point, ArrayList<ArrayList<Object>>> loadHashMap() {
 		HashMap<Point, ArrayList<ArrayList<Object>>> mapGridFunc = new HashMap<>();
 		try {
@@ -393,12 +433,12 @@ public class Game extends JFrame{
 		return mapPanel;
 	}
 	
+	*/
 	public int income(int count) {
 		return count*1000;
 	}
 	
 	public int buildCount(int team, JPanel mapPanel, HashMap<Point, ArrayList<ArrayList<Object>>> mapGridFunc3) {
-			mapPanel=loadMap(mapPanel, mapGridFunc3);
 			mapPanel.repaint();
 			ArrayList<ListaIDTerreno> buildings = new ArrayList<>(); buildings.add(ListaIDTerreno.CITY);buildings.add(ListaIDTerreno.FACTORY);buildings.add(ListaIDTerreno.HQ);
 			int building1 = 0;
@@ -442,8 +482,16 @@ public class Game extends JFrame{
 		
 	}
 	
-	public void createTropa(Point pos, HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid, JPanel troopPanel, int turn) {
+	public void createTropa(Point pos, HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid,JLayeredPane lp, JPanel troopPanel, int turn) {
 		JInternalFrame jif = new JInternalFrame();
+		Point casilla = new Point((int) pos.getX()/32, (int) pos.getY()/32);
+		if (((Terreno) mapGrid.get(casilla).get(0).get(1)).getIDTerreno() == ListaIDTerreno.FACTORY) {
+			return;
+		}
+		jif.pack();
+		jif.setLocation((int) pos.getX()+32,(int) pos.getY());
+		jif.setResizable(false);
+		jif.setVisible(true);
 		Container jifCP = jif.getContentPane();
 		JLabel jm = new JLabel();
 		JButton infFoot = new JButton();
@@ -474,8 +522,9 @@ public class Game extends JFrame{
 				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
 				troopsList.add(jm);
 				troopsList.add(tr);
-				mapGrid.get(pos).get(1).add(troopsList);
+				mapGrid.get(casilla).add(troopsList);
 				troopPanel.add(jm);
+				jif.dispose();
 			}
 		});
 		
@@ -507,8 +556,9 @@ public class Game extends JFrame{
 				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
 				troopsList.add(jm);
 				troopsList.add(tr);
-				mapGrid.get(pos).get(1).add(troopsList);
+				mapGrid.get(casilla).add(troopsList);
 				troopPanel.add(jm);
+				jif.dispose();
 			}
 		});
 		
@@ -540,8 +590,9 @@ public class Game extends JFrame{
 				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
 				troopsList.add(jm);
 				troopsList.add(tr);
-				mapGrid.get(pos).get(1).add(troopsList);
+				mapGrid.get(casilla).add(troopsList);
 				troopPanel.add(jm);
+				jif.dispose();
 			}
 		});
 		
@@ -573,8 +624,9 @@ public class Game extends JFrame{
 				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
 				troopsList.add(jm);
 				troopsList.add(tr);
-				mapGrid.get(pos).get(1).add(troopsList);
+				mapGrid.get(casilla).add(troopsList);
 				troopPanel.add(jm);
+				jif.dispose();
 			}
 		});
 		
@@ -606,8 +658,9 @@ public class Game extends JFrame{
 				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
 				troopsList.add(jm);
 				troopsList.add(tr);
-				mapGrid.get(pos).get(1).add(troopsList);
+				mapGrid.get(casilla).add(troopsList);
 				troopPanel.add(jm);
+				jif.dispose();
 			}
 		});
 		
@@ -639,8 +692,9 @@ public class Game extends JFrame{
 				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
 				troopsList.add(jm);
 				troopsList.add(tr);
-				mapGrid.get(pos).get(1).add(troopsList);
+				mapGrid.get(casilla).add(troopsList);
 				troopPanel.add(jm);
+				jif.dispose();
 			}
 		});
 		
@@ -672,8 +726,9 @@ public class Game extends JFrame{
 				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
 				troopsList.add(jm);
 				troopsList.add(tr);
-				mapGrid.get(pos).get(1).add(troopsList);
+				mapGrid.get(casilla).add(troopsList);
 				troopPanel.add(jm);
+				jif.dispose();
 			}
 		});
 		
@@ -705,8 +760,9 @@ public class Game extends JFrame{
 				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
 				troopsList.add(jm);
 				troopsList.add(tr);
-				mapGrid.get(pos).get(1).add(troopsList);
+				mapGrid.get(casilla).add(troopsList);
 				troopPanel.add(jm);
+				jif.dispose();
 			}
 		});
 		
@@ -722,14 +778,14 @@ public class Game extends JFrame{
 		tankM.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TankM tr = new TankM(0);
+				TankM tr = new TankM(2);
 				switch (turn%2){
 					case 0:
-						tr.setTeam(0);
+						tr.setTeam(1);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/MTankBLUE.png")));
 						break;
 					default:
-						tr.setTeam(1);
+						tr.setTeam(2);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/MTankRED.png")));
 						break;
 				}		
@@ -738,8 +794,9 @@ public class Game extends JFrame{
 				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
 				troopsList.add(jm);
 				troopsList.add(tr);
-				mapGrid.get(pos).get(1).add(troopsList);
+				mapGrid.get(casilla).add(troopsList);
 				troopPanel.add(jm);
+				jif.dispose();
 			}
 		});
 		
@@ -755,14 +812,14 @@ public class Game extends JFrame{
 		tankH.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TankH tr = new TankH(0);
+				TankH tr = new TankH(1);
 				switch (turn%2){
 					case 0:
-						tr.setTeam(0);
+						tr.setTeam(1);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/HTankBLUE.png")));
 						break;
 					default:
-						tr.setTeam(1);
+						tr.setTeam(2);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/HTankRED.png")));
 						break;
 				}		
@@ -771,8 +828,9 @@ public class Game extends JFrame{
 				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
 				troopsList.add(jm);
 				troopsList.add(tr);
-				mapGrid.get(pos).get(1).add(troopsList);
+				mapGrid.get(casilla).add(troopsList);
 				troopPanel.add(jm);
+				jif.dispose();
 			}
 		});
 		
@@ -790,29 +848,30 @@ public class Game extends JFrame{
 		vRecon.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VRecon tr = new VRecon(0);
+				VRecon tr = new VRecon(1);
 				switch (turn%2){
-					case 0:
-						tr.setTeam(0);
+					case 1:
+						tr.setTeam(1);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/ReconBLUE.png")));
 						break;
 					default:
-						tr.setTeam(1);
+						tr.setTeam(2);
 						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/ReconRED.png")));
 						break;
 				}		
 				ArrayList<Object> troopsList = new ArrayList<>();
-				
 				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
 				troopsList.add(jm);
 				troopsList.add(tr);
-				mapGrid.get(pos).get(1).add(troopsList);
+				mapGrid.get(casilla).add(troopsList);
 				troopPanel.add(jm);
+				jif.dispose();
 			}
 		});
-		
+				
 		jifCP.setLayout(new GridLayout(4, 3));
 		
+		jifCP.add(infFoot);
 		jifCP.add(infMech);
 		jifCP.add(infBike);
 		jifCP.add(rocl);
@@ -824,7 +883,9 @@ public class Game extends JFrame{
 		jifCP.add(tankH);
 		jifCP.add(vRecon);
 		
-		
+		jif.pack();		//Se asegura de que todos los componentes están por lo menos a su tamaño preferido
+		jif.setSize(new Dimension(192, 256));		//Se cambia el tamaño de la ventana
+		lp.add(jif, 4, 0);
 	}
 	
 	
