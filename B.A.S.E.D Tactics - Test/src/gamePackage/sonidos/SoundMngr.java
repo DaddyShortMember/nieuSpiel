@@ -171,6 +171,14 @@ public class SoundMngr implements Runnable {
 	public void changeSound(String newSound) {
 		logSounds.log(Level.INFO,"Audiofile changed to " + newSound);
 		this.name = newSound;
+		try {
+			stop();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			logSounds.log(Level.WARNING,"Something went wrong",e);
+		}
+		primer();
+		
 	}
 	
 	public void primer() {
