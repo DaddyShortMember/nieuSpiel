@@ -17,6 +17,7 @@ public class City implements Estructura, Serializable{
 	boolean construibleSobre = false;
 	int defensa = 2;
 	int ingresos = 1000;
+	float hp=2;
 	boolean cuartelGeneral = false;
 	boolean construible = false;
 	boolean capturable = true;
@@ -33,6 +34,19 @@ public class City implements Estructura, Serializable{
 		super();
 		this.team = team;
 
+	}
+	public float getHp() {
+		return hp;
+	}
+	public void setHp(float hp) {
+		this.hp=hp;
+		if (getHp()<=0) {
+			if (getTeam()!=1) {
+				setTeam(1);
+			}else if (getTeam()!=2) {
+				
+			}
+		}
 	}
 
 	public int getTeam() {
@@ -93,6 +107,7 @@ public class City implements Estructura, Serializable{
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 	@Override
 	public boolean getCG() {
@@ -152,7 +167,7 @@ public class City implements Estructura, Serializable{
 					trop.setMuniciones((trop.getMuniciones() + 1));
 				}
 				if(trop.getSalud() <= trop.getSaludMax()){
-					trop.setMuniciones((trop.getSalud() + 1));
+					trop.setSalud((trop.getSalud() + 1));
 				}
 			}}
 			
