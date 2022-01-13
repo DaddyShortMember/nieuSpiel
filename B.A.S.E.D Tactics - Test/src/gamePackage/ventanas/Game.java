@@ -9,6 +9,8 @@ import java.util.*;
 import java.util.logging.Logger;
 import javax.swing.*;
 
+import gamePackage.sonidos.SoundMngr;
+import gamePackage.baseDatos.DataBase;
 import gamePackage.entidades.*;
 import gamePackage.logica.*;
 import gamePackage.entidades.terrestres.*;
@@ -40,10 +42,15 @@ public class Game extends JFrame{
 	Point ogPos = new Point();
 	Player p1 = new Player(1);
 	Player p2 = new Player(2);
+	SoundMngr sic = new SoundMngr("combat1.wav",0,0);
+	Thread mus = new Thread(sic);
+	
 	
 	public Game(String nomMapa) {
-		
+		mus.start();
 		p1.setfunds(1000);
+		DataBase dataBase = new DataBase();
+		dataBase.getConn();
 		p2.setfunds(1000);
 		Container cp = this.getContentPane();
 		cp.setLayout(new BoxLayout(cp, BoxLayout.X_AXIS));		//Se le pone un BoxLayout al contenedor de la ventana en el eje X que coloca los componentes en serie horizontalmente
@@ -451,6 +458,7 @@ public class Game extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				terminaTurno(turn, mapPanel, mapGrid);
 				System.out.println(turn);
+				dataBase.actualizaTEquipos(p1.getfunds(),0,p2.getfunds(),0);
 			}
 		});
 		
@@ -611,10 +619,16 @@ public class Game extends JFrame{
 		case 1:
 			p1.setfunds(cashout);
 			this.turn++;
+			sic.changeSound("combat2.wav");
+			mus.interrupt();
+			mus.start();
 			break;
 		default:
 			p2.setfunds(cashout);
 			this.turn++;
+			sic.changeSound("combat1.wav");
+			mus.interrupt();
+			mus.start();
 			break;
 		}
 	}
