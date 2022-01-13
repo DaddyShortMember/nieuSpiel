@@ -20,11 +20,12 @@ public abstract class GamePlay {
 		switch (weaponChoice(atacante,defensor)) {
 		case 0:
 			damage = ((atacante.getGolpePrim() * damageNumbers(atacante.getArmas()[0] , defensor.getBlindaje())* atacante.getHP()) * (((atacante.getNivel()/10)+1)) * (1 - (cobertura.getDefensa()/10)));
+			damage = damage + (damage * (float) Math.random()*5);
 			atacante.setMuniciones(atacante.getMuniciones()-1);
 			break;
 		case 1:
 			damage = ((atacante.getGolpePrim() * damageNumbers(atacante.getArmas()[0] , defensor.getBlindaje())   * atacante.getHP()) * ((atacante.getNivel()/10)+1) * (1 - (cobertura.getDefensa()/10)));
-		
+			damage = damage + (damage * (float) Math.random()*5);
 			break;
 		case 2:
 			damage = 0;

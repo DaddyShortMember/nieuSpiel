@@ -36,8 +36,8 @@ public class TestingGround {
 		ArrayList<Object> tropa2 = new ArrayList<>();
 		Point locate = new Point(5,3);
 		Point locate2 = new Point(5,4);
-		AntiA a = new AntiA(1);
-		Rocl d = new Rocl(2);
+		InfFoot a = new InfFoot(1);
+		TankH d = new TankH(2);
 		Road carretera = new Road();
 		City ciudad = new City(0);
 		tropa.add(a);
