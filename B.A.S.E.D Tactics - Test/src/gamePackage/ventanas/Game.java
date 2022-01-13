@@ -130,12 +130,13 @@ public class Game extends JFrame{
 			volatile boolean on = true;
 			@Override
 			public void run() {
+				
 				mapGrid = loadMap();
+				
 				Tropa t = (Tropa) mapGrid.get(ogPos).get(1).get(1);
 				Point pos = ogPos;
 				while (on) {
 					while(stateSwitcher == true) {
-						System.out.println("Thread de Mov");
 						Point mouse = MouseInfo.getPointerInfo().getLocation();
 						SwingUtilities.convertPointFromScreen(mouse, layeredGamePanel);
 						try {
@@ -196,7 +197,6 @@ public class Game extends JFrame{
 			public void run() {
 				while (on) {
 					while(stateSwitcher == true) {
-						System.out.println("Thread de cursor general");
 						Point mouse = MouseInfo.getPointerInfo().getLocation();
 						SwingUtilities.convertPointFromScreen(mouse, layeredGamePanel);
 						try {
@@ -275,6 +275,8 @@ public class Game extends JFrame{
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				cm.pause();	
+				
 				Point casilla = new Point((int) cursor.getX()/32, (int) cursor.getY()/32);
 				
 				int teamTester;
@@ -291,11 +293,11 @@ public class Game extends JFrame{
 						if (((Tropa) mapGrid.get(casilla).get(1).get(1)).getTeam() == teamTester) {
 								estadoMov = true;
 								ogPos = casilla;
+								cm.pause();
 								if (tMV.isAlive()) {
 									mv.resume();
 								} else {
 									tMV.start();
-									mv.resume();
 								}
 						} 
 						
@@ -313,16 +315,13 @@ public class Game extends JFrame{
 						} 
 				}
 				
+				
 			}
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-				if (!estadoMov) {
-					cm.resume();
-				}
-				
-				
+				cm.resume();
 			}
 			
 			@Override
