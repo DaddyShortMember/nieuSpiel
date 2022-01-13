@@ -59,7 +59,7 @@ public abstract class GamePlay {
 		
 		
 	}
-	
+	//arma que usa cada tropa en combate 
 	public static int weaponChoice(Tropa  a , Tropa d) {
 		int attack = 0;
 		if (d.getIDTropa()==ListaIDTropa.INF) {
