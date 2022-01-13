@@ -11,7 +11,10 @@ import javax.swing.*;
 import gamePackage.entidades.*;
 import gamePackage.entidades.terrestres.*;
 import gamePackage.logica.ListaIDTerreno;
-import gamePackage.terrenos.Estructura;
+import gamePackage.terrenos.*;
+import gamePackage.terrenos.estructuras.*;
+import gamePackage.terrenos.terrenos.*;
+
 
 
 
@@ -30,10 +33,14 @@ public class Game extends JFrame{
 	}
 	//public static int tiles = 17;  <-- Viejo tamaño de las casillas
 	public static int mov = 32;		//Tamaño de las casillas y valor por el que se multiplica el valor de x e y de los labels
-	public HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid = new HashMap<>();
+	HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid = new HashMap<>();
 	public int turn;
 	
 	public Game() {
+		
+		ArrayList<Integer> mierda = new ArrayList<>();
+		mierda.add(2);
+		mierda.add(5);
 		Container cp = this.getContentPane();
 		cp.setLayout(new BoxLayout(cp, BoxLayout.X_AXIS));		//Se le pone un BoxLayout al contenedor de la ventana en el eje X que coloca los componentes en serie horizontalmente
 		JLayeredPane layeredGamePanel = new JLayeredPane();		//Creación de un panel que permite colocar unos componentes por encima de otros
@@ -54,9 +61,14 @@ public class Game extends JFrame{
 		mapPanel.setBounds(0, 0, 672, 672);		//Posición y tamaño del panel del mapa
 		//mapPanel.setOpaque(true);		//Hace que se pueda ver lo que haya detrás del panel
 		
-		
-		mapPanel=loadMap(mapPanel);
+		JPanel troopPanel = new JPanel();
+		troopPanel.setLayout(null);
+		troopPanel.setBounds(0, 1, 672, 672);
+		troopPanel.setOpaque(false);
+		mapGrid = loadHashMap();
+		mapPanel=loadMap(mapPanel, mapGrid);
 		mapPanel.repaint();
+		
 		ArrayList<ListaIDTerreno> buildings = new ArrayList<>(); buildings.add(ListaIDTerreno.CITY);buildings.add(ListaIDTerreno.FACTORY);buildings.add(ListaIDTerreno.HQ);
 		int building1 = 0;
 		int building2 = 0;
@@ -86,7 +98,7 @@ public class Game extends JFrame{
 			} catch (Exception e) {
 				
 			}
-			System.out.println(building1 + "-" + building2);	
+			//System.out.println(building1 + "-" + building2);	
 		}
 		
 		
@@ -97,8 +109,8 @@ public class Game extends JFrame{
 		JLayeredPane entityPanel = new JLayeredPane();		//Creación del panel que contiene las entidades como tropas o edificios
 		entityPanel.setLayout(null);		//Se le pone layout nulo para que deje poner componentes mediante posiciones absolutas
 		entityPanel.setBounds(0, 0, 672, 672);		//Posición y tamaño del panel de entidades
-		entityPanel.add(cursor, 1, 0);		//Se añade el label del cursor con una prioridad mayor que hace que esté sobre las tropas y entidades
-		
+		entityPanel.add(cursor, 2, 0);		//Se añade el label del cursor con una prioridad mayor que hace que esté sobre las tropas y entidades
+		entityPanel.add(troopPanel, 1, 0);
 		entityPanel.setOpaque(false);		//Se cambia el atributo del panel para hacer que se pueda ver lo que tiene debajo (otro panel)
 		
 		layeredGamePanel.add(mapPanel, 0, 0);		//Se añade el panel que contiene el mapa con prioridad baja para que esté por debajo del resto de cosas que se añadan
@@ -143,18 +155,21 @@ public class Game extends JFrame{
 
 			
 		}
-		
+
 		CursorMovement cm = new CursorMovement();
 		Thread tCM = new Thread(cm);
 		tCM.start();
-		
 		MouseListener ml = new MouseListener() {
-			
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				cm.pause();
 				
+				System.out.println(mierda);
+				System.out.println(cursor.getLocation());
+				System.out.println(mapGrid);
+				System.out.println(mapGrid.get(cursor.getLocation()));
+				System.out.println((Terreno) mapGrid.get(cursor.getLocation()).get(0).get(1));
 			}
 			
 			@Override
@@ -340,21 +355,17 @@ public class Game extends JFrame{
 		
 		}
 	
-	public JPanel loadMap(JPanel mapPanel) {
+	public HashMap<Point, ArrayList<ArrayList<Object>>> loadHashMap() {
+		HashMap<Point, ArrayList<ArrayList<Object>>> mapGridFunc = new HashMap<>();
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("BeanIsland.dat"));
-
-			mapGrid = (HashMap) ois.readObject();
+			
+			mapGridFunc = (HashMap) ois.readObject();
+			System.out.println("fuck");
+			System.out.println(mapGridFunc.get(new Point(0,0)).get(0).get(0));
+			System.out.println("endFuck");
 
 			ois.close();
-			Set<Point> keys = mapGrid.keySet();
-			mapPanel.removeAll();
-			JLabel jl = new JLabel();
-			for (Point i : keys) {
-				jl = (JLabel) mapGrid.get(i).get(0).get(0);
-				mapPanel.add(jl);
-
-			}
 
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -366,6 +377,18 @@ public class Game extends JFrame{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		System.out.println(mapGridFunc);
+		return mapGridFunc;
+	}
+	
+	public JPanel loadMap(JPanel mapPanel, HashMap<Point, ArrayList<ArrayList<Object>>> mapGridFunc2) {
+			Set<Point> keys = mapGridFunc2.keySet();
+			mapPanel.removeAll();
+			JLabel jl = new JLabel();
+			for (Point i : keys) {
+				jl = (JLabel) mapGridFunc2.get(i).get(0).get(0);
+				mapPanel.add(jl);
+			}
 
 		return mapPanel;
 	}
@@ -374,11 +397,435 @@ public class Game extends JFrame{
 		return count*1000;
 	}
 	
-	public int turnEnder(int turn, int count) {
-		income(count);
-		return turn+1;
+	public int buildCount(int team, JPanel mapPanel, HashMap<Point, ArrayList<ArrayList<Object>>> mapGridFunc3) {
+			mapPanel=loadMap(mapPanel, mapGridFunc3);
+			mapPanel.repaint();
+			ArrayList<ListaIDTerreno> buildings = new ArrayList<>(); buildings.add(ListaIDTerreno.CITY);buildings.add(ListaIDTerreno.FACTORY);buildings.add(ListaIDTerreno.HQ);
+			int building1 = 0;
+			int building2 = 0;
+			int building3 = 0;
+			int building4 = 0;
+			for (Point p : mapGridFunc3.keySet()) {
+				try {
+					Estructura struc = (Estructura) mapGridFunc3.get(p).get(0).get(1);
+					if (buildings.contains(struc.getIDTerreno())) {
+						switch (struc.getTeam()) {
+						case 1: 
+							building1+=1;
+							break;
+						case 2:
+							building2+=1;
+							break;
+						case 3:
+							building3+=1;
+							break;
+						default:
+							building4+=1;
+							break;
+						}
+					}
+				} catch (Exception e) {
+					
+				}
+			}
+			//System.out.println(building1 + "-" + building2);	
+			switch (team) {
+			case 1:
+				return building1;
+			case 2:
+				return building2;
+			case 3:
+				return building3;
+			default:
+				return building4;
+			}
+		
 	}
 	
+	public void createTropa(Point pos, HashMap<Point, ArrayList<ArrayList<Object>>> mapGrid, JPanel troopPanel, int turn) {
+		JInternalFrame jif = new JInternalFrame();
+		Container jifCP = jif.getContentPane();
+		JLabel jm = new JLabel();
+		JButton infFoot = new JButton();
+		switch (turn%2) {
+		case 0:
+			infFoot.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/InftBLUE.png")));
+			break;
+		default:
+			infFoot.setIcon(new ImageIcon(getClass().getResource("img/troop/red/InftRED.png")));
+			break;
+		}
+		infFoot.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				InfFoot tr = new InfFoot(0);
+				switch (turn%2){
+					case 0:
+						tr.setTeam(0);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/InftBLUE.png")));
+						break;
+					default:
+						tr.setTeam(1);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/InftRED.png")));
+						break;
+				}		
+				ArrayList<Object> troopsList = new ArrayList<>();
+				
+				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
+				troopsList.add(jm);
+				troopsList.add(tr);
+				mapGrid.get(pos).get(1).add(troopsList);
+				troopPanel.add(jm);
+			}
+		});
+		
+		JButton infMech = new JButton();
+		switch (turn%2) {
+		case 0:
+			infMech.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/MecBLUE.png")));
+			break;
+		default:
+			infMech.setIcon(new ImageIcon(getClass().getResource("img/troop/red/MecRED.png")));
+			break;
+		}
+		infMech.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				InfMech tr = new InfMech(0);
+				switch (turn%2){
+					case 0:
+						tr.setTeam(0);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/MecBLUE.png")));
+						break;
+					default:
+						tr.setTeam(1);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/MecRED.png")));
+						break;
+				}		
+				ArrayList<Object> troopsList = new ArrayList<>();
+				
+				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
+				troopsList.add(jm);
+				troopsList.add(tr);
+				mapGrid.get(pos).get(1).add(troopsList);
+				troopPanel.add(jm);
+			}
+		});
+		
+		JButton infBike = new JButton();
+		switch (turn%2) {
+		case 0:
+			infBike.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/BikeBLUE.png")));
+			break;
+		default:
+			infBike.setIcon(new ImageIcon(getClass().getResource("img/troop/red/BikeRED.png")));
+			break;
+		}
+		infBike.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				InfBike tr = new InfBike(0);
+				switch (turn%2){
+					case 0:
+						tr.setTeam(0);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/BikeBLUE.png")));
+						break;
+					default:
+						tr.setTeam(1);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/BikeRED.png")));
+						break;
+				}		
+				ArrayList<Object> troopsList = new ArrayList<>();
+				
+				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
+				troopsList.add(jm);
+				troopsList.add(tr);
+				mapGrid.get(pos).get(1).add(troopsList);
+				troopPanel.add(jm);
+			}
+		});
+		
+		JButton rocl = new JButton();
+		switch (turn%2) {
+		case 0:
+			rocl.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/RocketBLUE.png")));
+			break;
+		default:
+			rocl.setIcon(new ImageIcon(getClass().getResource("img/troop/red/RocketRED.png")));
+			break;
+		}
+		rocl.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Rocl tr = new Rocl(0);
+				switch (turn%2){
+					case 0:
+						tr.setTeam(0);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/RocketBLUE.png")));
+						break;
+					default:
+						tr.setTeam(1);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/RocketRED.png")));
+						break;
+				}		
+				ArrayList<Object> troopsList = new ArrayList<>();
+				
+				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
+				troopsList.add(jm);
+				troopsList.add(tr);
+				mapGrid.get(pos).get(1).add(troopsList);
+				troopPanel.add(jm);
+			}
+		});
+		
+		JButton antiA = new JButton();
+		switch (turn%2) {
+		case 0:
+			antiA.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/AaBLUE.png")));
+			break;
+		default:
+			antiA.setIcon(new ImageIcon(getClass().getResource("img/troop/red/AaRED.png")));
+			break;
+		}
+		antiA.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AntiA tr = new AntiA(0);
+				switch (turn%2){
+					case 0:
+						tr.setTeam(0);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/AaBLUE.png")));
+						break;
+					default:
+						tr.setTeam(1);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/AaRED.png")));
+						break;
+				}		
+				ArrayList<Object> troopsList = new ArrayList<>();
+				
+				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
+				troopsList.add(jm);
+				troopsList.add(tr);
+				mapGrid.get(pos).get(1).add(troopsList);
+				troopPanel.add(jm);
+			}
+		});
+		
+		JButton vAPC = new JButton();
+		switch (turn%2) {
+		case 0:
+			vAPC.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/ToaBLUE.png")));
+			break;
+		default:
+			vAPC.setIcon(new ImageIcon(getClass().getResource("img/troop/red/ToaRED.png")));
+			break;
+		}
+		vAPC.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VApc tr = new VApc(0);
+				switch (turn%2){
+					case 0:
+						tr.setTeam(0);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/ToaBLUE.png")));
+						break;
+					default:
+						tr.setTeam(1);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/ToaRED.png")));
+						break;
+				}		
+				ArrayList<Object> troopsList = new ArrayList<>();
+				
+				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
+				troopsList.add(jm);
+				troopsList.add(tr);
+				mapGrid.get(pos).get(1).add(troopsList);
+				troopPanel.add(jm);
+			}
+		});
+		
+		JButton arty = new JButton();
+		switch (turn%2) {
+		case 0:
+			arty.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/ArtilleryBLUE.png")));
+			break;
+		default:
+			arty.setIcon(new ImageIcon(getClass().getResource("img/troop/red/ArtilleryRED.png")));
+			break;
+		}
+		arty.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Arty tr = new Arty(0);
+				switch (turn%2){
+					case 0:
+						tr.setTeam(0);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/ArtilleryBLUE.png")));
+						break;
+					default:
+						tr.setTeam(1);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/ArtilleryRED.png")));
+						break;
+				}		
+				ArrayList<Object> troopsList = new ArrayList<>();
+				
+				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
+				troopsList.add(jm);
+				troopsList.add(tr);
+				mapGrid.get(pos).get(1).add(troopsList);
+				troopPanel.add(jm);
+			}
+		});
+		
+		JButton tankL = new JButton();
+		switch (turn%2) {
+		case 0:
+			tankL.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/LTankBLUE.png")));
+			break;
+		default:
+			tankL.setIcon(new ImageIcon(getClass().getResource("img/troop/red/LTankRED.png")));
+			break;
+		}
+		tankL.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TankL tr = new TankL(0);
+				switch (turn%2){
+					case 0:
+						tr.setTeam(0);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/LTankBLUE.png")));
+						break;
+					default:
+						tr.setTeam(1);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/LTankRED.png")));
+						break;
+				}		
+				ArrayList<Object> troopsList = new ArrayList<>();
+				
+				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
+				troopsList.add(jm);
+				troopsList.add(tr);
+				mapGrid.get(pos).get(1).add(troopsList);
+				troopPanel.add(jm);
+			}
+		});
+		
+		JButton tankM = new JButton();
+		switch (turn%2) {
+		case 0:
+			tankM.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/MTankBLUE.png")));
+			break;
+		default:
+			tankM.setIcon(new ImageIcon(getClass().getResource("img/troop/red/MTankRED.png")));
+			break;
+		}
+		tankM.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TankM tr = new TankM(0);
+				switch (turn%2){
+					case 0:
+						tr.setTeam(0);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/MTankBLUE.png")));
+						break;
+					default:
+						tr.setTeam(1);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/MTankRED.png")));
+						break;
+				}		
+				ArrayList<Object> troopsList = new ArrayList<>();
+				
+				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
+				troopsList.add(jm);
+				troopsList.add(tr);
+				mapGrid.get(pos).get(1).add(troopsList);
+				troopPanel.add(jm);
+			}
+		});
+		
+		JButton tankH = new JButton();
+		switch (turn%2) {
+		case 0:
+			tankH.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/HTankBLUE.png")));
+			break;
+		default:
+			tankH.setIcon(new ImageIcon(getClass().getResource("img/troop/red/HTankRED.png")));
+			break;
+		}
+		tankH.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TankH tr = new TankH(0);
+				switch (turn%2){
+					case 0:
+						tr.setTeam(0);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/HTankBLUE.png")));
+						break;
+					default:
+						tr.setTeam(1);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/HTankRED.png")));
+						break;
+				}		
+				ArrayList<Object> troopsList = new ArrayList<>();
+				
+				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
+				troopsList.add(jm);
+				troopsList.add(tr);
+				mapGrid.get(pos).get(1).add(troopsList);
+				troopPanel.add(jm);
+			}
+		});
+		
+		
+		
+		JButton vRecon = new JButton();
+		switch (turn%2) {
+		case 0:
+			vRecon.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/ReconBLUE.png")));
+			break;
+		default:
+			vRecon.setIcon(new ImageIcon(getClass().getResource("img/troop/red/ReconRED.png")));
+			break;
+		}
+		vRecon.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VRecon tr = new VRecon(0);
+				switch (turn%2){
+					case 0:
+						tr.setTeam(0);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/blue/ReconBLUE.png")));
+						break;
+					default:
+						tr.setTeam(1);
+						jm.setIcon(new ImageIcon(getClass().getResource("img/troop/red/ReconRED.png")));
+						break;
+				}		
+				ArrayList<Object> troopsList = new ArrayList<>();
+				
+				jm.setBounds((int) pos.getX(), (int) pos.getY(), 32, 32);
+				troopsList.add(jm);
+				troopsList.add(tr);
+				mapGrid.get(pos).get(1).add(troopsList);
+				troopPanel.add(jm);
+			}
+		});
+		
+		jifCP.setLayout(new GridLayout(4, 3));
+		
+		jifCP.add(infMech);
+		jifCP.add(infBike);
+		jifCP.add(rocl);
+		jifCP.add(antiA);
+		jifCP.add(vAPC);
+		jifCP.add(arty);
+		jifCP.add(tankL);
+		jifCP.add(tankM);
+		jifCP.add(tankH);
+		jifCP.add(vRecon);
+		
+		
+	}
 	
 	
 	}
